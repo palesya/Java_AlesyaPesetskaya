@@ -1,0 +1,19 @@
+server:
+  port: 8090
+
+spring:
+  mvc:
+    view:
+      suffix: /jsp/
+      prefix: .jsp
+
+  datasource:
+    username: postgres
+    password: alesya
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+
