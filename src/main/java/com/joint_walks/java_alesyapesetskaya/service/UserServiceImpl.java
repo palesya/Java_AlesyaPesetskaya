@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,6 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllNotDeleted() {
-        return repository.findByIsDeletedIsFalse();
+        return repository.findAll().stream().filter(user -> !user.isDeleted()).collect(Collectors.toList());
     }
 }

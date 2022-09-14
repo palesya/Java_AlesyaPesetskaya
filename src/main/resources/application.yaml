@@ -1,11 +1,11 @@
 server:
-  port: 8090
+  port: 8091
 
 spring:
   mvc:
     view:
-      suffix: /jsp/
-      prefix: .jsp
+      suffix: .jsp
+      prefix: /WEB-INF/jsp/
 
   datasource:
     username: postgres
@@ -16,4 +16,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: 'create-drop'
+
+  h2:
+    console:
+      enabled: true
 

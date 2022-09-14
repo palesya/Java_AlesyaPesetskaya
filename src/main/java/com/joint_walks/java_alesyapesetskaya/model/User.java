@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,8 +27,13 @@ public class User {
 
     private String login;
     private String password;
+    private Integer age;
     @Builder.Default
     private boolean isDeleted = false;
+    @Lob
+    private String base64Image;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Dog dog;
 
     @CreationTimestamp
     private Date created;
@@ -35,8 +42,11 @@ public class User {
     @Version
     private long version;
 
-    public User(String login, String password) {
+    public User(String login, String password, Integer age,String base64Image,Dog dog) {
         this.login = login;
         this.password = password;
+        this.age=age;
+        this.base64Image=base64Image;
+        this.dog=dog;
     }
 }
