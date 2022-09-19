@@ -31,4 +31,14 @@ public class PlaceServiceImpl implements PlaceService {
         return cities.stream().distinct().collect(Collectors.toList());
     }
 
+    @Override
+    public List<Place> getPlacesByPartialMatch(String text) {
+        return repository.getPlacesByPartialMatch(text);
+    }
+
+    @Override
+    public List<Place> getPlacesByCity(String city) {
+        return repository.getPlacesByCity(city);
+    }
+
 }

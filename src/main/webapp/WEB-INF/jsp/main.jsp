@@ -14,7 +14,7 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center p-3" style="background-color: #e3f2fd;">
 
             <div class="navbar-nav col-2">
                 <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogs">Dogs</a>
@@ -31,9 +31,6 @@
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/join">Join</a></li>
                 </ul>
             </div>
-            <form class="col m-auto p-2">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </form>
         </nav>
     </div>
 </div>

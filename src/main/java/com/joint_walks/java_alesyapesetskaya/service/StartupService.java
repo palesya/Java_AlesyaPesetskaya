@@ -70,7 +70,6 @@ public class StartupService {
         List<Place> places = List.of(place1, place2,place3,place4);
         for (Place place : places) {
             placeRepository.saveAndFlush(place);
-            System.out.println(place);
         }
     }
 

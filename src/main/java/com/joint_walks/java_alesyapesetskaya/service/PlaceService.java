@@ -7,6 +7,7 @@ import java.util.List;
 public interface PlaceService {
 
     List<Place> getAll();
-
     List<String> getAllCities();
+    List<Place> getPlacesByPartialMatch(String text);
+    List<Place> getPlacesByCity(String city);
 }

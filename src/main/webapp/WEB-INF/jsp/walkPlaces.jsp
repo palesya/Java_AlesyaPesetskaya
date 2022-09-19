@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
             integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
             crossorigin="anonymous"></script>
+
 </head>
 <body style="background-color: dimgrey">
 <div class="container p-1">
@@ -32,17 +34,18 @@
                 </ul>
             </div>
 
-            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/places" method="post">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select city</option>
+            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/places/city" method="get">
+                <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city" onchange="this.form.submit();">
+                    <option selected >Select city</option>
+                    <option>All cities</option>
                     <c:forEach items="${allCities}" var="city">
                         <option>${city}</option>
                     </c:forEach>
                 </select>
             </form>
 
-            <form class="col-3 m-auto p-2">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <form class="col-3 m-auto p-2" action="${pageContext.request.contextPath}/places" method="post">
+                <input class="form-control" type="text" placeholder="Search by street or transport stop." aria-label="Search" name="search_text">
             </form>
         </nav>
     </div>
@@ -61,20 +64,20 @@
                         <p class="card-text">The presence of a fence:
                             <c:choose>
                                 <c:when test="${place.fence}">
-                                    <img src="check.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
+                                    <img src="/check.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="minus.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
+                                    <img src="/minus.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
                                 </c:otherwise>
                             </c:choose>
                         </p>
                         <p class="card-text">The availability of training equipment:
                             <c:choose>
                                 <c:when test="${place.trainingEqyipment}">
-                                    <img src="check.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
+                                    <img src="/check.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="minus.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
+                                    <img src="/minus.jpg" class="mx-auto rounded-circle" style="width: 25px;"/>
                                 </c:otherwise>
                             </c:choose>
                         </p>

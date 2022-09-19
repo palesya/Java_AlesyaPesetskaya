@@ -31,8 +31,9 @@
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/join">Join</a></li>
                 </ul>
             </div>
-            <form class="col m-auto p-2">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <form class="col m-auto p-2" action="${pageContext.request.contextPath}/dogs" method="post">
+                    <input class="form-control rounded" type="text" placeholder="Search by owner's name, dog's name or type." aria-label="Search"
+                           name="search_text">
             </form>
         </nav>
     </div>
