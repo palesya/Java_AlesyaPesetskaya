@@ -11,8 +11,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> getByLogin(String login);
 
-    List<User> findByIsDeletedIsFalse();
-
     @Transactional
     @Query("select u from User u JOIN u.dog d " +
             "where lower(u.login) LIKE lower(CONCAT('%',:text,'%')) " +
