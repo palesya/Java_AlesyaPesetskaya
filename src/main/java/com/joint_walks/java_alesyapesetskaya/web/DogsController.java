@@ -25,6 +25,7 @@ public class DogsController {
     public String get(Model model) {
         List<User> allUsers = userService.getAllNotDeleted();
         model.addAttribute("users", allUsers);
+        System.out.println();
         return "dogs";
     }
 
