@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User> getByLogin(String login);
+    User getByLogin(String login);
     List<User> getAllNotDeleted();
     List<User> getUsersByPartialMatch(String text);
 }

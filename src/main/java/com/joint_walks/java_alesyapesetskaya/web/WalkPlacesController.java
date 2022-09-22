@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping(path = "/places")
+@RequestMapping(path = "/dogwalker/places")
 public class WalkPlacesController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class WalkPlacesController {
         return "walkPlaces";
     }
 
-    @PostMapping
+    @PostMapping("/search")
     public String searchPlace(
             @RequestParam(name = "search_text") String text,
             Model model) {

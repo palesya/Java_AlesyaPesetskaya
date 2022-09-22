@@ -17,8 +17,8 @@
         <nav class="navbar navbar-expand-lg primary-color rounded text-center p-3" style="background-color: #e3f2fd;">
 
             <div class="navbar-nav col-2">
-                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogs">Dogs</a>
-                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/places">Places</a>
+                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
+                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
             <div class="dropdown col-6 d-flex justify-content-start">
@@ -27,8 +27,8 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/add">Add new</a></li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/add">Add new</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/join">Join</a></li>
                 </ul>
             </div>
         </nav>
@@ -71,5 +71,9 @@
         </c:forEach>
     </div>
 </div>
+
+<form action="${pageContext.request.contextPath}/login}" method="post">
+    <input type="submit" name="logout" value="Logout">
+</form>
 </body>
 </html>

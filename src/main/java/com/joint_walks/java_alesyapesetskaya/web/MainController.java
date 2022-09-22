@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/main")
+@RequestMapping(path = "/dogwalker/main")
 public class MainController {
 
     @Autowired

@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(path = "/dogs")
+@RequestMapping(path = "/dogwalker/dogs")
 public class DogsController {
     @Autowired
     UserServiceImpl userService;

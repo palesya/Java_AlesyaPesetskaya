@@ -17,8 +17,8 @@
         <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-color: #e3f2fd;">
 
             <div class="navbar-nav col-2">
-                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/main">Home</a>
-                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/places">Places</a>
+                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogwalker/main">Home</a>
+                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
             <div class="dropdown col-6 d-flex justify-content-start">
@@ -27,11 +27,11 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/add">Add new</a></li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/add">Add new</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/join">Join</a></li>
                 </ul>
             </div>
-            <form class="col m-auto p-2" action="${pageContext.request.contextPath}/dogs" method="post">
+            <form class="col m-auto p-2" action="${pageContext.request.contextPath}/dogwalker/dogs" method="post">
                     <input class="form-control rounded" type="text" placeholder="Search by owner's name, dog's name or type." aria-label="Search"
                            name="search_text">
             </form>

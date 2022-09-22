@@ -8,7 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -40,11 +42,16 @@ public class User {
     @Version
     private long version;
 
-    public User(String login, String password, Integer age,String base64Image,Dog dog) {
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles = new ArrayList<>();
+
+    public User(String login, String password, Integer age, String base64Image, Dog dog) {
         this.login = login;
         this.password = password;
-        this.age=age;
-        this.base64Image=base64Image;
-        this.dog=dog;
+        this.age = age;
+        this.base64Image = base64Image;
+        this.dog = dog;
     }
 }

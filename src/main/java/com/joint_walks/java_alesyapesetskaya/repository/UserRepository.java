@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> getByLogin(String login);
+
+    @Transactional
+    User getByLogin(String login);
 
     @Transactional
     @Query("select u from User u JOIN u.dog d " +
@@ -17,5 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "OR LOWER(d.name) LIKE lower(CONCAT('%',:text,'%')) " +
             "OR LOWER(d.type) LIKE lower(CONCAT('%',:text,'%'))")
     List<User> getUsersByPartialMatch(String text);
+
+
 
 }
