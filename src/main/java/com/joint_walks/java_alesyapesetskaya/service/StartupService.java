@@ -18,9 +18,9 @@ import java.util.List;
 public class StartupService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    PlaceRepository placeRepository;
+    private PlaceRepository placeRepository;
 
     @PostConstruct
     public void init() throws IOException {
