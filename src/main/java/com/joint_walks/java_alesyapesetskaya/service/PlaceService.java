@@ -10,4 +10,5 @@ public interface PlaceService {
     List<String> getAllCities();
     List<Place> getPlacesByPartialMatch(String text);
     List<Place> getPlacesByCity(String city);
+    Place getById(Long id);
 }

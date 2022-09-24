@@ -20,4 +20,8 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
             "where LOWER(a.city) LIKE lower(CONCAT('%',:city,'%'))")
     List<Place> getPlacesByCity(String city);
 
+    @Transactional
+    @Query("select p from Place p where p.id=:id")
+    Place getById(Long id);
+
 }

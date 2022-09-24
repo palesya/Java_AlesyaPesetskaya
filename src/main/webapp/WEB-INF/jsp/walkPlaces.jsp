@@ -81,7 +81,9 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <a href="${pageContext.request.contextPath}/dogwalker/add" class="btn btn-primary">Add appointment</a>
+                        <form method="post" action="${pageContext.request.contextPath}/dogwalker/add/${place.id}">
+                            <input type="submit" class="btn btn-primary" value="Add appointment" name="place_id" >
+                        </form>
                     </div>
                 </div>
             </div>

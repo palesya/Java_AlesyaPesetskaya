@@ -4,6 +4,7 @@ import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,11 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<Place> getPlacesByCity(String city) {
         return repository.getPlacesByCity(city);
+    }
+
+    @Override
+    public Place getById(Long id) {
+        return repository.getById(id);
     }
 
 }

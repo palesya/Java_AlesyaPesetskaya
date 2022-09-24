@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-
     @Transactional
     User getByLogin(String login);
 

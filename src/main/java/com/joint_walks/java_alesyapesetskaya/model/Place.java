@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -27,6 +28,7 @@ public class Place {
     private boolean trainingEqyipment;
     private boolean fence;
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private String base64Image;
 
     public Place(Address address, String transportStop, boolean trainingEqyipment, boolean fence,String base64Image) {
