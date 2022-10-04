@@ -35,6 +35,12 @@
                     <input class="form-control rounded" type="text" placeholder="Search by owner's name, dog's name or type." aria-label="Search"
                            name="search_text">
             </form>
+            <div class="col-1 m-auto p-2">
+                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
+                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
+                         style="max-height: 3rem;border-radius: 50%">
+                </a>
+            </div>
         </nav>
     </div>
 </div>

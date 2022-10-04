@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "OR LOWER(d.type) LIKE lower(CONCAT('%',:text,'%'))")
     List<User> getUsersByPartialMatch(String text);
 
-
+    @Transactional
+    @Query("select u from User u where u.id=:id")
+    User getById(Long id);
 
 }

@@ -23,20 +23,23 @@
                 <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
             </div>
 
-            <div class="dropdown col-4 d-flex justify-content-start">
+            <div class="dropdown col-3 d-flex justify-content-start">
                 <button class="btn dropdown-toggle" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/add">Add new</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/add">Add new</a>
+                    </li>
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/join">Join</a></li>
                 </ul>
             </div>
 
-            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/places/city" method="get">
-                <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city" onchange="this.form.submit();">
-                    <option selected >Select city</option>
+            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/places/city"
+                  method="get">
+                <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city"
+                        onchange="this.form.submit();">
+                    <option selected>Select city</option>
                     <option>All cities</option>
                     <c:forEach items="${allCities}" var="city">
                         <option>${city}</option>
@@ -44,9 +47,17 @@
                 </select>
             </form>
 
-            <form class="col-3 m-auto p-2" action="${pageContext.request.contextPath}/dogwalker/places/search" method="post">
-                <input class="form-control" type="text" placeholder="Search by street or transport stop." aria-label="Search" name="search_text">
+            <form class="col-3 m-auto p-2" action="${pageContext.request.contextPath}/dogwalker/places/search"
+                  method="post">
+                <input class="form-control" type="text" placeholder="Search by street or transport stop."
+                       aria-label="Search" name="search_text">
             </form>
+            <div class="col-1 m-auto p-2">
+                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
+                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
+                         style="max-height: 3rem;border-radius: 50%">
+                </a>
+            </div>
         </nav>
     </div>
 </div>
@@ -82,7 +93,7 @@
                             </c:choose>
                         </p>
                         <form method="post" action="${pageContext.request.contextPath}/dogwalker/add/${place.id}">
-                            <input type="submit" class="btn btn-primary" value="Add appointment" name="place_id" >
+                            <input type="submit" class="btn btn-primary" value="Add appointment" name="place_id">
                         </form>
                     </div>
                 </div>

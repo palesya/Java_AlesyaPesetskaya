@@ -28,4 +28,15 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersByPartialMatch(String text) {
         return repository.getUsersByPartialMatch(text);
     }
+
+    @Override
+    public User getById(Long id) {
+        return repository.getById(id);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        repository.saveAndFlush(user);
+    }
+
 }

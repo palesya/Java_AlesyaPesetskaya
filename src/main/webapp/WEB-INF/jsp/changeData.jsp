@@ -33,56 +33,40 @@
                 </ul>
             </div>
 
-            <div class="col-1 m-auto">
-                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
-                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
-                         style="max-height: 3rem;border-radius: 50%">
-                </a>
-            </div>
-
         </nav>
     </div>
 </div>
 
 <div class="container p-3">
-    <div class="row mx-auto">
-        <c:forEach items="${users}" var="user">
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;background-color: darkgray">
-                    <img src="data:image/jpg;base64,${user.dog.base64Image}" alt="Lights"
-                         style="height: 20rem; object-fit: cover;"
-                         class="card-img-top rounded">
-                    <div class="card-body">
-                        <h5>${user.dog.name} - <h6>(${user.dog.type})</h6></h5>
-                        <p>age: ${user.dog.age}, good
-                            <c:choose>
-                                <c:when test="${user.dog.sex == 'MAN'}">
-                                    boy
-                                </c:when>
-                                <c:otherwise>
-                                    girl
-                                </c:otherwise>
-                            </c:choose>
-                        </p>
-                        <p>Owner:</p>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="data:image/jpg;base64,${user.base64Image}" alt="Lights"
-                                     style="max-height: 5rem;border-radius: 50%">
-                            </div>
-                            <div class="col-md-4">
-                                    ${user.login} - ${user.age}
-                            </div>
-                        </div>
-                    </div>
+    <div class="card mb-3" style="width: 100%; height: 21rem; background-color: darkgray">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <img src="data:image/jpg;base64,${loggedUser.base64Image}" style="height: 21rem; object-fit: cover;"
+                     class="card-img-top rounded">
+            </div>
+            <div class="col-4">
+                <div class="card-body">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}/savedChanges">
+                        <label for="ownerAge">Owner's age</label>
+                        <input type="number" class="form-control" id="ownerAge" name="ownerAge" placeholder="Age">
+                        <label for="dogName">Dog's name</label>
+                        <input type="text" class="form-control" id="dogName" name="dogName" placeholder="Name">
+                        <label for="dogType">Dog's type</label>
+                        <input type="text" class="form-control" id="dogType" name="dogType" placeholder="Type">
+                        <label for="dogAge">Dog's age</label>
+                        <input type="number" class="form-control" id="dogAge" name="dogAge" placeholder="Age">
+                        <br>
+                        <input type="submit" class="btn btn-secondary" value="Save changes" name="changeData">
+                    </form>
                 </div>
             </div>
-        </c:forEach>
+            <div class="col-4">
+                <img src="data:image/jpg;base64,${loggedUser.dog.base64Image}" style="height: 21rem; object-fit: cover;"
+                     class="card-img-top rounded">
+            </div>
+        </div>
     </div>
 </div>
-
-<form action="${pageContext.request.contextPath}/login}" method="post">
-    <input type="submit" name="logout" value="Logout">
-</form>
 </body>
 </html>

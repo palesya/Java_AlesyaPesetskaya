@@ -9,4 +9,6 @@ public interface UserService {
     User getByLogin(String login);
     List<User> getAllNotDeleted();
     List<User> getUsersByPartialMatch(String text);
+    User getById(Long id);
+    void saveUser(User user);
 }

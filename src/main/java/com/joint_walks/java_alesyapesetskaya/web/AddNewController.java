@@ -1,7 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AddNewController {
 
     @GetMapping
-    public String get(Model model) {
-
+    public String get() {
         return "addNew";
     }
 }

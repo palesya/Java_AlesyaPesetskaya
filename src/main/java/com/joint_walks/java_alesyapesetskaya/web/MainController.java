@@ -1,8 +1,12 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.model.User;
+import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
 import com.joint_walks.java_alesyapesetskaya.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +20,18 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @GetMapping
-    public String get(Model model) {
+    public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+
         List<User> allUsers = userService.getAllNotDeleted();
         model.addAttribute("users", allUsers);
-        System.out.println("");
+
+        String securityUserLogin = userSecurity.getUsername();
+        User byLogin = userService.getByLogin(securityUserLogin);
+        model.addAttribute("loggedUser", byLogin);
+
         return "main";
     }
 

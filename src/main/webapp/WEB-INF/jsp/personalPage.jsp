@@ -33,56 +33,48 @@
                 </ul>
             </div>
 
-            <div class="col-1 m-auto">
-                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
-                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
-                         style="max-height: 3rem;border-radius: 50%">
-                </a>
-            </div>
-
         </nav>
     </div>
 </div>
 
 <div class="container p-3">
-    <div class="row mx-auto">
-        <c:forEach items="${users}" var="user">
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;background-color: darkgray">
-                    <img src="data:image/jpg;base64,${user.dog.base64Image}" alt="Lights"
-                         style="height: 20rem; object-fit: cover;"
-                         class="card-img-top rounded">
-                    <div class="card-body">
-                        <h5>${user.dog.name} - <h6>(${user.dog.type})</h6></h5>
-                        <p>age: ${user.dog.age}, good
-                            <c:choose>
-                                <c:when test="${user.dog.sex == 'MAN'}">
-                                    boy
-                                </c:when>
-                                <c:otherwise>
-                                    girl
-                                </c:otherwise>
-                            </c:choose>
-                        </p>
-                        <p>Owner:</p>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="data:image/jpg;base64,${user.base64Image}" alt="Lights"
-                                     style="max-height: 5rem;border-radius: 50%">
-                            </div>
-                            <div class="col-md-4">
-                                    ${user.login} - ${user.age}
-                            </div>
-                        </div>
-                    </div>
+    <div class="card mb-3" style="width: 100%; height: 21rem; background-color: darkgray">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <img src="data:image/jpg;base64,${loggedUser.base64Image}" style="height: 21rem; object-fit: cover;"
+                     class="card-img-top rounded">
+            </div>
+            <div class="col-4">
+                <div class="card-body">
+                    <h5 class="card-title">Personal data</h5><br>
+                    <p class="card-text"><strong>Owner:</strong>
+                        ${loggedUser.login} - ${loggedUser.age} years.</p><br>
+                    <p class="card-text"><strong>Dog:</strong></p>
+                    <p class="card-text">Beloved dog ${loggedUser.dog.name} - (${loggedUser.dog.type}).</p>
+                    <p class="card-text">It's age is ${loggedUser.dog.age}. And it is a good
+                        <c:choose>
+                            <c:when test="${loggedUser.dog.sex == 'MAN'}">
+                                boy
+                            </c:when>
+                            <c:otherwise>
+                                girl
+                            </c:otherwise>
+                        </c:choose>.
+                    </p>
+                    <br>
+
+                    <form method="post" action="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}/changeData">
+                        <input type="submit" class="btn btn-secondary" value="Change personal data" name="changeData" >
+                    </form>
+
                 </div>
             </div>
-        </c:forEach>
+            <div class="col-4">
+                <img src="data:image/jpg;base64,${loggedUser.dog.base64Image}" style="height: 21rem; object-fit: cover;"
+                     class="card-img-top rounded">
+            </div>
+        </div>
     </div>
 </div>
-
-<form action="${pageContext.request.contextPath}/login}" method="post">
-    <input type="submit" name="logout" value="Logout">
-</form>
 </body>
 </html>
