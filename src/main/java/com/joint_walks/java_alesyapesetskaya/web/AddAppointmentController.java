@@ -45,13 +45,9 @@ public class AddAppointmentController {
             @RequestParam("description") String description,
             Model model) {
         model.addAttribute("added_address", address);
-        System.out.println(address);
         model.addAttribute("added_date", date);
-        System.out.println(date);
         model.addAttribute("added_time", time);
-        System.out.println(time);
         model.addAttribute("added_description", description);
-        System.out.println(description);
         return "addedNew";
     }
 
