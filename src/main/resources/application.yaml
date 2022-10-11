@@ -7,6 +7,10 @@ spring:
       suffix: .jsp
       prefix: /WEB-INF/jsp/
 
+    format:
+      time: HH:mm
+      date: MM/dd/YYYY
+
   datasource:
     username: postgres
     password: alesya

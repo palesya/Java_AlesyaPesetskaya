@@ -1,5 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.service;
 
+import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public Place getById(Long id) {
         return repository.getById(id);
+    }
+
+    @Override
+    public Place getPlaceByAddress(Address address) {
+        return repository.getPlaceByAddress(address);
     }
 
 }

@@ -18,42 +18,27 @@
     <div class="row">
         <div class="col-sm-6 text-black">
 
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Add new appointment</h3>
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">New appointment was successfully created</h3>
 
-            <form action="${pageContext.request.contextPath}/dogwalker/addAddress/added" method="post">
                 <div class="form-outline mb-4">
                     <label class="form-label">Address:</label>
-                    <select typeof="submit" class="form-select" aria-label="Default select example"
-                            name="selected_address" >
-                        <option selected>${selected_place.address}</option>
-                        <c:forEach items="${allPlaces}" var="place">
-                            <option>${place.address}</option>
-                        </c:forEach>
-                    </select>
+                    <p>${added_address}</p>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example18">Date:</label>
-                    <input type="date" name="date" id="form2Example18"
-                                class="form-control form-control-lg"/>
+                    <label class="form-label" >Date:</label>
+                    <p>${added_date}</p>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example28">Time:</label>
-                    <input type="time" name="time" id="form2Example28"
-                           class="form-control form-control-lg" />
+                    <label class="form-label" >Time:</label>
+                    <p>${added_time}</p>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form3">Description:</label>
-                    <input type="text" name="description" id="form3"
-                           class="form-control form-control-lg" />
+                    <label class="form-label" >Description:</label>
+                    <p>${added_description}</p>
                 </div>
-
-                <div class="pt-1 mb-4">
-                    <button class="btn btn-primary" type="submit">Create</button>
-                </div>
-            </form>
 
         </div>
 

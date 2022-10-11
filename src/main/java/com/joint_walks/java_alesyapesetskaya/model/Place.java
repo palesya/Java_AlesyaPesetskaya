@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +31,8 @@ public class Place {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String base64Image;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private List<Appointment> appointments;
 
     public Place(Address address, String transportStop, boolean trainingEqyipment, boolean fence,String base64Image) {
         this.address = address;
