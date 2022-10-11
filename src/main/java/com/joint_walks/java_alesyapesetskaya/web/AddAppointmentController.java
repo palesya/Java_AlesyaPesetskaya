@@ -24,16 +24,35 @@ public class AddAppointmentController {
     public String get(Model model) {
         List<Place> allPlaces = placeService.getAll();
         model.addAttribute("allPlaces", allPlaces);
+        model.addAttribute("appointment", new Appointment());
         return "addNew";
     }
 
     @PostMapping("/addWithSelectedPlace/{id}")
-    public String get(@PathVariable Long id, Model model) {
+    public String getWithSelectedAddress(@PathVariable Long id, Model model) {
         Place place = placeService.getById(id);
         model.addAttribute("selected_place", place);
         List<Place> allPlaces = placeService.getAll();
         model.addAttribute("allPlaces", allPlaces);
         return "addNew";
+    }
+
+    @PostMapping("/addAddress/added")
+    public String getCreatedAppointment(
+            @RequestParam("selected_address") String address,
+            @RequestParam("date") String date,
+            @RequestParam("time") String time,
+            @RequestParam("description") String description,
+            Model model) {
+        model.addAttribute("added_address", address);
+        System.out.println(address);
+        model.addAttribute("added_date", date);
+        System.out.println(date);
+        model.addAttribute("added_time", time);
+        System.out.println(time);
+        model.addAttribute("added_description", description);
+        System.out.println(description);
+        return "addedNew";
     }
 
 

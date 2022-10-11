@@ -29,10 +29,8 @@ public class Appointment {
     private Integer numberOfPeople;
     private String description;
 
-    public Appointment(Place place, Date date, Time time, String description) {
+    public Appointment(Place place, String description) {
         this.place = place;
-        this.date = date;
-        this.time = time;
         this.description = description;
     }
 }
