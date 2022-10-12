@@ -6,10 +6,8 @@ spring:
     view:
       suffix: .jsp
       prefix: /WEB-INF/jsp/
-
     format:
-      time: HH:mm
-      date: MM/dd/YYYY
+      date: dd/MM/yyyy
 
   datasource:
     username: postgres

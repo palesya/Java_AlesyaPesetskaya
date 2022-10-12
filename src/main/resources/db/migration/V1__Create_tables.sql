@@ -72,10 +72,11 @@ create table if not exists appointments
         primary key,
     date           date,
     time           time,
-    numberOfPeople int,
     description    varchar(255),
     place_id         bigint,
+    number_of_people integer,
     constraint fk_place
         FOREIGN KEY (place_id)
             references addresses (id)
 );
+

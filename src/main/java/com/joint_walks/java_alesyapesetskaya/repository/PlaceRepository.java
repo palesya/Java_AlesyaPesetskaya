@@ -1,6 +1,5 @@
 package com.joint_walks.java_alesyapesetskaya.repository;
 
-import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +24,9 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     @Query("select p from Place p where p.id=:id")
     Place getById(Long id);
 
-    Place getPlaceByAddress(Address address);
+    @Transactional
+    @Query(value = "select * from places p JOIN addresses a on p.address_id=a.id where a.city = :city and a.street = :street and a.house_number_nearby=:houseNumber",
+    nativeQuery = true)
+    Place getPlaceByCityStreetHouseNumber(String city, String street, Integer houseNumber);
 
 }

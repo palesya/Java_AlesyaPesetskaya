@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -25,12 +26,14 @@ public class Appointment {
     @ManyToOne
     private Place place;
     private Date date;
-    private Time time;
-    private Integer numberOfPeople;
+    private LocalTime time;
     private String description;
+    private Integer numberOfPeople;
 
-    public Appointment(Place place, String description) {
+    public Appointment(Place place, Date date, LocalTime time, String description) {
         this.place = place;
+        this.date = date;
+        this.time = time;
         this.description = description;
     }
 }

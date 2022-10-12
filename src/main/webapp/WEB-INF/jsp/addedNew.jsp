@@ -14,9 +14,9 @@
 
 </head>
 <body style="background-color: dimgrey">
-<div class="container-fluid">
+<div class="container-fluid p-3">
     <div class="row">
-        <div class="col-sm-6 text-black">
+        <div class="col-sm-8 text-black p-3">
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">New appointment was successfully created</h3>
 
@@ -43,12 +43,14 @@
         </div>
 
 
-        <div class="col-sm-6 px-0 d-none d-sm-block">
-            <img src="https://i.pinimg.com/564x/05/ca/d7/05cad708c6fbfdeec648bf21b9d1bc27.jpg"
-                 alt="image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+        <div class="col-sm-4 px-0 d-none d-sm-block p-3">
+            <img src="https://i.pinimg.com/564x/9c/3d/25/9c3d252aa0bcebf1bf88d91ca043612a.jpg"
+                 alt="image" class="rounded" style="object-fit: cover; object-position: left; height: 33rem">
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>
