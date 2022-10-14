@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class PlaceServiceImpl implements PlaceService {
 
     @Autowired
-    PlaceRepository repository;
+    private PlaceRepository repository;
 
     @Override
     public List<Place> getAll() {

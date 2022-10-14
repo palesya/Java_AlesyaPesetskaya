@@ -1,4 +1,5 @@
 package com.joint_walks.java_alesyapesetskaya.service;
+import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.User;
 
 import java.util.List;
@@ -6,9 +7,10 @@ import java.util.List;
 
 public interface UserService {
 
-    User getByLogin(String login);
-    List<User> getAllNotDeleted();
-    List<User> getUsersByPartialMatch(String text);
-    User getById(Long id);
+    UserDto getByLogin(String login);
+    List<UserDto> getAllNotDeleted();
+    List<UserDto> getUsersByPartialMatch(String text);
+    UserDto getUserDtoById(Long id);
+    User getUserById(Long id);
     void saveUser(User user);
 }

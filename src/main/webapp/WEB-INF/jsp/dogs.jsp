@@ -21,7 +21,7 @@
                 <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
-            <div class="dropdown col-6 d-flex justify-content-start">
+            <div class="dropdown col-5 d-flex justify-content-start">
                 <button class="btn dropdown-toggle" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk

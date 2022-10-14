@@ -23,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.id=:id")
     User getById(Long id);
 
+    @Transactional
+    List<User> findByIsDeletedIsFalse();
+
 }

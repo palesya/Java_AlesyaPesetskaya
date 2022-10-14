@@ -1,5 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
+import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
@@ -31,34 +32,49 @@ public class WalkPlacesController {
         model.addAttribute("allCities", allCities);
 
         String securityUserLogin = userSecurity.getUsername();
-        User byLogin = userService.getByLogin(securityUserLogin);
+        UserDto byLogin = userService.getByLogin(securityUserLogin);
         model.addAttribute("loggedUser", byLogin);
         return "walkPlaces";
     }
 
     @GetMapping("/{city}")
     public String getPlacesByCity(@PathVariable @RequestParam("selected_city") String city,
-                                  Model model) {
+                                  Model model,
+                                  @AuthenticationPrincipal UserSecurity userSecurity) {
         List<Place> allPlaces;
         if (Objects.equals(city, "All cities")) {
             allPlaces = placeService.getAll();
         } else {
             allPlaces = placeService.getPlacesByCity(city);
         }
+
         model.addAttribute("allPlaces", allPlaces);
         List<String> allCities = placeService.getAllCities();
         model.addAttribute("allCities", allCities);
+
+        String securityUserLogin = userSecurity.getUsername();
+        UserDto byLogin = userService.getByLogin(securityUserLogin);
+        model.addAttribute("loggedUser", byLogin);
+
         return "walkPlaces";
     }
 
     @PostMapping("/search")
     public String searchPlace(
             @RequestParam(name = "search_text") String text,
-            Model model) {
+            Model model,
+            @AuthenticationPrincipal UserSecurity userSecurity) {
+
         List<Place> allPlaces = placeService.getPlacesByPartialMatch(text);
         model.addAttribute("allPlaces", allPlaces);
+
         List<String> allCities = placeService.getAllCities();
         model.addAttribute("allCities", allCities);
+
+        String securityUserLogin = userSecurity.getUsername();
+        UserDto byLogin = userService.getByLogin(securityUserLogin);
+        model.addAttribute("loggedUser", byLogin);
+
         return "walkPlaces";
     }
 

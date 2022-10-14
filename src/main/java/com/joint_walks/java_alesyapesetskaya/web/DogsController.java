@@ -1,6 +1,5 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
 import com.joint_walks.java_alesyapesetskaya.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.List;
-
 
 @Controller
 @RequestMapping(path = "/dogwalker/dogs")
-public class DogsController {
+public class DogsController extends AbstractUserController {
+
     @Autowired
     UserServiceImpl userService;
 
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-        List<User> allUsers = userService.getAllNotDeleted();
-        model.addAttribute("users", allUsers);
 
-        String securityUserLogin = userSecurity.getUsername();
-        User byLogin = userService.getByLogin(securityUserLogin);
-        model.addAttribute("loggedUser", byLogin);
+        getNotDeletedUsersAndAddToModel(model, "users");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
 
         return "dogs";
     }
@@ -35,9 +30,12 @@ public class DogsController {
     @PostMapping
     public String searchDog(
             @RequestParam(name = "search_text") String text,
-            Model model){
-        List<User> allUsers = userService.getUsersByPartialMatch(text);
-        model.addAttribute("users", allUsers);
+            Model model,
+            @AuthenticationPrincipal UserSecurity userSecurity){
+
+        getUsersByPartialMatchAndAddToModel(text,model,"users");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
+
         return "dogs";
     }
 }

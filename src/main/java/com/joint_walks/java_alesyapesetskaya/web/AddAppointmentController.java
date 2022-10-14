@@ -23,7 +23,6 @@ public class AddAppointmentController {
 
     @Autowired
     private PlaceServiceImpl placeService;
-    ObjectMapper mapper = new ObjectMapper();
 
     @GetMapping("/add")
     public String get(Model model) {
