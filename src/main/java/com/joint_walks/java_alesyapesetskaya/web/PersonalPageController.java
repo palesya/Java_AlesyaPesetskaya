@@ -21,17 +21,13 @@ public class PersonalPageController extends AbstractUserController {
 
     @GetMapping("/{id}")
     public String get(@PathVariable Long id, Model model) {
-
         getLoggedUserByIdAndAddToModel(id, model,"loggedUser");
-
         return "personalPage";
     }
 
     @PostMapping("/{id}/changeData")
     public String getChanges(@PathVariable Long id, Model model) {
-
         getLoggedUserByIdAndAddToModel(id, model,"loggedUser");
-
         return "changeData";
     }
 
@@ -62,7 +58,6 @@ public class PersonalPageController extends AbstractUserController {
         userFromDB.setId(id);
         userService.saveUser(userFromDB);
         getLoggedUserByIdAndAddToModel(id, model,"loggedUser");
-
         return "personalPage";
     }
 

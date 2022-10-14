@@ -15,15 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(path = "/dogwalker/dogs")
 public class DogsController extends AbstractUserController {
 
-    @Autowired
-    UserServiceImpl userService;
-
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-
         getNotDeletedUsersAndAddToModel(model, "users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
-
         return "dogs";
     }
 
@@ -32,10 +27,8 @@ public class DogsController extends AbstractUserController {
             @RequestParam(name = "search_text") String text,
             Model model,
             @AuthenticationPrincipal UserSecurity userSecurity){
-
         getUsersByPartialMatchAndAddToModel(text,model,"users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
-
         return "dogs";
     }
 }

@@ -42,7 +42,7 @@
                         <button class="btn btn-primary" type="submit">Login</button>
                     </div>
                     <br>
-                    <p class="d-flex justify-content-center">Don't have an account? <a href="#!" class="link-info">Register
+                    <p class="d-flex justify-content-center">Don't have an account?&nbsp;<a href="#!" class="link-info">Register
                         here</a></p>
 
                 </form>

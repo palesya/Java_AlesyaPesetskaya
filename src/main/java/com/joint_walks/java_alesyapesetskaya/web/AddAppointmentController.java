@@ -1,9 +1,7 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
-import com.joint_walks.java_alesyapesetskaya.model.Appointment;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +13,24 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/dogwalker")
-public class AddAppointmentController {
+public class AddAppointmentController extends AbstractPlaceController{
 
     @Autowired
     private PlaceServiceImpl placeService;
 
     @GetMapping("/add")
     public String get(Model model) {
-        List<Place> allPlaces = placeService.getAll();
-        model.addAttribute("allPlaces", allPlaces);
+        getAllPlacesAndAddToModel(model,"allPlaces");
         return "addNew";
     }
 
     @PostMapping("/addWithSelectedPlace/{id}")
     public String getWithSelectedAddress(@PathVariable Long id, Model model) {
-        Place place = placeService.getById(id);
-        model.addAttribute("selected_place", place);
-        List<Place> allPlaces = placeService.getAll();
-        model.addAttribute("allPlaces", allPlaces);
+        getPlaceByIdAndAddToModel(id,model,"selected_place");
+        getAllPlacesAndAddToModel(model,"allPlaces");
         return "addNew";
     }
 
@@ -57,6 +51,5 @@ public class AddAppointmentController {
         placeService.createAppointment(address,date,time,description);
         return "addedNew";
     }
-
 
 }

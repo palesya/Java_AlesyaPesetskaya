@@ -1,5 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
+import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.model.User;
@@ -17,23 +18,16 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping(path = "/dogwalker/places")
-public class WalkPlacesController {
+public class WalkPlacesController extends AbstractPlaceController {
 
     @Autowired
     private PlaceServiceImpl placeService;
-    @Autowired
-    private UserServiceImpl userService;
 
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-        List<Place> allPlaces = placeService.getAll();
-        List<String> allCities = placeService.getAllCities();
-        model.addAttribute("allPlaces", allPlaces);
-        model.addAttribute("allCities", allCities);
-
-        String securityUserLogin = userSecurity.getUsername();
-        UserDto byLogin = userService.getByLogin(securityUserLogin);
-        model.addAttribute("loggedUser", byLogin);
+        getAllPlacesAndAddToModel(model, "allPlaces");
+        getAllCitiesAndAddToModel(model, "allCities");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "walkPlaces";
     }
 
@@ -41,21 +35,16 @@ public class WalkPlacesController {
     public String getPlacesByCity(@PathVariable @RequestParam("selected_city") String city,
                                   Model model,
                                   @AuthenticationPrincipal UserSecurity userSecurity) {
-        List<Place> allPlaces;
+        List<PlaceDto> allPlaces;
         if (Objects.equals(city, "All cities")) {
             allPlaces = placeService.getAll();
         } else {
             allPlaces = placeService.getPlacesByCity(city);
         }
-
         model.addAttribute("allPlaces", allPlaces);
-        List<String> allCities = placeService.getAllCities();
-        model.addAttribute("allCities", allCities);
 
-        String securityUserLogin = userSecurity.getUsername();
-        UserDto byLogin = userService.getByLogin(securityUserLogin);
-        model.addAttribute("loggedUser", byLogin);
-
+        getAllCitiesAndAddToModel(model, "allCities");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "walkPlaces";
     }
 
@@ -64,19 +53,10 @@ public class WalkPlacesController {
             @RequestParam(name = "search_text") String text,
             Model model,
             @AuthenticationPrincipal UserSecurity userSecurity) {
-
-        List<Place> allPlaces = placeService.getPlacesByPartialMatch(text);
-        model.addAttribute("allPlaces", allPlaces);
-
-        List<String> allCities = placeService.getAllCities();
-        model.addAttribute("allCities", allCities);
-
-        String securityUserLogin = userSecurity.getUsername();
-        UserDto byLogin = userService.getByLogin(securityUserLogin);
-        model.addAttribute("loggedUser", byLogin);
-
+        getAllPlacesByPartialMatchAndAddToModel(text,model, "allPlaces");
+        getAllCitiesAndAddToModel(model, "allCities");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "walkPlaces";
     }
-
 
 }

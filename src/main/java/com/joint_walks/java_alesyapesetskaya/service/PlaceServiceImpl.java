@@ -1,5 +1,7 @@
 package com.joint_walks.java_alesyapesetskaya.service;
 
+import com.joint_walks.java_alesyapesetskaya.converter.PlaceMapperUtils;
+import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
@@ -19,17 +21,20 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Autowired
     private PlaceRepository repository;
+    @Autowired
+    private PlaceMapperUtils mapper;
 
     @Override
-    public List<Place> getAll() {
-        return repository.findAll();
+    public List<PlaceDto> getAll() {
+        List<Place> allPlacesFromDB = repository.findAll();
+        return mapper.mapToListPlaceDTO(allPlacesFromDB);
     }
 
     @Override
     public List<String> getAllCities() {
-        List<Place> allPlaces = getAll();
+        List<PlaceDto> allPlaces = getAll();
         List<String> cities = new ArrayList<>();
-        for (Place place : allPlaces) {
+        for (PlaceDto place : allPlaces) {
             String city = place.getAddress().getCity();
             cities.add(city);
         }
@@ -37,18 +42,21 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<Place> getPlacesByPartialMatch(String text) {
-        return repository.getPlacesByPartialMatch(text);
+    public List<PlaceDto> getPlacesByPartialMatch(String text) {
+        List<Place> placesFromDb = repository.getPlacesByPartialMatch(text);
+        return mapper.mapToListPlaceDTO(placesFromDb);
     }
 
     @Override
-    public List<Place> getPlacesByCity(String city) {
-        return repository.getPlacesByCity(city);
+    public List<PlaceDto> getPlacesByCity(String city) {
+        List<Place> placesByCityFromDb = repository.getPlacesByCity(city);
+        return mapper.mapToListPlaceDTO(placesByCityFromDb);
     }
 
     @Override
-    public Place getById(Long id) {
-        return repository.getById(id);
+    public PlaceDto getById(Long id) {
+        Place placeFromDb = repository.getById(id);
+        return mapper.mapToPlaceDTO(placeFromDb);
     }
 
     @Override
