@@ -1,17 +1,18 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
-import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
+import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import java.util.List;
 
 @Controller
 public abstract class AbstractPlaceController extends AbstractUserController{
 
     @Autowired
-    private PlaceServiceImpl placeService;
+    private PlaceService placeService;
 
     public void getAllPlacesAndAddToModel(Model model, String attributeName) {
         List<PlaceDto> allPlacesDto = placeService.getAll();

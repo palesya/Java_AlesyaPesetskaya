@@ -9,7 +9,6 @@ import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;

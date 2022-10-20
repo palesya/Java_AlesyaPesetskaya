@@ -16,15 +16,18 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+
+            <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
+                 alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
             <div class="navbar-nav col-2">
-                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogwalker/main">Home</a>
-                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/main">Home</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
             </div>
 
-            <div class="dropdown col-3 d-flex justify-content-start">
-                <button class="btn dropdown-toggle" type="button"
+            <div class="dropdown col-2 d-flex justify-content-start">
+                <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
                 </button>
@@ -47,12 +50,12 @@
                 </select>
             </form>
 
-            <form class="col-3 m-auto p-2" action="${pageContext.request.contextPath}/dogwalker/places/search"
+            <form class="col-3 m-auto" action="${pageContext.request.contextPath}/dogwalker/places/search"
                   method="post">
                 <input class="form-control" type="text" placeholder="Search by street or transport stop."
                        aria-label="Search" name="search_text">
             </form>
-            <div class="col-1 m-auto p-2">
+            <div class="col-1 m-auto">
                 <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
                     <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
                          style="max-height: 3rem;border-radius: 50%">

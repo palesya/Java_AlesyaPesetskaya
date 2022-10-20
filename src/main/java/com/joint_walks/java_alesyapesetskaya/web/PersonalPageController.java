@@ -4,7 +4,7 @@ package com.joint_walks.java_alesyapesetskaya.web;
 import com.joint_walks.java_alesyapesetskaya.converter.UserMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.model.Dog;
 import com.joint_walks.java_alesyapesetskaya.model.User;
-import com.joint_walks.java_alesyapesetskaya.service.UserServiceImpl;
+import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class PersonalPageController extends AbstractUserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     @Autowired
     UserMapperUtils converter;
 

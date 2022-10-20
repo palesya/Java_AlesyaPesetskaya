@@ -14,15 +14,18 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center p-3" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+
+            <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
+                 alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
             <div class="navbar-nav col-2">
-                <a class="nav-link mx-4" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
-                <a class="nav-link mx-1" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
-            <div class="dropdown col-9 d-flex justify-content-start">
-                <button class="btn dropdown-toggle" type="button"
+            <div class="dropdown col-7 d-flex justify-content-start">
+                <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
                 </button>

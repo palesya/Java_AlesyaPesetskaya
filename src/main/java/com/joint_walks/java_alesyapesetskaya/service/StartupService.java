@@ -27,7 +27,7 @@ public class StartupService {
     @PostConstruct
     public void init() throws IOException {
 
-        String pathPart = "C:/Users/Admin/IdeaProjects/Java_AlesyaPesetskaya/src/main/resources/static/";
+        String pathPart = "./src/main/resources/static/";
 
         String avatar1 = getStringBase64FromFile(pathPart + "user1.jpg");
         String avatar2 = getStringBase64FromFile(pathPart + "user2.jpg");

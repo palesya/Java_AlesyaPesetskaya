@@ -1,12 +1,8 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
-import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
-import com.joint_walks.java_alesyapesetskaya.model.Place;
-import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
-import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
-import com.joint_walks.java_alesyapesetskaya.service.UserServiceImpl;
+import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,7 +17,7 @@ import java.util.Objects;
 public class WalkPlacesController extends AbstractPlaceController {
 
     @Autowired
-    private PlaceServiceImpl placeService;
+    private PlaceService placeService;
 
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {

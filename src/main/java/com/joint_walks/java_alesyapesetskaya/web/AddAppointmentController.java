@@ -1,11 +1,11 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
-import com.joint_walks.java_alesyapesetskaya.model.Place;
-import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
+import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
+import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +19,23 @@ import java.util.Date;
 public class AddAppointmentController extends AbstractPlaceController{
 
     @Autowired
-    private PlaceServiceImpl placeService;
+    private PlaceService placeService;
 
     @GetMapping("/add")
-    public String get(Model model) {
+    public String get(Model model,
+                      @AuthenticationPrincipal UserSecurity userSecurity) {
         getAllPlacesAndAddToModel(model,"allPlaces");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "addNew";
     }
 
     @PostMapping("/addWithSelectedPlace/{id}")
-    public String getWithSelectedAddress(@PathVariable Long id, Model model) {
+    public String getWithSelectedAddress(@PathVariable Long id,
+                                         Model model,
+                                         @AuthenticationPrincipal UserSecurity userSecurity) {
         getPlaceByIdAndAddToModel(id,model,"selected_place");
         getAllPlacesAndAddToModel(model,"allPlaces");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "addNew";
     }
 
@@ -40,7 +45,8 @@ public class AddAppointmentController extends AbstractPlaceController{
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
             @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
             @RequestParam("description") String description,
-            Model model) {
+            Model model,
+            @AuthenticationPrincipal UserSecurity userSecurity) {
         model.addAttribute("added_address", address);
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -49,6 +55,7 @@ public class AddAppointmentController extends AbstractPlaceController{
         model.addAttribute("added_time", time);
         model.addAttribute("added_description", description);
         placeService.createAppointment(address,date,time,description);
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "addedNew";
     }
 

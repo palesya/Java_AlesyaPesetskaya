@@ -2,7 +2,7 @@ package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
-import com.joint_walks.java_alesyapesetskaya.service.UserServiceImpl;
+import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class AbstractUserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     public void getLoggedUserByIdAndAddToModel(Long id, Model model, String attributeName) {
         UserDto userDto = userService.getUserDtoById(id);
