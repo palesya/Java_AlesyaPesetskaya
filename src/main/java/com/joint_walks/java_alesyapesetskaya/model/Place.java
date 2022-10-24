@@ -22,7 +22,8 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id",referencedColumnName = "id")
     private Address address;
     private String transportStop;
@@ -31,7 +32,8 @@ public class Place {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String base64Image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "place")
     private List<Appointment> appointments;
 
     public Place(Address address, String transportStop, boolean trainingEqyipment, boolean fence,String base64Image) {

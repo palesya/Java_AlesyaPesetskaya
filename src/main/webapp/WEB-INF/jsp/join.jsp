@@ -78,6 +78,13 @@
     </div>
 </c:if>
 
+<c:if test="${not empty success}">
+    <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">
+        <strong>${success}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
+
 
 <div class="container p-3">
     <div class="row mx-auto">

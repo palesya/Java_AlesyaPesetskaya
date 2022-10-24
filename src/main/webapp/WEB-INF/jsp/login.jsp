@@ -42,7 +42,7 @@
                         <button class="btn btn-primary" type="submit">Login</button>
                     </div>
                     <br>
-                    <p class="d-flex justify-content-center">Don't have an account?&nbsp;<a href="#!" class="link-info">Register
+                    <p class="d-flex justify-content-center">Don't have an account?&nbsp;<a href="${pageContext.request.contextPath}/register" class="link-info">Register
                         here</a></p>
 
                 </form>
@@ -50,7 +50,7 @@
 
         </div>
         <div class="col-sm-5 p-3 d-flex justify-content-center">
-            <img src="https://i.pinimg.com/564x/0b/9b/ec/0b9bec6eb80ff1cd3d8fc90fe340a716.jpg"
+            <img src="${pageContext.request.contextPath}/login.jpg"
                  alt="Login image" class="rounded" style="object-fit: cover; object-position: left; height: 34rem;">
         </div>
     </div>

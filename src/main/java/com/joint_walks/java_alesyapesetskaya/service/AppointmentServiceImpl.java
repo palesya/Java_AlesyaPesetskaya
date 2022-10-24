@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +50,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setUsers(users);
             repository.saveAndFlush(appointment);
         } else {
-            throw new UserIsAlreadyAddedException("You are already added to the appointment.");
+            throw new UserIsAlreadyAddedException("You are already added to the selected appointment.");
         }
     }
 

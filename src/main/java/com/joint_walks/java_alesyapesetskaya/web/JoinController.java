@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,8 +76,13 @@ public class JoinController extends AbstractPlaceController {
         String securityUserLogin = userSecurity.getUsername();
         User userByLogin = userService.getUserByLogin(securityUserLogin);
         Appointment appointment = appointmentService.getById(id);
+        Address address = appointment.getPlace().getAddress();
+        String pattern = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(appointment.getDate());
+        LocalTime time = appointment.getTime();
         appointmentService.joinAppointment(appointment,userByLogin);
-
+        model.addAttribute("success", "You've been successfully added to the appointment. Date: "+date+". Time: "+time+". Address: "+address);
         List<AppointmentDto> all = appointmentService.getAll();
         model.addAttribute("allAppointments", all);
 

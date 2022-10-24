@@ -26,7 +26,7 @@ public class Appointment {
     private LocalTime time;
     private String description;
     private Integer numberOfPeople;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "appointment_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"),
     name = "user_appointment")

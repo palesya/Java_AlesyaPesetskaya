@@ -20,13 +20,20 @@
             <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
+            <div class="col-1 m-auto">
+                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
+                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
+                         style="max-height: 3rem;border-radius: 50%">
+                </a>
+            </div>
+
             <div class="navbar-nav col-2">
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
-            <div class="dropdown col-7 d-flex justify-content-start">
+            <div class="dropdown col-6 d-flex justify-content-start">
                 <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
@@ -39,8 +46,8 @@
             </div>
 
             <div class="col-1 m-auto">
-                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
-                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
+                <a href="${pageContext.request.contextPath}/process_logout">
+                    <img class="float-right" src="${pageContext.request.contextPath}/button_logout.jpg" alt="Lights"
                          style="max-height: 3rem;border-radius: 50%">
                 </a>
             </div>
@@ -84,12 +91,6 @@
             </div>
         </c:forEach>
     </div>
-</div>
-
-<div class="container p-3">
-    <form class="vh-100" action="${pageContext.request.contextPath}/process_logout" method="post">
-        <button class="btn btn-primary" type="submit">Logout</button>
-    </form>
 </div>
 
 </body>
