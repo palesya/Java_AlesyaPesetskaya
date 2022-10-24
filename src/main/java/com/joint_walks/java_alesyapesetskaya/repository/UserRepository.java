@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
+    @Query("select u from User u where u.login=:login")
     User getByLogin(String login);
 
     @Transactional
@@ -24,6 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getById(Long id);
 
     @Transactional
+    @Query("select u from User u where u.isDeleted=false")
     List<User> findByIsDeletedIsFalse();
 
 }

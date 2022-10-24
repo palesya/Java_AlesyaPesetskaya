@@ -18,18 +18,20 @@ public class UserServiceImpl implements UserService {
     private final UserMapperUtils converter;
 
     @Override
-    public UserDto getByLogin(String login) {
+    public UserDto getUserDtoByLogin(String login) {
         User userFromDB = repository.getByLogin(login);
         return converter.mapToUserDTO(userFromDB);
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        return repository.getByLogin(login);
+    }
+
+    @Override
     public List<UserDto> getAllNotDeleted() {
-        return repository
-                .findByIsDeletedIsFalse()
-                .stream()
-                .map(converter::mapToUserDTO)
-                .collect(Collectors.toList());
+        List<User> byIsDeletedIsFalse = repository.findByIsDeletedIsFalse();
+        return converter.mapToListUserDTO(byIsDeletedIsFalse);
     }
 
     @Override

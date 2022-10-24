@@ -80,3 +80,13 @@ create table if not exists appointments
             references addresses (id)
 );
 
+create table if not exists user_appointment
+(
+    user_id bigint not null,
+    appointment_id bigint not null,
+    constraint fk_user
+        FOREIGN KEY (appointment_id)
+            references appointments (id)
+);
+
+

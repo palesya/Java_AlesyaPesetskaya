@@ -74,15 +74,4 @@ public class PlaceServiceImpl implements PlaceService {
         repository.saveAndFlush(place);
     }
 
-    @Override
-    public void createAppointment(Address address, Date date, LocalTime time, String description) {
-        Place place = getPlaceByAddress(address);
-        Appointment appointment = new Appointment(place,date,time,description);
-        appointment.setNumberOfPeople(1);
-        List<Appointment> appointments = place.getAppointments();
-        appointments.add(appointment);
-        place.setAppointments(appointments);
-        savePlace(place);
-    }
-
 }

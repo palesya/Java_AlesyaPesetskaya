@@ -1,21 +1,32 @@
 package com.joint_walks.java_alesyapesetskaya.service;
 
+import com.joint_walks.java_alesyapesetskaya.converter.AppointmentMapperUtils;
+import com.joint_walks.java_alesyapesetskaya.dto.AppointmentDto;
+import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
+import com.joint_walks.java_alesyapesetskaya.exception.UserIsAlreadyAddedException;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
+import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.repository.AppointmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
 
-    @Autowired
-    private AppointmentRepository repository;
+    private final AppointmentRepository repository;
+    private final AppointmentMapperUtils converter;
 
     @Override
-    public List<Appointment> getAll(){
-        return repository.findAll();
+    public List<AppointmentDto> getAll() {
+        List<Appointment> allFromDb = repository.findAll();
+        return converter.mapToListAppointmentDTO(allFromDb);
     }
 
     @Override
@@ -24,13 +35,32 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public void saveAppointment(Appointment appointment) {
+    public void createAppointment(Appointment appointment, User user) {
+        appointment.setNumberOfPeople(1);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        appointment.setUsers(users);
         repository.saveAndFlush(appointment);
     }
 
     @Override
-    public List<Appointment> getAppointmentByCity(String city) {
-        return repository.getAppointmentByCity(city);
+    public void joinAppointment(Appointment appointment, User user) {
+        List<User> users = appointment.getUsers();
+        if (!users.contains(user)) {
+            Integer numberOfPeople = appointment.getNumberOfPeople();
+            appointment.setNumberOfPeople(numberOfPeople + 1);
+            users.add(user);
+            appointment.setUsers(users);
+            repository.saveAndFlush(appointment);
+        } else {
+            throw new UserIsAlreadyAddedException("You are already added to the appointment.");
+        }
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentByCity(String city) {
+        List<Appointment> appointmentByCity = repository.getAppointmentByCity(city);
+        return converter.mapToListAppointmentDTO(appointmentByCity);
     }
 
     @Override

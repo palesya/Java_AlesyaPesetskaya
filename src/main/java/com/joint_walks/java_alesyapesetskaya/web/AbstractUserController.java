@@ -35,7 +35,7 @@ public abstract class AbstractUserController {
                                                               Model model,
                                                               String attributeName) {
         String securityUserLogin = userSecurity.getUsername();
-        UserDto userDto = userService.getByLogin(securityUserLogin);
+        UserDto userDto = userService.getUserDtoByLogin(securityUserLogin);
         model.addAttribute(attributeName, userDto);
     }
 

@@ -1,12 +1,10 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
-import com.joint_walks.java_alesyapesetskaya.model.Address;
-import com.joint_walks.java_alesyapesetskaya.model.Appointment;
-import com.joint_walks.java_alesyapesetskaya.model.Place;
-import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
+import com.joint_walks.java_alesyapesetskaya.dto.AppointmentDto;
+import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
+import com.joint_walks.java_alesyapesetskaya.model.*;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
-import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
+import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,13 +19,14 @@ import java.util.Objects;
 public class JoinController extends AbstractPlaceController {
 
     @Autowired
-    private PlaceService placeService;
-    @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-        List<Appointment> all = appointmentService.getAll();
+        List<AppointmentDto> all = appointmentService.getAll();
         model.addAttribute("allAppointments", all);
 
         getAllPlacesAndAddToModel(model, "allPlaces");
@@ -40,7 +39,7 @@ public class JoinController extends AbstractPlaceController {
     public String getPlacesByCity(@PathVariable @RequestParam("selected_city") String city,
                                   Model model,
                                   @AuthenticationPrincipal UserSecurity userSecurity) {
-        List<Appointment> allAppointments;
+        List<AppointmentDto> allAppointments;
         if (Objects.equals(city, "All cities")) {
             allAppointments = appointmentService.getAll();
         } else {
@@ -71,13 +70,13 @@ public class JoinController extends AbstractPlaceController {
     public String getWithSelectedAddress(@PathVariable Long id,
                                          Model model,
                                          @AuthenticationPrincipal UserSecurity userSecurity) {
-        Appointment selected_appointment = appointmentService.getById(id);
-        Integer numberOfPeople = selected_appointment.getNumberOfPeople();
-        selected_appointment.setNumberOfPeople(numberOfPeople+1);
-        appointmentService.saveAppointment(selected_appointment);
-        List<Appointment> all = appointmentService.getAll();
-        model.addAttribute("allAppointments", all);
+        String securityUserLogin = userSecurity.getUsername();
+        User userByLogin = userService.getUserByLogin(securityUserLogin);
+        Appointment appointment = appointmentService.getById(id);
+        appointmentService.joinAppointment(appointment,userByLogin);
 
+        List<AppointmentDto> all = appointmentService.getAll();
+        model.addAttribute("allAppointments", all);
 
         getAllPlacesAndAddToModel(model,"allPlaces");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");

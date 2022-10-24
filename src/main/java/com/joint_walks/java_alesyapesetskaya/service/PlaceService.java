@@ -18,5 +18,4 @@ public interface PlaceService {
     Place getPlaceByAddress(Address address);
     Place getPlaceByCityStreetHouseNumber(String city, String street, Integer houseNumber);
     void savePlace(Place place);
-    void createAppointment(Address address, Date date, LocalTime time, String description);
 }

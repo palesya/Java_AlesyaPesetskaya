@@ -16,7 +16,8 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
+             style="background-image: linear-gradient(to right, black, #63646A)">
 
             <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
@@ -24,7 +25,8 @@
             <div class="navbar-nav col-3">
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/main">Home</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
             </div>
 
             <div class="dropdown col-1 d-flex justify-content-start">
@@ -69,6 +71,14 @@
 </div>
 
 
+<c:if test="${not empty error}">
+    <div class="container p-3 alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>${error}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
+
+
 <div class="container p-3">
     <div class="row mx-auto">
         <c:forEach items="${allAppointments}" var="appointment">
@@ -84,7 +94,8 @@
                         <p class="card-text">Time: ${appointment.time}</p>
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
-                        <form method="post" action="${pageContext.request.contextPath}/dogwalker/join/selected/${appointment.id}">
+                        <form method="post"
+                              action="${pageContext.request.contextPath}/dogwalker/join/selected/${appointment.id}">
                             <input type="submit" class="btn btn-primary" value="Join appointment" name="appointment_id">
                         </form>
                     </div>

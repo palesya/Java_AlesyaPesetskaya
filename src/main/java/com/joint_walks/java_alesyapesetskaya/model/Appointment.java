@@ -1,20 +1,17 @@
 package com.joint_walks.java_alesyapesetskaya.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 @Entity
 @Table(name = "appointments")
 public class Appointment {
@@ -23,12 +20,18 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Place place;
     private Date date;
     private LocalTime time;
     private String description;
     private Integer numberOfPeople;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "appointment_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"),
+    name = "user_appointment")
+    private List<User> users;
+
 
     public Appointment(Place place, Date date, LocalTime time, String description) {
         this.place = place;

@@ -13,7 +13,7 @@ public class UserMapperUtils {
 
     public UserDto mapToUserDTO(User userFromDB) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(userFromDB, UserDto.class);
+        return modelMapper.map(userFromDB,UserDto.class);
     }
 
     public List<UserDto> mapToListUserDTO(List<User> usersFromDB) {
