@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="data:image/jpg;base64,${user.base64Image}" alt="Lights"
-                                     style="max-height: 5rem;border-radius: 50%">
+                                     style="max-height: 5rem;border-radius: 50%;max-width: 5rem;">
                             </div>
                             <div class="col-md-4">
                                     ${user.login} - ${user.age}

@@ -26,7 +26,7 @@
 
 <div class="container p-3">
     <div class="row">
-        <form class="col-sm-8 text-black p-3" action="${pageContext.request.contextPath}/register" method="post">
+        <form class="col-sm-7 text-black p-3" action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data">
 
             <h3 class="fw-normal mb-3" style="letter-spacing: 1px;">Register new user</h3>
 
@@ -64,18 +64,7 @@
 
             <div class="form-outline mb-4">
                 <label for="Image" class="form-label">User's photo:</label>
-                <input class="form-control" type="file" id="Image">
-                <img id="frame1" src="" class="img-fluid"/>
-                <script>
-                    function preview() {
-                        frame1.src = URL.createObjectURL(event.target.files[0]);
-                    }
-
-                    function clearImage() {
-                        document.getElementById('formFile').value = null;
-                        frame1.src = "";
-                    }
-                </script>
+                <input class="form-control" type="file" id="Image" name="user_image" size = "40">
             </div>
 
             <div class="row">
@@ -97,7 +86,7 @@
                 <div class="col-md-9 mb-4">
                     <div class="form-outline">
                         <label class="form-label" for="form5">Dog's type:</label>
-                        <input type="text" name="type" id="form5" class="form-control form-control-lg"/>
+                        <input type="text" name="dog_type" id="form5" class="form-control form-control-lg"/>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
@@ -113,17 +102,8 @@
 
             <div class="form-outline mb-4">
                 <label for="ImageDog" class="form-label">Dog's photo:</label>
-                <input class="form-control" type="file" id="ImageDog">
-                <img id="frame2" src="" class="img-fluid"/>
+                <input class="form-control" type="file" id="ImageDog" name="dog_image">
                 <script>
-                    function preview() {
-                        frame2.src = URL.createObjectURL(event.target.files[0]);
-                    }
-
-                    function clearImage() {
-                        document.getElementById('formFile').value = null;
-                        frame2.src = "";
-                    }
                 </script>
             </div>
             <div class="pt-1 mb-4">
@@ -131,9 +111,9 @@
             </div>
         </form>
 
-        <div class="col-sm-4 px-0 d-none d-sm-block p-3">
+        <div class="col-sm-5 px-0 d-none d-sm-block p-3">
             <img src="${pageContext.request.contextPath}/register.jpg"
-                 alt="image" class="rounded" style="object-fit: cover; object-position: left; height: 33rem;">
+                 alt="image" class="rounded" style="object-fit: cover; object-position: left; height: 42rem;">
         </div>
     </div>
 </div>
