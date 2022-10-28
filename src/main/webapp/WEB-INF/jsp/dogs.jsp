@@ -51,7 +51,7 @@
 <div class="container p-3">
     <div class="row mx-auto">
         <c:forEach items="${users}" var="user">
-            <div class="col-md-4">
+            <div class="col-md-4 p-3">
                 <div class="card" style="width: 20rem;background-color: darkgray">
                     <img src="data:image/jpg;base64,${user.dog.base64Image}" alt="Lights"
                          style="height: 20rem; object-fit: cover;"
