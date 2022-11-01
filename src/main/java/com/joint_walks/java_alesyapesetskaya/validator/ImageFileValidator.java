@@ -8,11 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 public class ImageFileValidator implements ConstraintValidator<ValidImage, MultipartFile> {
 
     @Override
-    public void initialize(ValidImage constraintAnnotation) {
-
-    }
-
-    @Override
     public boolean isValid(MultipartFile multipartFile, ConstraintValidatorContext context) {
         boolean result = true;
         String contentType = multipartFile.getContentType();
