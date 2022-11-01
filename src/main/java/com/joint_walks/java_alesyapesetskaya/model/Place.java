@@ -16,12 +16,11 @@ import java.util.List;
 public class Place {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="address_id")
     private Long id;
-
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id",referencedColumnName = "id")
+    @MapsId
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id")
     private Address address;
     private String transportStop;
     private boolean trainingEqyipment;
