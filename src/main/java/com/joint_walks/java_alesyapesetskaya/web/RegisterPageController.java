@@ -1,6 +1,5 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-
 import com.joint_walks.java_alesyapesetskaya.converter.UserMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.dto.RegisterForm;
 import com.joint_walks.java_alesyapesetskaya.model.Dog;
@@ -13,13 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,8 +32,6 @@ public class RegisterPageController extends AbstractUserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserMapperUtils converter;
 
     private final String rootDir = System.getProperty("user.dir") + "/src/main/webapp/static/images";
 
@@ -48,33 +42,9 @@ public class RegisterPageController extends AbstractUserController {
         return "register";
     }
 
-//    @PostMapping
-//    public String saveChanges(Model model,
-//                              @RequestParam(name = "login") String login,
-//                              @RequestParam(name = "user_age") Integer userAge,
-//                              @RequestParam(name = "password") String password,
-//                              @RequestParam(name = "repeat_password") String repeatPassword,
-//                              @RequestParam(name = "user_image") MultipartFile userImage,
-//                              @RequestParam(name = "dog_name") String dogName,
-//                              @RequestParam(name = "dog_type") String dogType,
-//                              @RequestParam(name = "sex") String dogSexString,
-//                              @RequestParam(name = "dog_age") Integer dogAge,
-//                              @RequestParam(name = "dog_image") MultipartFile dogImage) throws IOException {
-//        System.out.println("-----------------------------------");
-//        String dogImageString = getStringBase64FromFile(dogImage);
-//        SEX dogSex = (Objects.equals(dogSexString, "girl")) ? WOMAN : MAN;
-//        Dog dog = new Dog(dogName,dogType,dogAge,dogImageString,dogSex);
-//        String encodedPassword = new BCryptPasswordEncoder().encode(password);
-//        String userImageString = getStringBase64FromFile(userImage);
-//        User user = new User(login, encodedPassword, userAge,userImageString,dog);
-//        userService.saveUser(user);
-//        return "success_register";
-//    }
-
     @PostMapping
     public String saveChanges(@Valid @ModelAttribute(name = "registerForm") RegisterForm registerForm,
-                              BindingResult bindingResult,
-                              Model model) throws IOException {
+                              BindingResult bindingResult) throws IOException {
         System.out.println("hello");
         if (bindingResult.hasErrors()) {
             return "register";

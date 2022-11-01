@@ -4,8 +4,6 @@ import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 public interface PlaceService {

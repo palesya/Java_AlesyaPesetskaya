@@ -1,6 +1,7 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
+import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public abstract class AbstractUserController {
         String securityUserLogin = userSecurity.getUsername();
         UserDto userDto = userService.getUserDtoByLogin(securityUserLogin);
         model.addAttribute(attributeName, userDto);
+    }
+
+    public User getUserByLoginFromUserSecurity(@AuthenticationPrincipal UserSecurity userSecurity) {
+        String securityUserLogin = userSecurity.getUsername();
+        return userService.getUserByLogin(securityUserLogin);
     }
 
 }

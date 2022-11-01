@@ -3,7 +3,6 @@ package com.joint_walks.java_alesyapesetskaya.web;
 import com.joint_walks.java_alesyapesetskaya.model.*;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
 import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
-import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,8 +22,6 @@ public class AddAppointmentController extends AbstractPlaceController{
     private PlaceService placeService;
     @Autowired
     private AppointmentService appointmentService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/add")
     public String get(Model model,
@@ -61,8 +58,7 @@ public class AddAppointmentController extends AbstractPlaceController{
         model.addAttribute("added_description", description);
         Place placeByAddress = placeService.getPlaceByAddress(address);
 
-        String securityUserLogin = userSecurity.getUsername();
-        User userByLogin = userService.getUserByLogin(securityUserLogin);
+        User userByLogin = getUserByLoginFromUserSecurity(userSecurity);
 
         appointmentService.createAppointment(new Appointment(placeByAddress,date,time,description),userByLogin);
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");

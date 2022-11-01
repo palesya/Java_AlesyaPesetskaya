@@ -21,6 +21,5 @@ public class PlaceDto {
     private boolean trainingEqyipment;
     private boolean fence;
     private String base64Image;
-    private List<Appointment> appointments;
 
 }

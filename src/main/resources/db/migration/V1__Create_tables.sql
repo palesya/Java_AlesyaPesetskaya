@@ -89,4 +89,13 @@ create table if not exists user_appointment
             references appointments (id)
 );
 
+create table if not exists place_appointment
+(
+    place_id bigint not null,
+    appointment_id bigint not null,
+    constraint fk_place
+        FOREIGN KEY (appointment_id)
+            references appointments (id)
+);
+
 

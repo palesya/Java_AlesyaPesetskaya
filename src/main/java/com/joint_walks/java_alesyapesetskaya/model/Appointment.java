@@ -1,14 +1,16 @@
 package com.joint_walks.java_alesyapesetskaya.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,13 +22,16 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "appointment_id"),
+            inverseJoinColumns = @JoinColumn(name = "place_id"),
+            name = "place_appointment")
     private Place place;
     private Date date;
     private LocalTime time;
     private String description;
     private Integer numberOfPeople;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "appointment_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"),
     name = "user_appointment")

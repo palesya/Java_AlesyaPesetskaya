@@ -24,7 +24,7 @@ public class Address {
     private String city;
     private String street;
     private Integer houseNumberNearby;
-    @OneToOne(mappedBy = "address",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "address",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Place place;
 
     public Address(String city, String street, Integer houseNumberNearby) {

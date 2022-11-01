@@ -2,7 +2,6 @@ package com.joint_walks.java_alesyapesetskaya.service;
 
 import com.joint_walks.java_alesyapesetskaya.converter.AppointmentMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.dto.AppointmentDto;
-import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.exception.UserIsAlreadyAddedException;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
 import com.joint_walks.java_alesyapesetskaya.model.User;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,12 +42,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void joinAppointment(Appointment appointment, User user) {
-        List<User> users = appointment.getUsers();
-        if (!users.contains(user)) {
-            Integer numberOfPeople = appointment.getNumberOfPeople();
-            appointment.setNumberOfPeople(numberOfPeople + 1);
+        List<Long> addedUserIdsFromAppointment = getAddedUserIdsFromAppointment(appointment.getId());
+        Long userId = user.getId();
+        if (!addedUserIdsFromAppointment.contains(userId)) {
+            List<User> users = appointment.getUsers();
             users.add(user);
             appointment.setUsers(users);
+            Integer numberOfPeople = appointment.getNumberOfPeople();
+            appointment.setNumberOfPeople(numberOfPeople + 1);
             repository.saveAndFlush(appointment);
         } else {
             throw new UserIsAlreadyAddedException("You are already added to the selected appointment.");
@@ -61,8 +63,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<Appointment> getAppointmentsByPartialMatch(String text) {
-        return repository.getAppointmentsByPartialMatch(text);
+    public List<AppointmentDto> getAppointmentsByPartialMatch(String text) {
+        List<Appointment> appointmentsByPartialMatch = repository.getAppointmentsByPartialMatch(text);
+        return converter.mapToListAppointmentDTO(appointmentsByPartialMatch);
+    }
+
+    @Override
+    public List<Long> getAddedUserIdsFromAppointment(Long appointmentId) {
+        return repository.getAddedUserIdsFromAppointment(appointmentId);
     }
 
 }
