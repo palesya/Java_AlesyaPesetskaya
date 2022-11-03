@@ -23,10 +23,10 @@
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
             <div class="navbar-nav col-3">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/main">Home</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white"
-                   href="${pageContext.request.contextPath}/dogwalker/places">Places</a>
+                   href="${pageContext.request.contextPath}/dogwalker/user/places">Places</a>
             </div>
 
             <div class="dropdown col-1 d-flex justify-content-start">
@@ -35,13 +35,13 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/add">Add new</a>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add new</a>
                     </li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a></li>
                 </ul>
             </div>
 
-            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/join/city"
+            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/user/join/city"
                   method="get">
                 <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city"
                         onchange="this.form.submit();">
@@ -53,14 +53,14 @@
                 </select>
             </form>
 
-            <form class="col-3 m-auto" action="${pageContext.request.contextPath}/dogwalker/join/search"
+            <form class="col-3 m-auto" action="${pageContext.request.contextPath}/dogwalker/user/join/search"
                   method="post">
                 <input class="form-control" type="text" placeholder="Search by street or transport stop."
                        aria-label="Search" name="search_text">
             </form>
 
             <div class="col-1 m-auto">
-                <a href="${pageContext.request.contextPath}/dogwalker/personalPage/${loggedUser.id}">
+                <a href="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}">
                     <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
                          style="max-height: 3rem;border-radius: 50%">
                 </a>
@@ -102,7 +102,7 @@
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
                         <form method="post"
-                              action="${pageContext.request.contextPath}/dogwalker/join/selected/${appointment.id}">
+                              action="${pageContext.request.contextPath}/dogwalker/user/join/selected/${appointment.id}">
                             <input type="submit" class="btn btn-primary" value="Join appointment" name="appointment_id">
                         </form>
                     </div>

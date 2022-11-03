@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {LoginValidator.class})
-public @interface ValidLogin {
+@Constraint(validatedBy = {LoginForRegisterValidator.class})
+public @interface ValidLoginForRegister {
 
     String message() default "Invalid login";
     Class<?>[] groups() default {};

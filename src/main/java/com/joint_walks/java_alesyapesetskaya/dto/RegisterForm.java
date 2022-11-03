@@ -1,7 +1,7 @@
 package com.joint_walks.java_alesyapesetskaya.dto;
 
 import com.joint_walks.java_alesyapesetskaya.validator.ValidImage;
-import com.joint_walks.java_alesyapesetskaya.validator.ValidLogin;
+import com.joint_walks.java_alesyapesetskaya.validator.ValidLoginForRegister;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +14,7 @@ import java.util.Objects;
 @Builder
 public class RegisterForm {
 
-    @ValidLogin
+    @ValidLoginForRegister
     private String login;
     @NotNull(message = "Age can't be empty.")
     @Min(value = 18, message = "Age can't be less than 18 years.")

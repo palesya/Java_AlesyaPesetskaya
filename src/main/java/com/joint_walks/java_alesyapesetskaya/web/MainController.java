@@ -8,16 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/dogwalker/main")
+@RequestMapping(path = "/dogwalker")
 public class MainController extends AbstractUserController {
 
-    @GetMapping
-    public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+    @GetMapping("/user/main")
+    public String getUserPage(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
 
         getNotDeletedUsersAndAddToModel(model, "users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
 
         return "main";
+    }
+
+    @GetMapping("/admin/main")
+    public String getAdminPage(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+        getNotDeletedUsersAndAddToModel(model, "users");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
+        return "mainAdmin";
     }
 
 }

@@ -3,6 +3,7 @@ package com.joint_walks.java_alesyapesetskaya.web;
 import com.joint_walks.java_alesyapesetskaya.converter.UserMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.dto.RegisterForm;
 import com.joint_walks.java_alesyapesetskaya.model.Dog;
+import com.joint_walks.java_alesyapesetskaya.model.Role;
 import com.joint_walks.java_alesyapesetskaya.model.SEX;
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
@@ -21,6 +22,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.joint_walks.java_alesyapesetskaya.model.SEX.MAN;
@@ -37,7 +40,6 @@ public class RegisterPageController extends AbstractUserController {
 
     @GetMapping
     public String get(Model model) {
-        System.out.println("hello");
         model.addAttribute("registerForm", new RegisterForm());
         return "register";
     }
@@ -45,17 +47,20 @@ public class RegisterPageController extends AbstractUserController {
     @PostMapping
     public String saveChanges(@Valid @ModelAttribute(name = "registerForm") RegisterForm registerForm,
                               BindingResult bindingResult) throws IOException {
-        System.out.println("hello");
         if (bindingResult.hasErrors()) {
             return "register";
         }
-            String dogImageString = getStringBase64FromFile(registerForm.getDogImage());
-            SEX dogSex = (Objects.equals(registerForm.getDogSexString(), "girl")) ? WOMAN : MAN;
-            Dog dog = new Dog(registerForm.getDogName(), registerForm.getDogType(), registerForm.getDogAge(), dogImageString, dogSex);
-            String encodedPassword = new BCryptPasswordEncoder().encode(registerForm.getPassword());
-            String userImageString = getStringBase64FromFile(registerForm.getUserImage());
-            User user = new User(registerForm.getLogin(), encodedPassword, registerForm.getUserAge(), userImageString, dog);
-            userService.saveUser(user);
+        String dogImageString = getStringBase64FromFile(registerForm.getDogImage());
+        SEX dogSex = (Objects.equals(registerForm.getDogSexString(), "girl")) ? WOMAN : MAN;
+        Dog dog = new Dog(registerForm.getDogName(), registerForm.getDogType(), registerForm.getDogAge(), dogImageString, dogSex);
+        String encodedPassword = new BCryptPasswordEncoder().encode(registerForm.getPassword());
+        String userImageString = getStringBase64FromFile(registerForm.getUserImage());
+        Role userRole = new Role("USER");
+        List<Role> rolesForSimpleUsers = new ArrayList<>();
+        rolesForSimpleUsers.add(userRole);
+        User user = new User(registerForm.getLogin(), encodedPassword, registerForm.getUserAge(), userImageString, dog);
+        user.setRoles(rolesForSimpleUsers);
+        userService.saveUser(user);
         return "success_register";
 
     }

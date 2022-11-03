@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(path = "/dogwalker/dogs")
+@RequestMapping(path = "/dogwalker/user/dogs")
 public class DogsController extends AbstractUserController {
 
     @GetMapping

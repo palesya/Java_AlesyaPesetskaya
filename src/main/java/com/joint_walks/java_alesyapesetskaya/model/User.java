@@ -6,8 +6,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,5 +51,14 @@ public class User {
         this.age = age;
         this.base64Image = base64Image;
         this.dog = dog;
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 }

@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserDtoByLogin(String login) {
-        User userFromDB = repository.getByLogin(login);
+        User userFromDB = repository.getByLoginNotDeleted(login);
         return converter.mapToUserDTO(userFromDB);
     }
 
     @Override
     public User getUserByLogin(String login) {
-        return repository.getByLogin(login);
+        return repository.getByLoginNotDeleted(login);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUsersByPartialMatch(String text) {
         return repository
-                .getUsersByPartialMatch(text)
+                .getUsersByPartialMatchNotDeleted(text)
                 .stream()
                 .map(converter::mapToUserDTO)
                 .collect(Collectors.toList());

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping(path = "/dogwalker/places")
+@RequestMapping(path = "/dogwalker/user/places")
 public class WalkPlacesController extends AbstractPlaceController {
 
     @Autowired

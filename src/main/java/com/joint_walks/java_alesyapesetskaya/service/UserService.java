@@ -4,7 +4,6 @@ import com.joint_walks.java_alesyapesetskaya.model.User;
 
 import java.util.List;
 
-
 public interface UserService {
 
     UserDto getUserDtoByLogin(String login);

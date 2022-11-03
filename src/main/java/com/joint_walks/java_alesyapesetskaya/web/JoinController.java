@@ -19,18 +19,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping(path = "/dogwalker/join")
+@RequestMapping(path = "/dogwalker/user/join")
 public class JoinController extends AbstractAppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping
     public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-
         getAllAppointmentsAndAddToModel(model,"allAppointments");
         getAllPlacesAndAddToModel(model, "allPlaces");
         getAllCitiesAndAddToModel(model, "allCities");

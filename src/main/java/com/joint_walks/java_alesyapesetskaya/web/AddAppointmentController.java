@@ -15,7 +15,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 @Controller
-@RequestMapping(path = "/dogwalker")
+@RequestMapping(path = "/dogwalker/user")
 public class AddAppointmentController extends AbstractPlaceController{
 
     @Autowired

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             List<User> users = appointment.getUsers();
             users.add(user);
             appointment.setUsers(users);
-            Integer numberOfPeople = appointment.getNumberOfPeople();
+            Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
             appointment.setNumberOfPeople(numberOfPeople + 1);
             repository.saveAndFlush(appointment);
         } else {
@@ -71,6 +70,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<Long> getAddedUserIdsFromAppointment(Long appointmentId) {
         return repository.getAddedUserIdsFromAppointment(appointmentId);
+    }
+
+    @Override
+    public Integer getNumberOfAddedUsers(Long appointmentId) {
+        return repository.getNumberOfAddedUsers(appointmentId);
     }
 
 }

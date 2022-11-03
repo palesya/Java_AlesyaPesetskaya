@@ -24,25 +24,28 @@
 
             <div class="p-4">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
-                <form class="vh-100" action="${pageContext.request.contextPath}/process_login" method="post">
+                <form class="vh-100" action="${pageContext.request.contextPath}/process_login" method="post" >
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example18">Login</label>
-                        <input type="text" name="username" id="form2Example18"
-                               class="form-control form-control-lg"/>
-
+                        <c:if test="${param.error!=null}">
+                            <p class="text-warning" style="line-height: 25px;">You've entered wrong credentials!</p>
+                        </c:if>
+                        <label class="form-label" for="login">Login</label>
+                        <input type="text" name="username" id="login" class="form-control form-control-lg"
+                                  placeholder="4-30 symbols"/>
                     </div>
 
                     <div class="form-outline mb-3">
-                        <label class="form-label" for="form2Example28">Password</label>
-                        <input type="password" name="password" id="form2Example28"
-                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                  placeholder="4-20 symbols"/>
                     </div>
                     <br>
                     <div class="pt-1 mb-3">
                         <button class="btn btn-primary" type="submit">Login</button>
                     </div>
                     <br>
-                    <p class="d-flex justify-content-center">Don't have an account?&nbsp;<a href="${pageContext.request.contextPath}/register" class="link-info">Register
+                    <p class="d-flex justify-content-center">Don't have an account?&nbsp;<a
+                            href="${pageContext.request.contextPath}/register" class="link-info">Register
                         here</a></p>
 
                 </form>

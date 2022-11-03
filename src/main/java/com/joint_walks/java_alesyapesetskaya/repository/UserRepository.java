@@ -11,14 +11,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Query("select u from User u where u.login=:login")
-    User getByLogin(String login);
+    User getByLoginNotDeleted(String login);
 
     @Transactional
     @Query("select u from User u JOIN u.dog d " +
-            "where lower(u.login) LIKE lower(CONCAT('%',:text,'%')) " +
+            "where u.isDeleted=false and lower(u.login) LIKE lower(CONCAT('%',:text,'%')) " +
             "OR LOWER(d.name) LIKE lower(CONCAT('%',:text,'%')) " +
             "OR LOWER(d.type) LIKE lower(CONCAT('%',:text,'%'))")
-    List<User> getUsersByPartialMatch(String text);
+    List<User> getUsersByPartialMatchNotDeleted(String text);
 
     @Transactional
     @Query("select u from User u where u.id=:id")

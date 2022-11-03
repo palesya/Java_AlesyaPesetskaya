@@ -2,6 +2,7 @@ package com.joint_walks.java_alesyapesetskaya.service;
 
 import com.joint_walks.java_alesyapesetskaya.model.*;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
+import com.joint_walks.java_alesyapesetskaya.repository.RoleRepository;
 import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,8 @@ public class StartupService {
     private UserRepository userRepository;
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @PostConstruct
     public void init() throws IOException {
@@ -40,6 +44,18 @@ public class StartupService {
         Dog dog2 = new Dog("Lucy", "English setter", 4, dogPhoto2, SEX.WOMAN);
         Dog dog3 = new Dog("Crunchy", "Mops", 10, dogPhoto3, SEX.MAN);
 
+        Role userRole = new Role("ROLE_USER");
+        Role adminRole = new Role("ROLE_ADMIN");
+        List<Role> roles = List.of(userRole, adminRole);
+        List<String> allRoleNamesInDb = roleRepository.findAll().stream().map(Role::getName).collect(Collectors.toList());
+        for (Role role : roles) {
+            if (!allRoleNamesInDb.contains(role.getName())) {
+                roleRepository.save(role);
+            }
+        }
+
+        User admin = new User("admin","$2a$12$Gh4ZzQM1UL/WAw/rdpvFIeRsBegJ7IaHDEAUIoVmumB39z4wMBBcm");
+
         User user1 = new User("Alesya", "$2a$12$JGRFmRlvwqm5IdcmmZlVVuJgAiBw/ZBJ4OgsHVE/Iv4Wzv37W0DMK", 32, avatar1, dog1);
         User user2 = new User("Pavel", "$2a$12$fEePR7vnSE.Xmd0XFt7LBe0TiUsnkh0T7hrpKW42reK3JVGC.5dRS", 35, avatar2, dog2);
         User user3 = new User("Sofiya", "$2a$12$2XlLYPd1v/AYjr/Yts4VCezVOPsphAAWM3NuCk91bnoUDUoFNmV32", 24, avatar3, dog3);
@@ -48,8 +64,13 @@ public class StartupService {
         List<String> allLogins = userRepository.findAll().stream().map(User::getLogin).collect(Collectors.toList());
         for (User user : users) {
             if (!allLogins.contains(user.getLogin())) {
+                user.addRole(userRole);
                 userRepository.saveAndFlush(user);
             }
+        }
+        if (!allLogins.contains(admin.getLogin())) {
+            admin.addRole(adminRole);
+            userRepository.saveAndFlush(admin);
         }
         Address address1 = new Address("Minsk", "Main", 12);
         Address address2 = new Address("Grodno", "Nebesnaya", 4);

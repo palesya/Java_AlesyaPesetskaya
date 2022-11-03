@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/dogwalker/personalPage")
+@RequestMapping(path = "/dogwalker/user/personalPage")
 public class PersonalPageController extends AbstractUserController {
 
     @Autowired

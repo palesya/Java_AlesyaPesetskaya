@@ -1,6 +1,5 @@
 package com.joint_walks.java_alesyapesetskaya.dto;
 
-import com.joint_walks.java_alesyapesetskaya.model.Place;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

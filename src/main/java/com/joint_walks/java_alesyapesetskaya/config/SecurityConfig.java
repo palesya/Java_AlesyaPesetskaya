@@ -7,7 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Collection;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -15,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl service;
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,16 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
-                .antMatchers("/dogwalker/**").authenticated()
+                .antMatchers("/dogwalker/user/**").hasRole("USER")
+                .antMatchers("/dogwalker/admin/**")
+                .hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/process_login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successHandler((request, response, authentication) -> {
-                    response.sendRedirect("/dogwalker/main");
-                })
+                .successHandler(loginSuccessHandler)
                 .and()
                 .logout()
                 .logoutUrl("/process_logout")
