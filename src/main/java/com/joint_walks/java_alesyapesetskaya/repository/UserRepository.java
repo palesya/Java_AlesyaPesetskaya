@@ -2,6 +2,7 @@ package com.joint_walks.java_alesyapesetskaya.repository;
 
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,5 +28,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Query("select u from User u join u.roles r where u.isDeleted=false and r.name='ROLE_USER'")
     List<User> findUsersByIsDeletedIsFalse();
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.isDeleted=true where u.id=:userId")
+    void setIsDeletedToTrue(Long userId);
 
 }

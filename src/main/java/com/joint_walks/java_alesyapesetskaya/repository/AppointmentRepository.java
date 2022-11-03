@@ -32,4 +32,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     @Query(value = "select count(*) from user_appointment ua join users u on ua.user_id=u.id where ua.appointment_id=? and u.is_deleted=false",nativeQuery = true)
     Integer getNumberOfAddedUsers(Long appointmentId);
 
+    @Transactional
+    @Query("select a from Appointment a JOIN a.users u where u.id=:userId")
+    List<Appointment> getAppointmentsByUserId(Long userId);
+
 }

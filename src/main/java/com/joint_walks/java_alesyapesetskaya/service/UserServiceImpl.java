@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
         repository.saveAndFlush(user);
     }
 
+    @Override
+    public void setIsDeletedToTrue(Long userId) {
+        repository.setIsDeletedToTrue(userId);
+    }
+
 }

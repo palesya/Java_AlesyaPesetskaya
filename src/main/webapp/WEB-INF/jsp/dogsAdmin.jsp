@@ -75,6 +75,10 @@
                             </div>
                         </div>
                     </div>
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/dogwalker/admin/dogs/delete/${user.id}" class="px-3">
+                        <input type="submit" class="btn btn-secondary" value="Delete" name="user_id">
+                    </form>
                 </div>
             </div>
         </c:forEach>

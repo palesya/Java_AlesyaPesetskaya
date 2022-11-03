@@ -33,7 +33,7 @@
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
             </div>
 
-            <div class="dropdown col-1 d-flex justify-content-start">
+            <div class="dropdown col-2 d-flex justify-content-start">
                 <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
@@ -45,7 +45,7 @@
                 </ul>
             </div>
 
-            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/user/places/city"
+            <form class="col-2 m-auto px-4" action="${pageContext.request.contextPath}/dogwalker/user/places/city"
                   method="get">
                 <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city"
                         onchange="this.form.submit();">
@@ -57,7 +57,7 @@
                 </select>
             </form>
 
-            <form class="col-3 m-auto" action="${pageContext.request.contextPath}/dogwalker/user/places/search"
+            <form class="col-3 m-auto px-1" action="${pageContext.request.contextPath}/dogwalker/user/places/search"
                   method="post">
                 <input class="form-control" type="text" placeholder="Search by street or transport stop."
                        aria-label="Search" name="search_text">

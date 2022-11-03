@@ -13,4 +13,5 @@ public interface UserService {
     UserDto getUserDtoById(Long id);
     User getUserById(Long id);
     void saveUser(User user);
+    void setIsDeletedToTrue(Long userId);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             users.add(user);
             appointment.setUsers(users);
             Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
-            appointment.setNumberOfPeople(numberOfPeople + 1);
+            appointment.setNumberOfPeople(numberOfPeople);
             repository.saveAndFlush(appointment);
         } else {
             throw new UserIsAlreadyAddedException("You are already added to the selected appointment.");
@@ -80,6 +81,28 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void deleteAppointment(Long appointmentId) {
         repository.deleteById(appointmentId);
+    }
+
+    @Override
+    public void deleteUserFromAppointments(Long userId) {
+        List<Appointment> appointmentsByUserId = getAppointmentsByUserId(userId);
+        for (Appointment appointment : appointmentsByUserId) {
+            List<User> usersFromAppointment = appointment.getUsers();
+            usersFromAppointment.removeIf(user -> Objects.equals(userId, user.getId()));
+            Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
+            if (numberOfPeople == 0) {
+                repository.delete(appointment);
+            } else {
+                appointment.setUsers(usersFromAppointment);
+                appointment.setNumberOfPeople(numberOfPeople);
+                repository.saveAndFlush(appointment);
+            }
+        }
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsByUserId(Long userId) {
+        return repository.getAppointmentsByUserId(userId);
     }
 
 }

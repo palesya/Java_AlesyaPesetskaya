@@ -29,16 +29,16 @@
                 </a>
             </div>
 
-            <div class="navbar-nav col-2 px-3">
-                <a class="nav-link mx-2 text-white"
+            <div class="navbar-nav col-3">
+                <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
-                <a class="nav-link mx-2 text-white"
+                <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
-                <a class="nav-link mx-2 text-white"
+                <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/user/places">Places</a>
             </div>
 
-            <div class="dropdown col-1 d-flex justify-content-start px-3">
+            <div class="dropdown col-1 d-flex justify-content-start">
                 <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
@@ -51,7 +51,6 @@
                     </li>
                 </ul>
             </div>
-
 
             <form class="col-2 m-auto px-1" action="${pageContext.request.contextPath}/dogwalker/user/join/city"
                   method="get">
