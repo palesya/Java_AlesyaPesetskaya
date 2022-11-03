@@ -14,18 +14,22 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
-             style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
 
             <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
-            <div class="navbar-nav col-9">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/dogs">Dogs</a>
-                <a class="nav-link mx-4 text-white"
-                   href="${pageContext.request.contextPath}/dogwalker/admin/places">Places</a>
+            <div class="navbar-nav col-6">
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/main">Home</a>
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/places">Places</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
             </div>
+
+
+            <form class="col m-auto" action="${pageContext.request.contextPath}/dogwalker/admin/dogs" method="post">
+                    <input class="form-control rounded" type="text" placeholder="Search by owner's name, dog's name or type." aria-label="Search"
+                           name="search_text">
+            </form>
 
             <div class="col-1 m-auto">
                 <a href="${pageContext.request.contextPath}/process_logout">
@@ -74,6 +78,5 @@
         </c:forEach>
     </div>
 </div>
-
 </body>
 </html>

@@ -10,23 +10,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(path = "/dogwalker/user/dogs")
+@RequestMapping(path = "/dogwalker")
 public class DogsController extends AbstractUserController {
 
-    @GetMapping
-    public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+    @GetMapping("/user/dogs")
+    public String getForUser(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
         getNotDeletedUsersAndAddToModel(model, "users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "dogs";
     }
 
-    @PostMapping
-    public String searchDog(
+    @PostMapping("/user/dogs")
+    public String searchDogForUser(
             @RequestParam(name = "search_text") String text,
             Model model,
             @AuthenticationPrincipal UserSecurity userSecurity){
         getUsersByPartialMatchAndAddToModel(text,model,"users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "dogs";
+    }
+
+    @GetMapping("/admin/dogs")
+    public String getForAdmin(Model model) {
+        getNotDeletedUsersAndAddToModel(model, "users");
+        return "dogsAdmin";
+    }
+
+    @PostMapping("/admin/dogs")
+    public String searchDogForAdmin(
+            @RequestParam(name = "search_text") String text,
+            Model model){
+        getUsersByPartialMatchAndAddToModel(text,model,"users");
+        return "dogsAdmin";
     }
 }

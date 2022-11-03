@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
             integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
             crossorigin="anonymous"></script>
+
 </head>
 <body style="background-color: dimgrey">
 <div class="container p-1">
@@ -20,12 +22,31 @@
             <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
 
-            <div class="navbar-nav col-9">
+            <div class="navbar-nav col-4">
+                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/main">Home</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/admin/places">Places</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
+
             </div>
+
+            <form class="col-2 m-auto mx-4" action="${pageContext.request.contextPath}/dogwalker/admin/appointment/city"
+                  method="get">
+                <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city"
+                        onchange="this.form.submit();">
+                    <option selected>Select city</option>
+                    <option>All cities</option>
+                    <c:forEach items="${allCities}" var="city">
+                        <option>${city}</option>
+                    </c:forEach>
+                </select>
+            </form>
+
+            <form class="col-3 m-auto" action="${pageContext.request.contextPath}/dogwalker/admin/appointment/search"
+                  method="post">
+                <input class="form-control" type="text" placeholder="Search by street or transport stop."
+                       aria-label="Search" name="search_text">
+            </form>
 
             <div class="col-1 m-auto">
                 <a href="${pageContext.request.contextPath}/process_logout">
@@ -38,42 +59,33 @@
     </div>
 </div>
 
+
 <div class="container p-3">
     <div class="row mx-auto">
-        <c:forEach items="${users}" var="user">
+        <c:forEach items="${allAppointments}" var="appointment">
             <div class="col-md-4 p-3">
                 <div class="card" style="width: 20rem;background-color: darkgray">
-                    <img src="data:image/jpg;base64,${user.dog.base64Image}" alt="Lights"
+                    <img src="data:image/jpg;base64,${appointment.place.base64Image}" alt="Lights"
                          style="height: 20rem; object-fit: cover;"
                          class="card-img-top rounded">
                     <div class="card-body">
-                        <h5>${user.dog.name} - <h6>(${user.dog.type})</h6></h5>
-                        <p>age: ${user.dog.age}, good
-                            <c:choose>
-                                <c:when test="${user.dog.sex == 'MAN'}">
-                                    boy
-                                </c:when>
-                                <c:otherwise>
-                                    girl
-                                </c:otherwise>
-                            </c:choose>
-                        </p>
-                        <p>Owner:</p>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="data:image/jpg;base64,${user.base64Image}" alt="Lights"
-                                     style="max-height: 5rem;border-radius: 50%;max-width: 5rem;">
-                            </div>
-                            <div class="col-md-4">
-                                    ${user.login} - ${user.age}
-                            </div>
-                        </div>
+                        <h5>${appointment.place.address}</h5>
+                        <p class="card-text">The nearest public transport stop: ${appointment.place.transportStop}</p>
+                        <p class="card-text">Date: ${appointment.date}</p>
+                        <p class="card-text">Time: ${appointment.time}</p>
+                        <p class="card-text">Additional info: ${appointment.description}</p>
+                        <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
+                        <form method="post"
+                              action="${pageContext.request.contextPath}/dogwalker/admin/appointment/delete/${appointment.id}">
+                            <input type="submit" class="btn btn-primary" value="Delete" name="appointment_id">
+                        </form>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
 </div>
+
 
 </body>
 </html>

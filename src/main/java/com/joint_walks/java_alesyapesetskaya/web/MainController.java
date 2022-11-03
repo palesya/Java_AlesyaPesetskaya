@@ -13,17 +13,14 @@ public class MainController extends AbstractUserController {
 
     @GetMapping("/user/main")
     public String getUserPage(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-
         getNotDeletedUsersAndAddToModel(model, "users");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
-
         return "main";
     }
 
     @GetMapping("/admin/main")
-    public String getAdminPage(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+    public String getAdminPage(Model model) {
         getNotDeletedUsersAndAddToModel(model, "users");
-        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "mainAdmin";
     }
 

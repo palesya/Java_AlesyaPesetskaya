@@ -77,4 +77,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         return repository.getNumberOfAddedUsers(appointmentId);
     }
 
+    @Override
+    public void deleteAppointment(Long appointmentId) {
+        repository.deleteById(appointmentId);
+    }
+
 }

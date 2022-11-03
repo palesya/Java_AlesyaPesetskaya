@@ -23,6 +23,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             redirectURL = "/dogwalker/admin/main";
         } else if (userDetails.hasRole("ROLE_USER")) {
             redirectURL = "/dogwalker/user/main";
+        } else if(userDetails.hasRole("ROLE_ADMIN")&&userDetails.hasRole("ROLE_USER")){
+            redirectURL = "/dogwalker/admin/main";
         }
         response.sendRedirect(redirectURL);
     }

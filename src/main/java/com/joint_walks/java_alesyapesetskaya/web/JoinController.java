@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping(path = "/dogwalker/user/join")
+@RequestMapping(path = "/dogwalker")
 public class JoinController extends AbstractAppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping
-    public String get(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
+    @GetMapping("/user/join")
+    public String getForUser(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
         getAllAppointmentsAndAddToModel(model,"allAppointments");
         getAllPlacesAndAddToModel(model, "allPlaces");
         getAllCitiesAndAddToModel(model, "allCities");
@@ -34,8 +34,8 @@ public class JoinController extends AbstractAppointmentController {
         return "join";
     }
 
-    @GetMapping("/{city}")
-    public String getPlacesByCity(@PathVariable @RequestParam("selected_city") String city,
+    @GetMapping("/user/join/{city}")
+    public String getPlacesByCityForUser(@PathVariable @RequestParam("selected_city") String city,
                                   Model model,
                                   @AuthenticationPrincipal UserSecurity userSecurity) {
         List<AppointmentDto> allAppointments;
@@ -51,8 +51,8 @@ public class JoinController extends AbstractAppointmentController {
         return "join";
     }
 
-    @PostMapping("/search")
-    public String searchPlace(
+    @PostMapping("/user/join/search")
+    public String searchPlaceForUser(
             @RequestParam(name = "search_text") String text,
             Model model,
             @AuthenticationPrincipal UserSecurity userSecurity) {
@@ -65,8 +65,8 @@ public class JoinController extends AbstractAppointmentController {
         return "join";
     }
 
-    @PostMapping("/selected/{id}")
-    public String getWithSelectedAddress(@PathVariable Long id,
+    @PostMapping("/user/join/selected/{id}")
+    public String getWithSelectedAddressForUser(@PathVariable Long id,
                                          Model model,
                                          @AuthenticationPrincipal UserSecurity userSecurity) {
         User userByLogin = getUserByLoginFromUserSecurity(userSecurity);
@@ -87,4 +87,45 @@ public class JoinController extends AbstractAppointmentController {
         return "join";
     }
 
+    @GetMapping("/admin/appointment")
+    public String getForAdmin(Model model) {
+        getAllAppointmentsAndAddToModel(model,"allAppointments");
+        getAllPlacesAndAddToModel(model, "allPlaces");
+        getAllCitiesAndAddToModel(model, "allCities");
+        return "appointmentsAdmin";
+    }
+
+    @GetMapping("/admin/appointment/{city}")
+    public String getPlacesByCityForAdmin(@PathVariable @RequestParam("selected_city") String city,
+                                         Model model) {
+        List<AppointmentDto> allAppointments;
+        if (Objects.equals(city, "All cities")) {
+            allAppointments = appointmentService.getAll();
+        } else {
+            allAppointments = appointmentService.getAppointmentByCity(city);
+        }
+        model.addAttribute("allAppointments", allAppointments);
+        getAllCitiesAndAddToModel(model, "allCities");
+        return "appointmentsAdmin";
+    }
+
+    @PostMapping("/admin/appointment/search")
+    public String searchPlaceForAdmin(
+            @RequestParam(name = "search_text") String text,
+            Model model) {
+        List<AppointmentDto> appointmentsByPartialMatch = appointmentService.getAppointmentsByPartialMatch(text);
+        model.addAttribute("allAppointments", appointmentsByPartialMatch);
+        getAllCitiesAndAddToModel(model, "allCities");
+        return "appointmentsAdmin";
+    }
+
+    @PostMapping("/admin/appointment/delete/{id}")
+    public String deleteAppointment(@PathVariable Long id,
+                                    Model model){
+        appointmentService.deleteAppointment(id);
+        getAllAppointmentsAndAddToModel(model,"allAppointments");
+        getAllPlacesAndAddToModel(model, "allPlaces");
+        getAllCitiesAndAddToModel(model, "allCities");
+        return "appointmentsAdmin";
+    }
 }
