@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getById(Long id);
 
     @Transactional
-    @Query("select u from User u where u.isDeleted=false")
-    List<User> findByIsDeletedIsFalse();
+    @Query("select u from User u join u.roles r where u.isDeleted=false and r.name='ROLE_USER'")
+    List<User> findUsersByIsDeletedIsFalse();
 
 }

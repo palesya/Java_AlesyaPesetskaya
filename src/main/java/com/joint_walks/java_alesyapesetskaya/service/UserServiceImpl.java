@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAllNotDeleted() {
-        List<User> byIsDeletedIsFalse = repository.findByIsDeletedIsFalse();
+        List<User> byIsDeletedIsFalse = repository.findUsersByIsDeletedIsFalse();
         return converter.mapToListUserDTO(byIsDeletedIsFalse);
     }
 

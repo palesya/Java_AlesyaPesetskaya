@@ -18,15 +18,22 @@
     <div class="row mx-auto">
         <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
 
-            <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
-                 alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
+            <div class="navbar-nav col-2 px-1">
+                <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
+                     alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
+
+                <a class="mx-2" href="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}">
+                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
+                         style="max-height: 3rem;border-radius: 50%">
+                </a>
+            </div>
 
             <div class="navbar-nav col-2">
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
             </div>
 
-            <div class="dropdown col-2 d-flex justify-content-start">
+            <div class="dropdown col-1 d-flex justify-content-start">
                 <button class="btn dropdown-toggle text-white" type="button"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Walk
@@ -55,12 +62,14 @@
                 <input class="form-control" type="text" placeholder="Search by street or transport stop."
                        aria-label="Search" name="search_text">
             </form>
-            <div class="col-1 m-auto">
-                <a href="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}">
-                    <img class="float-right" src="data:image/jpg;base64,${loggedUser.base64Image}" alt="Lights"
-                         style="max-height: 3rem;border-radius: 50%">
+
+            <div class="col-1 d-flex justify-content-end px-1">
+                <a href="${pageContext.request.contextPath}/process_logout">
+                    <img src="${pageContext.request.contextPath}/button_logout.jpg" alt="Logout"
+                         style="max-height: 3rem;border-radius: 50%;object-position: right;">
                 </a>
             </div>
+
         </nav>
     </div>
 </div>

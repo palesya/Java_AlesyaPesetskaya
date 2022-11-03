@@ -16,21 +16,23 @@
     <div class="row mx-auto">
         <nav class="navbar navbar-expand-lg primary-color rounded text-center"
              style="background-image: linear-gradient(to right, black, #63646A)">
-
-            <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
-                 alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
-
+            <div class="navbar-nav col-2 px-1">
+                <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
+                     alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
+            </div>
             <div class="navbar-nav col-9">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/admin/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white"
                    href="${pageContext.request.contextPath}/dogwalker/admin/places">Places</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
             </div>
 
-            <div class="col-1 m-auto">
+            <div class="col-1 d-flex justify-content-end px-1">
                 <a href="${pageContext.request.contextPath}/process_logout">
-                    <img class="float-right" src="${pageContext.request.contextPath}/button_logout.jpg" alt="Lights"
-                         style="max-height: 3rem;border-radius: 50%">
+                    <img src="${pageContext.request.contextPath}/button_logout.jpg" alt="Logout"
+                         style="max-height: 3rem;border-radius: 50%;object-position: right;">
                 </a>
             </div>
 
