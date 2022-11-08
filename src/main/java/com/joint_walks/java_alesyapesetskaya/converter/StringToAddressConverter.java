@@ -15,12 +15,16 @@ public class StringToAddressConverter implements Converter<String, Address> {
 
     @Override
     public Address convert(String source) {
-        String[] s = source.split(" ");
-        String city = s[0].substring(0,s[0].length()-1);
-        String street = s[1];
-        Integer houseNumber = Integer.parseInt(s[3]);
-        System.out.println(city+street+houseNumber);
-        Place place = placeService.getPlaceByCityStreetHouseNumber(city, street, houseNumber);
-        return place.getAddress();
+        if (source.isBlank()) {
+            return null;
+        } else {
+            String[] s = source.split(" ");
+            String city = s[0].substring(0, s[0].length() - 1);
+            String street = s[1];
+            Integer houseNumber = Integer.parseInt(s[3]);
+            System.out.println(city + street + houseNumber);
+            Place place = placeService.getPlaceByCityStreetHouseNumber(city, street, houseNumber);
+            return place.getAddress();
+        }
     }
 }

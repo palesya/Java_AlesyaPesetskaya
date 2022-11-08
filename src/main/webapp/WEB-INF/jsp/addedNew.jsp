@@ -3,6 +3,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -73,7 +74,7 @@
                 <input
                         class="form-control form-control-lg"
                         type="text"
-                        placeholder="${added_address}"
+                        placeholder="${added_appointment.address}"
                         disabled
                 />
             </div>
@@ -83,9 +84,8 @@
                 <input
                         class="form-control form-control-lg"
                         type="text"
-                        placeholder="${added_date}"
-                        disabled
-                />
+                        placeholder="<fmt:formatDate value="${added_appointment.date}" pattern="dd-MM-YYYY"/>"
+                        disabled/>
             </div>
 
             <div class="form-outline mb-4">
@@ -93,14 +93,14 @@
                 <input
                         class="form-control form-control-lg"
                         type="text"
-                        placeholder="${added_time}"
+                        placeholder="${added_appointment.time}"
                         disabled
                 />
             </div>
 
             <div class="form-outline mb-4">
                 <label class="form-label">Description:</label>
-                <p>${added_description}</p>
+                <p>${added_appointment.description}</p>
             </div>
 
         </div>

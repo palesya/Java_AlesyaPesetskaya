@@ -16,7 +16,8 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
+             style="background-image: linear-gradient(to right, black, #63646A)">
 
             <div class="navbar-nav col-2 px-1">
                 <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
@@ -29,8 +30,10 @@
             </div>
 
             <div class="navbar-nav col-3">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/places">Places</a>
             </div>
 
@@ -40,9 +43,11 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add new</a>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add
+                        new</a>
                     </li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a>
+                    </li>
                 </ul>
             </div>
 
@@ -64,40 +69,44 @@
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Add new appointment</h3>
 
-            <form action="${pageContext.request.contextPath}/dogwalker/user/addAddress/added" method="post">
+            <sf:form action="${pageContext.request.contextPath}/dogwalker/user/addedNew" method="post" modelAttribute="appointmentForm">
                 <div class="form-outline mb-4">
                     <label class="form-label">Address:</label>
-                    <select typeof="submit" class="form-select" aria-label="Default select example"
-                            name="selected_address">
+                    <sf:select typeof="submit" class="form-select" aria-label="Default select example"
+                            name="selected_address" path="address">
                         <option selected>${selected_place.address}</option>
                         <c:forEach items="${allPlaces}" var="place">
                             <option>${place.address}</option>
                         </c:forEach>
-                    </select>
+                    </sf:select>
+                    <sf:errors path="address" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                 </div>
 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example18">Date:</label>
-                    <input type="date" name="date" id="form2Example18"
-                                class="form-control form-control-lg"/>
+                    <sf:input type="date" name="date" id="form2Example18"
+                           class="form-control form-control-lg" path="date"/>
+                    <sf:errors path="date" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                 </div>
 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example28">Time:</label>
-                    <input type="time" name="time" id="form2Example28"
-                           class="form-control form-control-lg" />
+                    <sf:input type="time" name="time" id="form2Example28"
+                           class="form-control form-control-lg" path="time"/>
+                    <sf:errors path="time" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                 </div>
 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="form3">Description:</label>
-                    <input type="text" name="description" id="form3"
-                           class="form-control form-control-lg" />
+                    <sf:input type="text" name="description" id="form3"
+                           class="form-control form-control-lg" path="description"/>
+                    <sf:errors path="description" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                 </div>
 
                 <div class="pt-1 mb-4">
                     <button class="btn btn-primary" type="submit">Create</button>
                 </div>
-            </form>
+            </sf:form>
 
         </div>
 

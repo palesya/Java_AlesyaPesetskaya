@@ -40,7 +40,7 @@ public class User {
     @Version
     private long version;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
@@ -51,6 +51,15 @@ public class User {
         this.age = age;
         this.base64Image = base64Image;
         this.dog = dog;
+    }
+
+    public User(String login, String password, Integer age, String base64Image, Dog dog, List<Role> roles) {
+        this.login = login;
+        this.password = password;
+        this.age = age;
+        this.base64Image = base64Image;
+        this.dog = dog;
+        this.roles = roles;
     }
 
     public User(String login, String password) {
