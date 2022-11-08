@@ -13,11 +13,13 @@ public class UserSecurity implements UserDetails {
     private String name;
     private String password;
     private List<String> roles;
+    private boolean isEnabled;
 
-    public UserSecurity(String name, String password, List<String> roles) {
+    public UserSecurity(String name, String password, List<String> roles,boolean isEnabled) {
         this.name = name;
         this.password=password;
         this.roles=roles;
+        this.isEnabled = isEnabled;
     }
 
     @Override
@@ -53,7 +55,7 @@ public class UserSecurity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 
     public boolean hasRole(String roleName) {

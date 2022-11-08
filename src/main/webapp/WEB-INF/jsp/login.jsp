@@ -26,9 +26,7 @@
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
                 <form class="vh-100" action="${pageContext.request.contextPath}/process_login" method="post" >
                     <div class="form-outline mb-4">
-                        <c:if test="${param.error!=null}">
-                            <p class="text-warning" style="line-height: 25px;">You've entered wrong credentials!</p>
-                        </c:if>
+                            <p class="text-warning" style="line-height: 25px;">${errorMessage}</p>
                         <label class="form-label" for="login">Login</label>
                         <input type="text" name="username" id="login" class="form-control form-control-lg"
                                   placeholder="4-30 symbols"/>

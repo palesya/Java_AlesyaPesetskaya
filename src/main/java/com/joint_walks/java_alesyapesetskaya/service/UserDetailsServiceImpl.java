@@ -25,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = repository.getByLoginNotDeleted(username);
         List<Role> roles = user.getRoles();
         List<String> rolesAsString = roles.stream().map(Role::getName).collect(Collectors.toList());
-        return new UserSecurity(user.getLogin(), user.getPassword(), rolesAsString);
+        boolean isEnabled = !user.isDeleted();
+        return new UserSecurity(user.getLogin(), user.getPassword(), rolesAsString, isEnabled);
     }
 }
