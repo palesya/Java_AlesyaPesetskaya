@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -28,8 +29,10 @@
             </div>
 
             <div class="navbar-nav col-3">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/places">Places</a>
             </div>
 
@@ -39,9 +42,11 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add new</a>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add
+                        new</a>
                     </li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a>
+                    </li>
                 </ul>
             </div>
 
@@ -96,5 +101,49 @@
         </div>
     </div>
 </div>
+
+<c:if test="${not empty success}">
+    <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">
+        <strong>${success}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
+
+<div class="container p-3">
+    <h5>My appointments:</h5><br>
+    <c:forEach items="${allUserAppointments}" var="appointment">
+        <div class="card mb-3" style="width: 100%; height: 18rem; background-color: darkgray">
+            <div class="row no-gutters">
+                <div class="col-4">
+                    <img src="data:image/jpg;base64,${appointment.place.base64Image}"
+                         style="height: 18rem; object-fit: cover;"
+                         class="card-img-top rounded">
+                </div>
+                <div class="col-4">
+                    <div class="card-body">
+                        <h5>${appointment.place.address}</h5>
+                        <p class="card-text">The nearest public transport
+                            stop: ${appointment.place.transportStop}</p>
+                        <p class="card-text">Additional info: ${appointment.description}</p>
+                        <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
+                        <form method="post"
+                              action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/leaveAppointment/${appointment.id}">
+                            <input type="submit" class="btn btn-primary" value="Leave appointment"
+                                   name="appointment_id" style="position: absolute; bottom: 10px;">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card-body">
+                    <p class="card-text">Date: <fmt:formatDate value="${appointment.date}" pattern="dd-MM-YYYY"/></p>
+                    <p class="card-text">Time: ${appointment.time}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
+</div>
+
+
 </body>
 </html>

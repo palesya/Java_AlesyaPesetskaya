@@ -3,6 +3,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -108,7 +109,7 @@
                     <div class="card-body">
                         <h5>${appointment.place.address}</h5>
                         <p class="card-text">The nearest public transport stop: ${appointment.place.transportStop}</p>
-                        <p class="card-text">Date: ${appointment.date}</p>
+                        <p class="card-text">Date: <fmt:formatDate value="${appointment.date}" pattern="dd-MM-YYYY"/></p>
                         <p class="card-text">Time: ${appointment.time}</p>
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>

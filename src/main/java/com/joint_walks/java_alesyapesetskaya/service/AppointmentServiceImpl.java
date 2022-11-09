@@ -88,16 +88,26 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void deleteUserFromAppointments(Long userId) {
         List<Appointment> appointmentsByUserId = getAppointmentsByUserId(userId);
         for (Appointment appointment : appointmentsByUserId) {
-            List<User> usersFromAppointment = appointment.getUsers();
-            usersFromAppointment.removeIf(user -> Objects.equals(userId, user.getId()));
-            Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
-            if (numberOfPeople == 0) {
-                repository.delete(appointment);
-            } else {
-                appointment.setUsers(usersFromAppointment);
-                appointment.setNumberOfPeople(numberOfPeople);
-                repository.saveAndFlush(appointment);
-            }
+            deleteUserFromAppointment(userId, appointment);
+        }
+    }
+
+    @Override
+    public void deleteUserFromOneAppointment(Long userId, Long appointmentId) {
+        Appointment appointment = repository.getById(appointmentId);
+        deleteUserFromAppointment(userId, appointment);
+    }
+
+    private void deleteUserFromAppointment(Long userId, Appointment appointment) {
+        List<User> usersFromAppointment = appointment.getUsers();
+        usersFromAppointment.removeIf(user -> Objects.equals(userId, user.getId()));
+        Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
+        if (numberOfPeople == 0) {
+            repository.delete(appointment);
+        } else {
+            appointment.setUsers(usersFromAppointment);
+            appointment.setNumberOfPeople(numberOfPeople);
+            repository.saveAndFlush(appointment);
         }
     }
 

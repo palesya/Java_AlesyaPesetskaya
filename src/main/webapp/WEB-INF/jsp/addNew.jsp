@@ -67,11 +67,12 @@
     <div class="row">
         <div class="col-sm-8 text-black p-3">
 
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Add new appointment</h3>
-
+            <h3 class="fw-normal mb-3" style="letter-spacing: 1px;">Add new appointment</h3>
+            <h6>New appointment can be scheduled at least one hour before the existing one,
+                or not earlier than one hour after the beginning of the existing one.</h6>
             <%--@elvariable id="appointmentForm" type=""--%>
             <sf:form action="${pageContext.request.contextPath}/dogwalker/user/addedNew" method="post" modelAttribute="appointmentForm">
-                <div class="form-outline mb-4">
+                <div class="form-outline mb-4 mt-4">
                     <label class="form-label">Address:</label>
                     <sf:select typeof="submit" class="form-select" aria-label="Default select example"
                             name="selected_address" path="address">

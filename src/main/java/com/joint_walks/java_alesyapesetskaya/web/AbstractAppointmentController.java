@@ -5,7 +5,6 @@ import com.joint_walks.java_alesyapesetskaya.dto.AppointmentDto;
 import com.joint_walks.java_alesyapesetskaya.model.*;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
 import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
