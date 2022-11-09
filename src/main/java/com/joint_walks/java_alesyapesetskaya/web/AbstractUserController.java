@@ -3,6 +3,7 @@ package com.joint_walks.java_alesyapesetskaya.web;
 import com.joint_walks.java_alesyapesetskaya.dto.RegisterForm;
 import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.*;
+import com.joint_walks.java_alesyapesetskaya.service.RoleService;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public abstract class AbstractUserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     private final String rootDir = System.getProperty("user.dir") + "/src/main/webapp/static/images";
 
@@ -67,7 +70,9 @@ public abstract class AbstractUserController {
         String encodedPassword = new BCryptPasswordEncoder().encode(registerForm.getPassword());
         String userImageString = getStringBase64FromFile(registerForm.getUserImage());
         User user = new User(registerForm.getLogin(), encodedPassword, registerForm.getUserAge(), userImageString, dog);
-        user.addRole(new Role("ROLE_USER"));
+        Role userRole = new Role("ROLE_USER");
+        Role roleByNameFromDB = roleService.getRoleByName(userRole.getName());
+        user.addRole(roleByNameFromDB);
         userService.saveUser(user);
     }
 

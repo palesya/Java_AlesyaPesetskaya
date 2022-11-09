@@ -69,6 +69,7 @@
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Add new appointment</h3>
 
+            <%--@elvariable id="appointmentForm" type=""--%>
             <sf:form action="${pageContext.request.contextPath}/dogwalker/user/addedNew" method="post" modelAttribute="appointmentForm">
                 <div class="form-outline mb-4">
                     <label class="form-label">Address:</label>

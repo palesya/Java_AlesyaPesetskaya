@@ -3,7 +3,6 @@ package com.joint_walks.java_alesyapesetskaya.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter

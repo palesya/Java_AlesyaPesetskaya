@@ -4,6 +4,7 @@ import com.joint_walks.java_alesyapesetskaya.model.*;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
 import com.joint_walks.java_alesyapesetskaya.repository.RoleRepository;
 import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +14,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class StartupService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PlaceRepository placeRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final PlaceRepository placeRepository;
+    private final RoleRepository roleRepository;
 
     @PostConstruct
     public void init() throws IOException {

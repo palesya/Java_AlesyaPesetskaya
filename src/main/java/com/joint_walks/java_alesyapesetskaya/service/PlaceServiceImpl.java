@@ -3,15 +3,13 @@ package com.joint_walks.java_alesyapesetskaya.service;
 import com.joint_walks.java_alesyapesetskaya.converter.PlaceMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
-import com.joint_walks.java_alesyapesetskaya.model.Appointment;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,8 +58,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place getPlaceByAddress(Address address) {
-        Place place = repository.getPlaceByCityStreetHouseNumber(address.getCity(), address.getStreet(), address.getHouseNumberNearby());
-        return place;
+        return repository.getPlaceByCityStreetHouseNumber(address.getCity(), address.getStreet(), address.getHouseNumberNearby());
     }
 
     @Override

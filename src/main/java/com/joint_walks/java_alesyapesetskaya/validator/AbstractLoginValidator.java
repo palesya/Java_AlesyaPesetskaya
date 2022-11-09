@@ -2,6 +2,7 @@ package com.joint_walks.java_alesyapesetskaya.validator;
 
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidatorContext;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractLoginValidator {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     public boolean isLengthValid(String login, ConstraintValidatorContext context) {
         if (login.isEmpty() || login.trim().length() == 0) {

@@ -17,7 +17,6 @@ public class AddAppointmentController extends AbstractAppointmentController {
     @GetMapping("/add")
     public String get(Model model,
                       @AuthenticationPrincipal UserSecurity userSecurity) {
-        System.out.println();
         if (model.getAttribute("appointmentForm") == null) {
             model.addAttribute("appointmentForm", new AddAppointmentForm());
         }

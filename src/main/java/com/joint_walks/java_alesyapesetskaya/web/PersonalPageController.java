@@ -5,6 +5,7 @@ import com.joint_walks.java_alesyapesetskaya.converter.UserMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.model.Dog;
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ public class PersonalPageController extends AbstractUserController {
     @Autowired
     private UserService userService;
     @Autowired
-    UserMapperUtils converter;
+    private UserMapperUtils converter;
 
     @GetMapping("/{id}")
     public String get(@PathVariable Long id, Model model) {

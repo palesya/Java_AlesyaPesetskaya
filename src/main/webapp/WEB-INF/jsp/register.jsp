@@ -27,6 +27,7 @@
 <div class="container p-3">
     <div class="row">
 
+        <%--@elvariable id="registerForm" type=""--%>
         <sf:form class="col-sm-7 text-black p-3" action="${pageContext.request.contextPath}/register" method="post"
                  modelAttribute="registerForm"
                  enctype="multipart/form-data">
