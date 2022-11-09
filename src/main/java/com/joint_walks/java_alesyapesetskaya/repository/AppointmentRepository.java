@@ -2,7 +2,6 @@ package com.joint_walks.java_alesyapesetskaya.repository;
 
 import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
-import com.joint_walks.java_alesyapesetskaya.model.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +41,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     @Transactional
     @Query("select a from Appointment a JOIN a.place p where a.date=:date and p.address=:address")
     List<Appointment> findByDateAndAddress(Date date, Address address);
+
+    @Transactional
+    @Query(value = "select a.id from appointments a except select a.id from appointments a JOIN user_appointment ua on a.id = ua.appointment_id where ua.user_id=?",nativeQuery = true)
+    List<Long> getAppointmentsIdsWithoutUserId(Long userId);
 
 }

@@ -82,21 +82,15 @@
     </div>
 </div>
 
-
-<c:if test="${not empty error}">
-    <div class="container p-3 alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>${error}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-</c:if>
-
 <c:if test="${not empty success}">
     <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">
         <strong>${success}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </c:if>
-
+<div class="container pt-2">
+    <h6>Appointments, where you've already been added are displayed on the personal page.</h6>
+</div>
 
 <div class="container p-3">
     <div class="row mx-auto">
@@ -109,7 +103,8 @@
                     <div class="card-body">
                         <h5>${appointment.place.address}</h5>
                         <p class="card-text">The nearest public transport stop: ${appointment.place.transportStop}</p>
-                        <p class="card-text">Date: <fmt:formatDate value="${appointment.date}" pattern="dd-MM-YYYY"/></p>
+                        <p class="card-text">Date: <fmt:formatDate value="${appointment.date}"
+                                                                   pattern="dd-MM-YYYY"/></p>
                         <p class="card-text">Time: ${appointment.time}</p>
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>

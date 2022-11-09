@@ -2,7 +2,6 @@ package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ public class JoinController extends AbstractAppointmentController {
 
     @GetMapping("/user/join")
     public String getForUser(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
-        getAllAppointmentsAndAddToModel(model,"allAppointments");
+        getAppointmentsWithoutUserAndAddToModel(model,"allAppointments",userSecurity);
         getAllCitiesAndAddToModel(model, "allCities");
         addAllPlacesAndLoggedUserToModel(model,"allPlaces",userSecurity,"loggedUser");
         return "join";
@@ -28,7 +27,7 @@ public class JoinController extends AbstractAppointmentController {
     public String getPlacesByCityForUser(@PathVariable @RequestParam("selected_city") String city,
                                   Model model,
                                   @AuthenticationPrincipal UserSecurity userSecurity) {
-        filterAppointmentsByCityAndAddToModel(city,model,"allAppointments");
+        filterAppointmentsByCityWithoutUserAndAddToModel(city,model,"allAppointments",userSecurity);
         getAllCitiesAndAddToModel(model, "allCities");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "join";
@@ -39,7 +38,7 @@ public class JoinController extends AbstractAppointmentController {
             @RequestParam(name = "search_text") String text,
             Model model,
             @AuthenticationPrincipal UserSecurity userSecurity) {
-        getAppointmentsByPartialMatchAndAddToModel(model,text,"allAppointments");
+        getAppointmentsByPartialMatchWithoutUserAndAddToModel(model,text,"allAppointments", userSecurity);
         getAllCitiesAndAddToModel(model, "allCities");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "join";
@@ -50,8 +49,8 @@ public class JoinController extends AbstractAppointmentController {
                                          Model model,
                                          @AuthenticationPrincipal UserSecurity userSecurity) {
         joinAppointmentAndAddItToModel(model,id,userSecurity);
-        getAllAppointmentsAndAddToModel(model,"allAppointments");
-        addAllPlacesAndLoggedUserToModel(model,"allPlaces",userSecurity,"loggedUser");
+        getAppointmentsWithoutUserAndAddToModel(model,"allAppointments",userSecurity);
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "join";
     }
 
