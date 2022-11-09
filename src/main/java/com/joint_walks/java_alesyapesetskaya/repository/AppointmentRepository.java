@@ -1,10 +1,13 @@
 package com.joint_walks.java_alesyapesetskaya.repository;
 
+import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
+import com.joint_walks.java_alesyapesetskaya.model.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
@@ -35,5 +38,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     @Transactional
     @Query("select a from Appointment a JOIN a.users u where u.id=:userId")
     List<Appointment> getAppointmentsByUserId(Long userId);
+
+    @Transactional
+    @Query("select a from Appointment a JOIN a.place p where a.date=:date and p.address=:address")
+    List<Appointment> findByDateAndAddress(Date date, Address address);
 
 }

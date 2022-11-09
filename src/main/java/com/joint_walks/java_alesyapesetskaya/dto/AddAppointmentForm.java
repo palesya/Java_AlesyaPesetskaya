@@ -1,6 +1,7 @@
 package com.joint_walks.java_alesyapesetskaya.dto;
 
 import com.joint_walks.java_alesyapesetskaya.model.Address;
+import com.joint_walks.java_alesyapesetskaya.validator.ValidTime;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ValidTime
 public class AddAppointmentForm {
 
     @NotNull(message = "Address should be selected.")

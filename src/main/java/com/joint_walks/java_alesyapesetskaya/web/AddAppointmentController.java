@@ -2,10 +2,12 @@ package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.dto.AddAppointmentForm;
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
+import com.joint_walks.java_alesyapesetskaya.validator.ValidTime;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,6 +45,11 @@ public class AddAppointmentController extends AbstractAppointmentController {
         if (bindingResult.hasErrors()) {
             addAllPlacesAndLoggedUserToModel(model,"allPlaces",userSecurity,"loggedUser");
             showAddressIfItWasSelected(appointmentForm,model,"selected_place");
+            if(bindingResult.hasGlobalErrors()){
+                ObjectError globalError = bindingResult.getGlobalError();
+                String defaultMessage = globalError.getDefaultMessage();
+                model.addAttribute("error",defaultMessage);
+            }
             return "addNew";
         } else {
             model.addAttribute("added_appointment",appointmentForm);

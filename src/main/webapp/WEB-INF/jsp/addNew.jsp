@@ -95,6 +95,7 @@
                     <sf:input type="time" name="time" id="form2Example28"
                            class="form-control form-control-lg" path="time"/>
                     <sf:errors path="time" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
+                    <p class="text-warning" cssStyle="line-height: 25px;" role="alert">${error}</p>
                 </div>
 
                 <div class="form-outline mb-4">
