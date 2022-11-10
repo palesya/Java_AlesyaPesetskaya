@@ -14,7 +14,8 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
+             style="background-image: linear-gradient(to right, black, #63646A)">
 
             <div class="navbar-nav col-2 px-1">
                 <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
@@ -27,8 +28,10 @@
             </div>
 
             <div class="navbar-nav col-3">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/places">Places</a>
             </div>
 
@@ -38,9 +41,11 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add new</a>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add
+                        new</a>
                     </li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a>
+                    </li>
                 </ul>
             </div>
 
@@ -56,31 +61,75 @@
 </div>
 
 <div class="container p-3">
-    <div class="card mb-3" style="width: 100%; height: 21rem; background-color: darkgray">
+    <div class="card mb-3" style="width: 100%; height: 45rem; background-color: darkgray">
         <div class="row no-gutters">
             <div class="col-4">
-                <img src="data:image/jpg;base64,${loggedUser.base64Image}" style="height: 21rem; object-fit: cover;"
+                <img src="data:image/jpg;base64,${loggedUser.base64Image}" style="height: 25rem; object-fit: cover;"
                      class="card-img-top rounded">
             </div>
             <div class="col-4">
                 <div class="card-body">
-                    <form method="post"
-                          action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/savedChanges">
-                        <label for="ownerAge">Owner's age</label>
-                        <input type="number" class="form-control" id="ownerAge" name="ownerAge" placeholder="Age">
-                        <label for="dogName">Dog's name</label>
-                        <input type="text" class="form-control" id="dogName" name="dogName" placeholder="Name">
-                        <label for="dogType">Dog's type</label>
-                        <input type="text" class="form-control" id="dogType" name="dogType" placeholder="Type">
-                        <label for="dogAge">Dog's age</label>
-                        <input type="number" class="form-control" id="dogAge" name="dogAge" placeholder="Age">
-                        <br>
-                        <input type="submit" class="btn btn-secondary" value="Save changes" name="changeData">
-                    </form>
+                    <%--@elvariable id="changePersonalDataForm" type=""--%>
+                    <sf:form method="post"
+                             action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/savedChanges"
+                             modelAttribute="changePersonalDataForm"
+                             enctype="multipart/form-data">
+                        <div class="form-outline mb-2">
+                            <label class="form-label" for="ownerAge">Owner's age:</label>
+                            <sf:input path="ownerAge" type="number" id="ownerAge" name="ownerAge"
+                                      class="form-control form-control-lg"
+                                      placeholder=">=18"/>
+                            <sf:errors path="ownerAge" class="text-warning" cssStyle="line-height: 25px;"
+                                       role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label class="form-label" for="dogName">Dog's name:</label>
+                            <sf:input path="dogName" type="text" id="dogName" class="form-control form-control-lg"
+                                      placeholder="2-20 symbols"/>
+                            <sf:errors path="dogName" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label class="form-label" for="dogAge">Dog's age:</label>
+                            <sf:input path="dogAge" type="number" id="dogAge" class="form-control form-control-lg"
+                                      placeholder="<=30"/>
+                            <sf:errors path="dogAge" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label class="form-label" for="dogType">Dog's type:</label>
+                            <sf:input path="dogType" type="text" id="dogType" class="form-control form-control-lg"
+                                      placeholder="2-40 symbols"/>
+                            <sf:errors path="dogType" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label class="form-label">Dog's sex:</label><br>
+                            <sf:radiobutton path="dogSexString" class="form-check-input" name="sex" id="girl"
+                                            value="girl"/>
+                            <label class="form-check-label" for="girl">Good girl</label><br>
+                            <sf:radiobutton path="dogSexString" class="form-check-input" name="sex" id="boy"
+                                            value="boy"/>
+                            <label class="form-check-label" for="boy">Good boy</label><br>
+                            <sf:errors path="dogSexString" class="text-warning" cssStyle="line-height: 25px;"
+                                       role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label for="ownerImage" class="form-label">Owner's photo:</label>
+                            <sf:input path="ownerImage" type="file" id="ownerImage" class="form-control"/>
+                            <sf:errors path="ownerImage" class="text-warning" cssStyle="line-height: 25px;"
+                                       role="alert"/>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label for="ImageDog" class="form-label">Dog's photo:</label>
+                            <sf:input path="dogImage" type="file" id="ImageDog" class="form-control"/>
+                            <sf:errors path="dogImage" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Save changes"
+                               name="appointment_id" style="position: absolute; bottom: 10px;">
+                    </sf:form>
                 </div>
             </div>
             <div class="col-4">
-                <img src="data:image/jpg;base64,${loggedUser.dog.base64Image}" style="height: 21rem; object-fit: cover;"
+                <img src="data:image/jpg;base64,${loggedUser.dog.base64Image}"
+                     style="height: 25rem; object-fit: cover;"
                      class="card-img-top rounded">
             </div>
         </div>

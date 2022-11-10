@@ -30,13 +30,14 @@ public class RegisterForm {
     @NotBlank(message = "Name can't be empty or contain only spaces.")
     @Size(min = 2, max = 20, message = "Name should contain from 2 to 20 symbols.")
     private String dogName;
-    @NotBlank(message = "Name can't be empty or contain only spaces.")
-    @Size(min = 2, max = 40, message = "Name should contain from 2 to 40 symbols.")
+    @NotBlank(message = "Type can't be empty or contain only spaces.")
+    @Size(min = 2, max = 40, message = "Type should contain from 2 to 40 symbols.")
     private String dogType;
     @NotNull(message = "Sex should be selected.")
     private String dogSexString;
     @NotNull(message = "Age can't be empty.")
     @Max(value = 30, message = "Age can't be greater than 30 years.")
+    @Min(value = 0, message = "Age can't be less than 0 years.")
     private Integer dogAge;
     @ValidImage
     private MultipartFile dogImage;

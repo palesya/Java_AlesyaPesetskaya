@@ -1,5 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
+import com.joint_walks.java_alesyapesetskaya.dto.ChangePersonalDataForm;
 import com.joint_walks.java_alesyapesetskaya.dto.RegisterForm;
 import com.joint_walks.java_alesyapesetskaya.dto.UserDto;
 import com.joint_walks.java_alesyapesetskaya.model.*;
@@ -76,6 +77,42 @@ public abstract class AbstractUserController {
         userService.saveUser(user);
     }
 
+    public void saveUserChanges(Long userId, ChangePersonalDataForm form) throws IOException {
+        User userFromDB = userService.getUserById(userId);
+        Dog dog = userFromDB.getDog();
+        Integer ownerAge = form.getOwnerAge();
+        if (ownerAge != null && ownerAge > 0) {
+            userFromDB.setAge(ownerAge);
+        }
+        String dogName = form.getDogName();
+        if (dogName != null && !dogName.isBlank()) {
+            dog.setName(dogName);
+        }
+        String dogType = form.getDogType();
+        if (dogType != null && !dogType.isBlank()) {
+            dog.setType(dogType);
+        }
+        Integer dogAge = form.getDogAge();
+        if (dogAge != null && dogAge >= 0) {
+            dog.setAge(dogAge);
+        }
+        if (form.getDogSexString() != null) {
+            SEX dogSex = (Objects.equals(form.getDogSexString(), "girl")) ? WOMAN : MAN;
+            dog.setSex(dogSex);
+        }
+        if (!form.getDogImage().isEmpty()) {
+            String dogImageString = getStringBase64FromFile(form.getDogImage());
+            dog.setBase64Image(dogImageString);
+        }
+        if (!form.getOwnerImage().isEmpty()) {
+            String ownerImageString = getStringBase64FromFile(form.getOwnerImage());
+            userFromDB.setBase64Image(ownerImageString);
+        }
+        userFromDB.setId(userId);
+        userService.saveUser(userFromDB);
+    }
+
+
     private String getStringBase64FromFile(MultipartFile file) throws IOException {
         Path path = Paths.get(rootDir, file.getName());
         Files.write(path, file.getBytes());
@@ -85,5 +122,7 @@ public abstract class AbstractUserController {
         fileInputStreamReader.read(bytes);
         return new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
     }
+
+
 
 }

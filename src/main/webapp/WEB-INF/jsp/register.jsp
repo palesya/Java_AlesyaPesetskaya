@@ -87,7 +87,7 @@
             <div class="col-md-3 mb-4">
                 <div class="form-outline">
                     <label class="form-label" for="dogAge">Dog's age:</label>
-                    <sf:input path="dogAge" type="number" id="userAge" class="form-control form-control-lg"
+                    <sf:input path="dogAge" type="number" id="dogAge" class="form-control form-control-lg"
                               placeholder="<=30"/>
                     <sf:errors path="dogAge" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                 </div>
