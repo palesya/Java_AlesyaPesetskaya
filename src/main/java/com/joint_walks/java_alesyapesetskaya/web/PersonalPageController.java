@@ -21,8 +21,6 @@ import java.util.List;
 public class PersonalPageController extends AbstractUserController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private AppointmentService appointmentService;
 
     @GetMapping("/{id}")
@@ -63,6 +61,8 @@ public class PersonalPageController extends AbstractUserController {
         String date = simpleDateFormat.format(appointment.getDate());
         model.addAttribute("success", "You've successfully left the appointment. Date: " + date + ". Time: " + appointment.getTime() + ". Address: " + appointment.getPlace().getAddress());
         getLoggedUserByIdAndAddToModel(userId, model, "loggedUser");
+        List<Appointment> appointmentsByUserId = appointmentService.getAppointmentsByUserId(userId);
+        model.addAttribute("allUserAppointments", appointmentsByUserId);
         return "personalPage";
     }
 

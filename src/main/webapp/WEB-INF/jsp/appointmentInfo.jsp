@@ -82,54 +82,97 @@
     </div>
 </div>
 
-<c:if test="${not empty success}">
-    <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">
-        <strong>${success}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<%--<c:if test="${not empty success}">--%>
+<%--    <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">--%>
+<%--        <strong>${success}</strong>--%>
+<%--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
+<%--    </div>--%>
+<%--</c:if>--%>
+
+<div class="container p-3">
+    <h3 class="d-flex justify-content-center">Appointment's info</h3><br>
+    <div class="card" style="background-color: darkgray;width: 100%;height: 21rem;">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <img src="data:image/jpg;base64,${appointment.place.base64Image}" alt="Lights"
+                     style="height: 21rem; object-fit: cover;"
+                     class="card-img-top rounded">
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h5>${appointment.place.address}</h5>
+                    <p class="card-text">The nearest public transport stop: ${appointment.place.transportStop}</p>
+                    <p class="card-text">Date: <fmt:formatDate value="${appointment.date}"
+                                                               pattern="dd-MM-YYYY"/></p>
+                    <p class="card-text">Time: ${appointment.time}</p>
+                    <p class="card-text">Additional info: ${appointment.description}</p>
+                    <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
+                    <c:choose>
+                        <c:when test="${isUserAdded == true}">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/leaveAppointment/${appointment.id}">
+                                <input type="submit" class="btn btn-primary" value="Leave appointment"
+                                       name="appointment_id" style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/user/join/selected/${appointment.id}">
+                                <input type="submit" class="btn btn-primary" value="Join appointment"
+                                       name="appointment_id"
+                                       style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </div>
+        </div>
     </div>
-</c:if>
-<div class="container pt-2">
-    <h6>Appointments, where you've already been added are displayed on the personal page.</h6>
 </div>
 
 <div class="container p-3">
+    <h3 class="d-flex justify-content-center">Participants</h3><br>
     <div class="row mx-auto">
-        <c:forEach items="${allAppointments}" var="appointment">
-            <div class="col-md-4 p-3">
-                <div class="card" style="width: 20rem;background-color: darkgray">
-                    <img src="data:image/jpg;base64,${appointment.place.base64Image}" alt="Lights"
-                         style="height: 20rem; object-fit: cover;"
-                         class="card-img-top rounded">
-                    <div class="card-body">
-                        <h5>${appointment.place.address}</h5>
-                        <p class="card-text">The nearest public transport stop: ${appointment.place.transportStop}</p>
-                        <p class="card-text">Date: <fmt:formatDate value="${appointment.date}"
-                                                                   pattern="dd-MM-YYYY"/></p>
-                        <p class="card-text">Time: ${appointment.time}</p>
-                        <p class="card-text">Additional info: ${appointment.description}</p>
-                        <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
+        <c:forEach items="${allUsers}" var="user">
+            <div class="card m-2" style="background-color: darkgray;width: 48%;">
+                <div class="row no-gutters">
+                    <div class="col-4">
+                        <img src="data:image/jpg;base64,${user.base64Image}"
+                             style="height: 21rem; object-fit: cover;"
+                             class="card-img-top rounded">
                     </div>
-                    <div class="row p-3">
-                        <div class="col-4">
-                            <form method="get"
-                                  action="${pageContext.request.contextPath}/dogwalker/user/appointment/${appointment.id}">
-                                <input type="submit" class="btn btn-primary" value="More info" name="appointment_id"
-                                       style="position: absolute; bottom: 10px;"/>
-                            </form>
+                    <div class="col-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Personal data</h5><br>
+                            <p class="card-text"><strong>Owner:</strong>
+                                    ${user.login} - ${user.age} years.</p><br>
+                            <p class="card-text"><strong>Dog:</strong></p>
+                            <p class="card-text">Beloved dog ${user.dog.name} - (${user.dog.type}).</p>
+                            <p class="card-text">It's age is ${user.dog.age}. And it is a good
+                                <c:choose>
+                                    <c:when test="${user.dog.sex == 'MAN'}">
+                                        boy
+                                    </c:when>
+                                    <c:otherwise>
+                                        girl
+                                    </c:otherwise>
+                                </c:choose>.
+                            </p>
                         </div>
-                        <div class="col-7">
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/dogwalker/user/join/selected/${appointment.id}">
-                                <input type="submit" class="btn btn-primary" value="Join appointment" name="appointment_id" style="position: absolute; bottom: 10px;"/>
-                            </form>
-                        </div>
+                            <%--                    <form method="post"--%>
+                            <%--                          action="${pageContext.request.contextPath}/dogwalker/user/join/selected/${appointment.id}">--%>
+                            <%--                        <input type="submit" class="btn btn-primary" value="Join appointment" name="appointment_id">--%>
+                            <%--                    </form>--%>
+                    </div>
+                    <div class="col-4">
+                        <img src="data:image/jpg;base64,${user.dog.base64Image}"
+                             style="height: 21rem; object-fit: cover;"
+                             class="card-img-top rounded">
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
 </div>
-
-
 </body>
 </html>

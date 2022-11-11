@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -70,10 +71,11 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         Long userId = getUserByLoginFromUserSecurity(userSecurity).getId();
         List<AppointmentDto> allAppointments;
         if (Objects.equals(city, "All cities")) {
-            allAppointments = appointmentService.getAppointmentsWithoutUser(userId);;
+            allAppointments = appointmentService.getAppointmentsWithoutUser(userId);
+            ;
         } else {
             List<AppointmentDto> allAppointmentsByCity = appointmentService.getAppointmentByCity(city);
-            allAppointments = appointmentService.excludeAppointmentsWithUser(userId,allAppointmentsByCity);
+            allAppointments = appointmentService.excludeAppointmentsWithUser(userId, allAppointmentsByCity);
         }
         model.addAttribute(appointmentsAttributeName, allAppointments);
     }
@@ -83,10 +85,21 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         model.addAttribute(appointmentsAttributeName, appointmentsByPartialMatch);
     }
 
-    public void getAppointmentsByPartialMatchWithoutUserAndAddToModel(Model model, String text, String appointmentsAttributeName,UserSecurity userSecurity) {
+    public void getAppointmentsByPartialMatchWithoutUserAndAddToModel(Model model, String text, String appointmentsAttributeName, UserSecurity userSecurity) {
         List<AppointmentDto> appointments = appointmentService.getAppointmentsByPartialMatch(text);
         Long userId = getUserByLoginFromUserSecurity(userSecurity).getId();
-        List<AppointmentDto> appointmentsByPartialMatch = appointmentService.excludeAppointmentsWithUser(userId,appointments);
+        List<AppointmentDto> appointmentsByPartialMatch = appointmentService.excludeAppointmentsWithUser(userId, appointments);
         model.addAttribute(appointmentsAttributeName, appointmentsByPartialMatch);
+    }
+
+    public void getUsersFromAppointmentAndAddToModel(Model model, String usersAttributeName, Long appointmentId) {
+        List<User> users = appointmentService.getById(appointmentId).getUsers();
+        model.addAttribute(usersAttributeName, users);
+    }
+
+    public boolean isUserAddedToAppointment(UserSecurity userSecurity, Long appointmentId) {
+        Long userId = getUserByLoginFromUserSecurity(userSecurity).getId();
+        List<Long> addedUserIds = appointmentService.getAddedUserIdsFromAppointment(appointmentId);
+        return addedUserIds.contains(userId);
     }
 }

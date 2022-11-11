@@ -126,24 +126,34 @@
                             stop: ${appointment.place.transportStop}</p>
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
-                        <form method="post"
-                              action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/leaveAppointment/${appointment.id}">
-                            <input type="submit" class="btn btn-primary" value="Leave appointment"
-                                   name="appointment_id" style="position: absolute; bottom: 10px;">
-                        </form>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="card-body">
-                    <p class="card-text">Date: <fmt:formatDate value="${appointment.date}" pattern="dd-MM-YYYY"/></p>
-                    <p class="card-text">Time: ${appointment.time}</p>
+                        <p class="card-text">Date: <fmt:formatDate value="${appointment.date}"
+                                                                   pattern="dd-MM-YYYY"/></p>
+                        <p class="card-text">Time: ${appointment.time}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <form method="get"
+                                  action="${pageContext.request.contextPath}/dogwalker/user/appointment/${appointment.id}">
+                                <input type="submit" class="btn btn-primary" value="More info" name="appointment_id"
+                                       style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/leaveAppointment/${appointment.id}">
+                                <input type="submit" class="btn btn-primary" value="Leave appointment"
+                                       name="appointment_id" style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </c:forEach>
 </div>
-
-
 </body>
 </html>
