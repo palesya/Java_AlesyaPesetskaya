@@ -11,11 +11,8 @@ import org.springframework.ui.Model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public abstract class AbstractAppointmentController extends AbstractPlaceController {
@@ -92,14 +89,39 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         model.addAttribute(appointmentsAttributeName, appointmentsByPartialMatch);
     }
 
-    public void getUsersFromAppointmentAndAddToModel(Model model, String usersAttributeName, Long appointmentId) {
+    public void getUsersFromAppointmentAndAddToModel(Model model, Long appointmentId,String usersAttributeName) {
         List<User> users = appointmentService.getById(appointmentId).getUsers();
         model.addAttribute(usersAttributeName, users);
     }
 
-    public boolean isUserAddedToAppointment(UserSecurity userSecurity, Long appointmentId) {
+    public void checkIfUserIsAddedToAppointmentAndAddToModel(UserSecurity userSecurity, Long appointmentId, Model model, String isUserAddedAttributeName) {
         Long userId = getUserByLoginFromUserSecurity(userSecurity).getId();
         List<Long> addedUserIds = appointmentService.getAddedUserIdsFromAppointment(appointmentId);
-        return addedUserIds.contains(userId);
+        boolean isUserAdded = addedUserIds.contains(userId);
+        model.addAttribute("isUserAdded", isUserAdded);
+    }
+
+    public void getUserAppointmentsAndAddToModel(Long userId, Model model, String appointmentsAttributeName) {
+        List<Appointment> appointmentsByUserId = appointmentService.getAppointmentsByUserId(userId);
+        model.addAttribute(appointmentsAttributeName, appointmentsByUserId);
+    }
+
+    public void leaveAppointmentAndAddSuccessMessageToModel(Model model, Long appointmentId, Long userId, String successAttributeName) {
+        Appointment appointment = appointmentService.getById(appointmentId);
+        appointmentService.deleteUserFromOneAppointment(userId, appointmentId);
+        String pattern = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(appointment.getDate());
+        model.addAttribute(successAttributeName, "You've successfully left the appointment. Date: " + date + ". Time: " + appointment.getTime() + ". Address: " + appointment.getPlace().getAddress());
+    }
+
+    public void getAppointmentByIdAndAddToModel(Model model, Long appointmentId, String appointmentAttributeName) {
+        Appointment appointment = appointmentService.getById(appointmentId);
+        model.addAttribute(appointmentAttributeName, appointment);
+    }
+
+    public void getLoggedUserAndItsAppointmentsAndAddToModel(Model model,Long userId,String userAttributeName, String appointmentsAttributeName){
+        getLoggedUserByIdAndAddToModel(userId,model,userAttributeName);
+        getUserAppointmentsAndAddToModel(userId,model,appointmentsAttributeName);
     }
 }

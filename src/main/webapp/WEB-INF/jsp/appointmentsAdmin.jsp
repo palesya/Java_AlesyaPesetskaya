@@ -46,7 +46,8 @@
                 </select>
             </form>
 
-            <form class="col-3 m-auto px-1" action="${pageContext.request.contextPath}/dogwalker/admin/appointment/search"
+            <form class="col-3 m-auto px-1"
+                  action="${pageContext.request.contextPath}/dogwalker/admin/appointment/search"
                   method="post">
                 <input class="form-control" type="text" placeholder="Search by street or transport stop."
                        aria-label="Search" name="search_text">
@@ -77,10 +78,14 @@
                         <p class="card-text">Time: ${appointment.time}</p>
                         <p class="card-text">Additional info: ${appointment.description}</p>
                         <p class="card-text">Number of joined people: ${appointment.numberOfPeople}</p>
-                        <form method="post"
-                              action="${pageContext.request.contextPath}/dogwalker/admin/appointment/delete/${appointment.id}">
-                            <input type="submit" class="btn btn-primary" value="Delete" name="appointment_id">
-                        </form>
+                        <div class="row pt-4">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/admin/appointment/delete/${appointment.id}"
+                                  class="d-flex justify-content-end">
+                                <input type="submit" class="btn btn-primary" value="Delete" name="appointment_id"
+                                       style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

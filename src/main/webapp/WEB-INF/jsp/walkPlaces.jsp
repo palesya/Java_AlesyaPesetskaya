@@ -16,7 +16,8 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
+             style="background-image: linear-gradient(to right, black, #63646A)">
 
             <div class="navbar-nav col-2 px-1">
                 <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
@@ -29,8 +30,10 @@
             </div>
 
             <div class="navbar-nav col-2">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/main">Home</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/user/dogs">Dogs</a>
             </div>
 
             <div class="dropdown col-2 d-flex justify-content-start">
@@ -39,9 +42,11 @@
                     Walk
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add new</a>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/add">Add
+                        new</a>
                     </li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/dogwalker/user/join">Join</a>
+                    </li>
                 </ul>
             </div>
 
@@ -104,9 +109,13 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <form method="post" action="${pageContext.request.contextPath}/dogwalker/user/addWithSelectedPlace/${place.id}">
-                            <input type="submit" class="btn btn-primary" value="Add appointment" name="place_id">
-                        </form>
+                        <div class="row pt-4">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/user/addWithSelectedPlace/${place.id}">
+                                <input type="submit" class="btn btn-primary" value="Add appointment" name="place_id"
+                                       style="position: absolute; bottom: 10px;">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -89,7 +89,8 @@
 
                     <form method="post"
                           action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/changeData">
-                        <input type="submit" class="btn btn-secondary" value="Change personal data" name="changeData">
+                        <input type="submit" class="btn btn-primary" value="Change personal data" name="changeData"
+                               style="position: absolute; bottom: 10px;"/>
                     </form>
 
                 </div>

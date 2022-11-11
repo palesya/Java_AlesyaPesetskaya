@@ -36,9 +36,9 @@ public abstract class AbstractUserController {
 
     private final String rootDir = System.getProperty("user.dir") + "/src/main/webapp/static/images";
 
-    public void getLoggedUserByIdAndAddToModel(Long id, Model model, String attributeName) {
-        UserDto userDto = userService.getUserDtoById(id);
-        model.addAttribute(attributeName, userDto);
+    public void getLoggedUserByIdAndAddToModel(Long userId, Model model, String userAttributeName) {
+        UserDto userDto = userService.getUserDtoById(userId);
+        model.addAttribute(userAttributeName, userDto);
     }
 
     public void getUsersByPartialMatchAndAddToModel(String text, Model model, String attributeName) {

@@ -82,13 +82,6 @@
     </div>
 </div>
 
-<%--<c:if test="${not empty success}">--%>
-<%--    <div class="container p-3 alert alert-success alert-dismissible fade show" role="alert">--%>
-<%--        <strong>${success}</strong>--%>
-<%--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
-<%--    </div>--%>
-<%--</c:if>--%>
-
 <div class="container p-3">
     <h3 class="d-flex justify-content-center">Appointment's info</h3><br>
     <div class="card" style="background-color: darkgray;width: 100%;height: 21rem;">
@@ -159,10 +152,6 @@
                                 </c:choose>.
                             </p>
                         </div>
-                            <%--                    <form method="post"--%>
-                            <%--                          action="${pageContext.request.contextPath}/dogwalker/user/join/selected/${appointment.id}">--%>
-                            <%--                        <input type="submit" class="btn btn-primary" value="Join appointment" name="appointment_id">--%>
-                            <%--                    </form>--%>
                     </div>
                     <div class="col-4">
                         <img src="data:image/jpg;base64,${user.dog.base64Image}"

@@ -14,7 +14,8 @@
 <body style="background-color: dimgrey">
 <div class="container p-1">
     <div class="row mx-auto">
-        <nav class="navbar navbar-expand-lg primary-color rounded text-center" style="background-image: linear-gradient(to right, black, #63646A)">
+        <nav class="navbar navbar-expand-lg primary-color rounded text-center"
+             style="background-image: linear-gradient(to right, black, #63646A)">
 
             <div class="navbar-nav col-2 px-1">
                 <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
@@ -22,15 +23,18 @@
             </div>
 
             <div class="navbar-nav col-5">
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/main">Home</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/admin/main">Home</a>
                 <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/places">Places</a>
-                <a class="nav-link mx-4 text-white" href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
+                <a class="nav-link mx-4 text-white"
+                   href="${pageContext.request.contextPath}/dogwalker/admin/appointment">Appointments</a>
             </div>
 
 
             <form class="col m-auto" action="${pageContext.request.contextPath}/dogwalker/admin/dogs" method="post">
-                    <input class="form-control rounded" type="text" placeholder="Search by owner's name, dog's name or type." aria-label="Search"
-                           name="search_text">
+                <input class="form-control rounded" type="text"
+                       placeholder="Search by owner's name, dog's name or type." aria-label="Search"
+                       name="search_text">
             </form>
 
             <div class="col-1 d-flex justify-content-end px-1">
@@ -74,11 +78,15 @@
                                     ${user.login} - ${user.age}
                             </div>
                         </div>
+                        <div class="row pt-4">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/admin/dogs/delete/${user.id}"
+                                  class="d-flex justify-content-end">
+                                <input type="submit" class="btn btn-primary" value="Delete" name="user_id"
+                                       style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </div>
                     </div>
-                    <form method="post"
-                          action="${pageContext.request.contextPath}/dogwalker/admin/dogs/delete/${user.id}" class="px-3">
-                        <input type="submit" class="btn btn-secondary" value="Delete" name="user_id">
-                    </form>
                 </div>
             </div>
         </c:forEach>

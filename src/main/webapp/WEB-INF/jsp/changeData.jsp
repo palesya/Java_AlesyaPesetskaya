@@ -61,7 +61,7 @@
 </div>
 
 <div class="container p-3">
-    <div class="card mb-3" style="width: 100%; height: 45rem; background-color: darkgray">
+    <div class="card mb-3" style="width: 100%; background-color: darkgray">
         <div class="row no-gutters">
             <div class="col-4">
                 <img src="data:image/jpg;base64,${loggedUser.base64Image}" style="height: 25rem; object-fit: cover;"
@@ -74,6 +74,7 @@
                              action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/savedChanges"
                              modelAttribute="changePersonalDataForm"
                              enctype="multipart/form-data">
+
                         <div class="form-outline mb-2">
                             <label class="form-label" for="ownerAge">Owner's age:</label>
                             <sf:input path="ownerAge" type="number" id="ownerAge" name="ownerAge"
@@ -122,11 +123,14 @@
                             <sf:input path="dogImage" type="file" id="ImageDog" class="form-control"/>
                             <sf:errors path="dogImage" class="text-warning" cssStyle="line-height: 25px;" role="alert"/>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Save changes"
-                               name="appointment_id" style="position: absolute; bottom: 10px;">
+                        <div class="form-outline pt-4">
+                            <input type="submit" class="btn btn-primary" value="Save changes"
+                                   name="appointment_id" style="position: absolute; bottom: 10px;">
+                        </div>
                     </sf:form>
                 </div>
             </div>
+
             <div class="col-4">
                 <img src="data:image/jpg;base64,${loggedUser.dog.base64Image}"
                      style="height: 25rem; object-fit: cover;"
