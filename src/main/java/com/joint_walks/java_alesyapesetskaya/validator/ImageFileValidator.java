@@ -1,10 +1,12 @@
 package com.joint_walks.java_alesyapesetskaya.validator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+@Component
 public class ImageFileValidator implements ConstraintValidator<ValidImage, MultipartFile> {
 
     @Override

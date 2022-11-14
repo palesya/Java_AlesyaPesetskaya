@@ -4,7 +4,9 @@ import com.joint_walks.java_alesyapesetskaya.dto.AddAppointmentForm;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Appointment;
 import com.joint_walks.java_alesyapesetskaya.repository.AppointmentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,10 +15,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
+@RequiredArgsConstructor
 public class TimeValidator implements ConstraintValidator<ValidTime, AddAppointmentForm> {
 
-    @Autowired
-    private AppointmentRepository repository;
+    private final AppointmentRepository repository;
 
     @Override
     public boolean isValid(AddAppointmentForm appointmentForm, ConstraintValidatorContext context) {

@@ -15,6 +15,7 @@ public class UserDto {
     private Long id;
     private String login;
     private Integer age;
+    @Builder.Default
     private boolean isDeleted = false;
     private String base64Image;
     private Dog dog;

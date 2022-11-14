@@ -27,13 +27,19 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.44'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.0'
     implementation 'org.flywaydb:flyway-core'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
     implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'org.hibernate.validator:hibernate-validator:6.2.2.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.mockito:mockito-core:4.8.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.8.0'
+
 }
 
 tasks.named('test') {

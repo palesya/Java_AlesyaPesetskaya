@@ -1,9 +1,17 @@
 package com.joint_walks.java_alesyapesetskaya.validator;
 
+import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
+import org.springframework.stereotype.Component;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+@Component
 public class LoginForRegisterValidator extends AbstractLoginValidator implements ConstraintValidator<ValidLoginForRegister, String> {
+
+    public LoginForRegisterValidator(UserRepository repository) {
+        super(repository);
+    }
 
     @Override
     public boolean isValid(String login, ConstraintValidatorContext context) {
