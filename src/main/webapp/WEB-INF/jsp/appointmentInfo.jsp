@@ -53,25 +53,7 @@
                 </ul>
             </div>
 
-            <form class="col-2 m-auto px-1" action="${pageContext.request.contextPath}/dogwalker/user/join/city"
-                  method="get">
-                <select typeof="submit" class="form-select" aria-label="Default select example" name="selected_city"
-                        onchange="this.form.submit();">
-                    <option selected>Select city</option>
-                    <option>All cities</option>
-                    <c:forEach items="${allCities}" var="city">
-                        <option>${city}</option>
-                    </c:forEach>
-                </select>
-            </form>
-
-            <form class="col-3 m-auto px-1" action="${pageContext.request.contextPath}/dogwalker/user/join/search"
-                  method="post">
-                <input class="form-control" type="text" placeholder="Search by street or transport stop."
-                       aria-label="Search" name="search_text">
-            </form>
-
-            <div class="col-1 d-flex justify-content-end px-1">
+            <div class="col-6 d-flex justify-content-end px-1">
                 <a href="${pageContext.request.contextPath}/process_logout">
                     <img src="${pageContext.request.contextPath}/button_logout.jpg" alt="Logout"
                          style="max-height: 3rem;border-radius: 50%;object-position: right;">

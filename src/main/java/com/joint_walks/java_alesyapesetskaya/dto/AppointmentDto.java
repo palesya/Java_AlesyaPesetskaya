@@ -1,5 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.dto;
 
+import com.joint_walks.java_alesyapesetskaya.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,5 +22,6 @@ public class AppointmentDto {
     private LocalTime time;
     private String description;
     private Integer numberOfPeople;
+    private List<User> users;
 
 }

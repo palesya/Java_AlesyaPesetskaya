@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +35,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsersByPartialMatch(String text) {
-        return repository
-                .getUsersByPartialMatchNotDeleted(text)
-                .stream()
-                .map(converter::mapToUserDTO)
-                .collect(Collectors.toList());
+        List<User> usersFromDb = repository.getUsersByPartialMatchNotDeleted(text);
+        return converter.mapToListUserDTO(usersFromDb);
     }
 
     @Override
