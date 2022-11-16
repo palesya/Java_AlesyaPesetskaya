@@ -4,7 +4,9 @@ import com.joint_walks.java_alesyapesetskaya.converter.PlaceMapperUtils;
 import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
 import com.joint_walks.java_alesyapesetskaya.model.Place;
+import com.joint_walks.java_alesyapesetskaya.repository.AppointmentRepository;
 import com.joint_walks.java_alesyapesetskaya.repository.PlaceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PlaceServiceImpl implements PlaceService {
 
-    @Autowired
-    private PlaceRepository repository;
-    @Autowired
-    private PlaceMapperUtils mapper;
+    private final PlaceRepository repository;
+    private final PlaceMapperUtils mapper;
 
     @Override
     public List<PlaceDto> getAll() {

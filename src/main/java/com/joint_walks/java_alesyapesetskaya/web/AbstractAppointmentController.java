@@ -59,7 +59,7 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         if (Objects.equals(city, "All cities")) {
             allAppointments = appointmentService.getAll();
         } else {
-            allAppointments = appointmentService.getAppointmentByCity(city);
+            allAppointments = appointmentService.getAppointmentsByCity(city);
         }
         model.addAttribute(appointmentsAttributeName, allAppointments);
     }
@@ -71,7 +71,7 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
             allAppointments = appointmentService.getAppointmentsWithoutUser(userId);
             ;
         } else {
-            List<AppointmentDto> allAppointmentsByCity = appointmentService.getAppointmentByCity(city);
+            List<AppointmentDto> allAppointmentsByCity = appointmentService.getAppointmentsByCity(city);
             allAppointments = appointmentService.excludeAppointmentsWithUser(userId, allAppointmentsByCity);
         }
         model.addAttribute(appointmentsAttributeName, allAppointments);

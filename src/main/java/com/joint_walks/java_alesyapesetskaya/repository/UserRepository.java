@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
-    @Query("select u from User u where u.login=:login")
+    @Query("select u from User u where u.login=:login and u.isDeleted=false")
     User getByLoginNotDeleted(String login);
 
     @Transactional

@@ -42,18 +42,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void joinAppointment(Appointment appointment, User user) {
-            List<User> users = appointment.getUsers();
-            users.add(user);
-            appointment.setUsers(users);
-            Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
-            appointment.setNumberOfPeople(numberOfPeople);
-            repository.saveAndFlush(appointment);
+        List<User> users = appointment.getUsers();
+        users.add(user);
+        appointment.setUsers(users);
+        Integer numberOfPeople = getNumberOfAddedUsers(appointment.getId());
+        appointment.setNumberOfPeople(numberOfPeople);
+        repository.saveAndFlush(appointment);
     }
 
-    @Override
-    public List<AppointmentDto> getAppointmentByCity(String city) {
-        List<Appointment> appointmentByCity = repository.getAppointmentByCity(city);
-        return converter.mapToListAppointmentDTO(appointmentByCity);
+    public List<AppointmentDto> getAppointmentsByCity(String city) {
+        List<Appointment> appointmentByCity = repository.getAppointmentsByCity(city);
+        List<AppointmentDto> appointmentDto = converter.mapToListAppointmentDTO(appointmentByCity);
+        return appointmentDto;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointmentsWithoutUser(Long userId) {
         List<Long> appointmentsIdsWithoutUserId = repository.getAppointmentsIdsWithoutUserId(userId);
         List<Appointment> userAppointments = new ArrayList<>();
-        for(Long id:appointmentsIdsWithoutUserId){
+        for (Long id : appointmentsIdsWithoutUserId) {
             Appointment appointment = repository.getById(id);
             userAppointments.add(appointment);
         }
@@ -105,7 +105,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> excludeAppointmentsWithUser(Long userId, List<AppointmentDto> allAppointments) {
         List<Long> appointmentsIdsWithoutUserId = repository.getAppointmentsIdsWithoutUserId(userId);
-        return allAppointments.stream().filter(appointmentDto -> appointmentsIdsWithoutUserId.contains(appointmentDto.getId())).collect(Collectors.toList());
+        List<AppointmentDto> appointments = allAppointments.stream()
+                .filter(appointmentDto -> appointmentsIdsWithoutUserId
+                        .contains(appointmentDto.getId()))
+                .collect(Collectors.toList());
+        return appointments;
     }
 
     private void deleteUserFromAppointment(Long userId, Appointment appointment) {

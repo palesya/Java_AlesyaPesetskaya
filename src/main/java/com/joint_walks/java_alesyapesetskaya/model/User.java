@@ -53,15 +53,6 @@ public class User {
         this.dog = dog;
     }
 
-    public User(String login, String password, Integer age, String base64Image, Dog dog, List<Role> roles) {
-        this.login = login;
-        this.password = password;
-        this.age = age;
-        this.base64Image = base64Image;
-        this.dog = dog;
-        this.roles = roles;
-    }
-
     public User(String login, String password) {
         this.login = login;
         this.password = password;

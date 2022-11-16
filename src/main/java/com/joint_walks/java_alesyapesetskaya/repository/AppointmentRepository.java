@@ -18,7 +18,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     @Transactional
     @Query("select a from Appointment a JOIN a.place p JOIN p.address adr " +
             "where LOWER(adr.city) LIKE lower(CONCAT('%',:city,'%'))")
-    List<Appointment> getAppointmentByCity(String city);
+    List<Appointment> getAppointmentsByCity(String city);
 
     @Transactional
     @Query("select a from Appointment a JOIN a.place p JOIN p.address adr " +

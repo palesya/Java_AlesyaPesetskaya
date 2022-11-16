@@ -6,7 +6,6 @@ import com.joint_walks.java_alesyapesetskaya.repository.RoleRepository;
 import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
