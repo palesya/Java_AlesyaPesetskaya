@@ -283,10 +283,6 @@ public class AppointmentServiceImplTest {
     @Test
     void deleteAppointment() {
         AppointmentServiceImpl service = new AppointmentServiceImpl(repository, converter);
-        Appointment appointment = Appointment.builder()
-                .id(1L)
-                .numberOfPeople(2)
-                .build();
         Mockito.doAnswer(invocation -> {
             Mockito.when(repository.getById(1L)).thenReturn(null);
             return null;

@@ -71,19 +71,4 @@ public class UserRepositoryTest {
         Assertions.assertNull(userFromDB);
     }
 
-//    @Test
-//    void getUsersByPartialMatchNotDeleted() {
-//    }
-//
-//    @Test
-//    void getById() {
-//    }
-//
-//    @Test
-//    void findUsersByIsDeletedIsFalse() {
-//    }
-//
-//    @Test
-//    void setIsDeletedToTrue() {
-//    }
 }

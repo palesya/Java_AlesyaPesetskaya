@@ -20,8 +20,10 @@ public class StringToAddressConverterTest {
 
     @InjectMocks
     private PlaceServiceImpl placeService;
+
     @Mock
     private PlaceRepository repository;
+
     @Mock
     private PlaceMapperUtils mapper;
 
