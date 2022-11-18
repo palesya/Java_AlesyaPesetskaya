@@ -1,30 +1,26 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.joint_walks.java_alesyapesetskaya.config.MockSpringSecurityFilter;
-import com.joint_walks.java_alesyapesetskaya.model.Role;
-import com.joint_walks.java_alesyapesetskaya.model.User;
+
 import com.joint_walks.java_alesyapesetskaya.model.UserSecurity;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+@RunWith(Suite.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoginControllerTest {
+public class LoginControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -59,13 +55,6 @@ class LoginControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/dogwalker/admin/places")
                         .with(user("Admin").password("Admin").roles("ADMIN")))
                 .andExpect(status().isOk());
-    }
-
-    @Before
-    public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context)
-                .apply(springSecurity(new MockSpringSecurityFilter()))
-                .build();
     }
 
     @Test

@@ -11,6 +11,8 @@ import com.joint_walks.java_alesyapesetskaya.repository.AppointmentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -19,9 +21,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RunWith(Suite.class)
 @ExtendWith({MockitoExtension.class})
-class AppointmentServiceImplTest {
+public class AppointmentServiceImplTest {
 
     @Mock
     private AppointmentRepository repository;

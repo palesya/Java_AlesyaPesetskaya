@@ -4,6 +4,8 @@ import com.joint_walks.java_alesyapesetskaya.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,9 +15,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RunWith(Suite.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class UserRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
     UserRepository repository;

@@ -3,6 +3,8 @@ package com.joint_walks.java_alesyapesetskaya.validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -11,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidatorContext;
 import java.nio.charset.StandardCharsets;
-
+@RunWith(Suite.class)
 @ExtendWith(MockitoExtension.class)
-class ImageFileValidatorForEditTest {
+public class ImageFileValidatorForEditTest {
 
     @Mock
     private ConstraintValidatorContext context;

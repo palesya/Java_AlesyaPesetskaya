@@ -7,15 +7,17 @@ import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@RunWith(Suite.class)
 @ExtendWith(MockitoExtension.class)
-class UserServiceImplTest {
+public class UserServiceImplTest {
 
     @Mock
     private UserRepository repository;

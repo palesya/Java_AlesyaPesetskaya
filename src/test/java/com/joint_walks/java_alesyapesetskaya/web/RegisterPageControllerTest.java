@@ -7,6 +7,8 @@ import com.joint_walks.java_alesyapesetskaya.service.RoleService;
 import com.joint_walks.java_alesyapesetskaya.service.UserDetailsServiceImpl;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,9 +19,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+@RunWith(Suite.class)
 @WebMvcTest(value = RegisterPageController.class)
-class RegisterPageControllerTest {
+public class RegisterPageControllerTest {
 
     @MockBean
     private UserService userService;

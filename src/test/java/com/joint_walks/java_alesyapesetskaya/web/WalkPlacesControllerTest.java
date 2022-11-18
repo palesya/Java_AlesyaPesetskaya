@@ -1,11 +1,13 @@
 package com.joint_walks.java_alesyapesetskaya.web;
 
-import com.joint_walks.java_alesyapesetskaya.converter.StringToAddressConverter;
 import com.joint_walks.java_alesyapesetskaya.dto.PlaceDto;
 import com.joint_walks.java_alesyapesetskaya.model.Address;
-import com.joint_walks.java_alesyapesetskaya.service.PlaceService;
 import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,9 +23,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@RunWith(Suite.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class WalkPlacesControllerTest {
+@Execution(ExecutionMode.SAME_THREAD)
+public class WalkPlacesControllerTest {
 
     @MockBean
     private PlaceServiceImpl placeService;

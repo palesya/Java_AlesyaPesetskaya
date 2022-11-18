@@ -2,6 +2,8 @@ package com.joint_walks.java_alesyapesetskaya.web;
 
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+@RunWith(Suite.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class MainControllerTest {
+public class MainControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

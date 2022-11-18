@@ -7,13 +7,16 @@ import com.joint_walks.java_alesyapesetskaya.service.PlaceServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+@RunWith(Suite.class)
 @ExtendWith(MockitoExtension.class)
-class StringToAddressConverterTest {
+public class StringToAddressConverterTest {
 
     @InjectMocks
     private PlaceServiceImpl placeService;

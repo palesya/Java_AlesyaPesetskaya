@@ -8,6 +8,10 @@ import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,10 +28,11 @@ import java.util.List;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+@RunWith(Suite.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class PersonalPageControllerTest {
+@Execution(ExecutionMode.SAME_THREAD)
+public class PersonalPageControllerTest {
 
     @MockBean
     private UserService userService;
@@ -73,14 +78,6 @@ class PersonalPageControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("loggedUser",userDto))
                 .andExpect(model().attribute("allUserAppointments",allAppointments));
-    }
-
-    @Test
-    void getChanges() {
-    }
-
-    @Test
-    void saveChanges() {
     }
 
     @Test

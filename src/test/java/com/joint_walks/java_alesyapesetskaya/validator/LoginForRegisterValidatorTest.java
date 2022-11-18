@@ -5,6 +5,8 @@ import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -12,9 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
-
+@RunWith(Suite.class)
 @ExtendWith(MockitoExtension.class)
-class LoginForRegisterValidatorTest {
+public class LoginForRegisterValidatorTest {
 
     @Mock
     private ConstraintValidatorContext context;
