@@ -27,7 +27,8 @@ import org.junit.platform.suite.api.Suite;
         RegisterPageControllerTest.class,
         SmokeTest.class,
         WalkPlacesControllerTest.class,
-        AppointmentInfoControllerTest.class
+        AppointmentInfoControllerTest.class,
+        JoinControllerTest.class
 })
 public class TestSuiteAllTests {
 

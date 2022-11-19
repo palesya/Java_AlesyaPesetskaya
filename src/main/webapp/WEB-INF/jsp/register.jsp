@@ -19,6 +19,8 @@
 
             <img src="${pageContext.request.contextPath}/dogwalker_mini.jpg"
                  alt="logo" class="rounded" style="object-fit: cover; object-position: left; height: 3rem;">
+            <a class="nav-link mx-4 text-white"
+               href="${pageContext.request.contextPath}/login">Login page</a>
 
         </nav>
     </div>

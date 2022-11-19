@@ -1,7 +1,6 @@
 package com.joint_walks.java_alesyapesetskaya.config;
 
 import com.joint_walks.java_alesyapesetskaya.service.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
