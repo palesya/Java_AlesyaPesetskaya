@@ -32,14 +32,17 @@ public class StartupService {
         String avatar1 = getStringBase64FromFile(pathPart + "user1.jpg");
         String avatar2 = getStringBase64FromFile(pathPart + "user2.jpg");
         String avatar3 = getStringBase64FromFile(pathPart + "user3.jpg");
+        String avatar4 = getStringBase64FromFile(pathPart + "user4.jpg");
 
         String dogPhoto1 = getStringBase64FromFile(pathPart + "dog1.jpg");
         String dogPhoto2 = getStringBase64FromFile(pathPart + "dog2.jpg");
         String dogPhoto3 = getStringBase64FromFile(pathPart + "dog3.jpg");
+        String dogPhoto4 = getStringBase64FromFile(pathPart + "dog4.jpg");
 
         Dog dog1 = new Dog("Lucky", "French bulldog", 1, dogPhoto1, SEX.MAN);
         Dog dog2 = new Dog("Lucy", "English setter", 4, dogPhoto2, SEX.WOMAN);
         Dog dog3 = new Dog("Crunchy", "Mops", 10, dogPhoto3, SEX.MAN);
+        Dog dog4 = new Dog("Snoopy", "Taksa", 2, dogPhoto4, SEX.MAN);
 
         Role userRole = new Role("ROLE_USER");
         Role adminRole = new Role("ROLE_ADMIN");
@@ -56,9 +59,10 @@ public class StartupService {
         User user1 = new User("Alesya", "$2a$12$JGRFmRlvwqm5IdcmmZlVVuJgAiBw/ZBJ4OgsHVE/Iv4Wzv37W0DMK", 32, avatar1, dog1);
         User user2 = new User("Pavel", "$2a$12$fEePR7vnSE.Xmd0XFt7LBe0TiUsnkh0T7hrpKW42reK3JVGC.5dRS", 35, avatar2, dog2);
         User user3 = new User("Sofiya", "$2a$12$2XlLYPd1v/AYjr/Yts4VCezVOPsphAAWM3NuCk91bnoUDUoFNmV32", 24, avatar3, dog3);
-
-        List<User> users = List.of(user1, user2, user3);
+        User user4 = new User("Snoop Dogg", "$2a$12$TXclXk9J5uJk89HpCWR9fedFF15pYK/YFflgfA2ZlXUQdk8t54jYW", 24, avatar4, dog4);
+        List<User> users = List.of(user1, user2, user3,user4);
         List<String> allLogins = userRepository.findAll().stream().map(User::getLogin).collect(Collectors.toList());
+        user4.setDeleted(true);
         for (User user : users) {
             if (!allLogins.contains(user.getLogin())) {
                 user.addRole(userRole);
@@ -69,6 +73,8 @@ public class StartupService {
             admin.addRole(adminRole);
             userRepository.saveAndFlush(admin);
         }
+
+
         Address address1 = new Address("Minsk", "Main", 12);
         Address address2 = new Address("Grodno", "Nebesnaya", 4);
         Address address3 = new Address("Brest", "Svetlaya", 48);

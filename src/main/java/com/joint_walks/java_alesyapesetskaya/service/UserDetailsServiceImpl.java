@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.getByLoginNotDeleted(username);
+        User user = repository.getByLogin(username);
         List<Role> roles = user.getRoles();
         List<String> rolesAsString = roles.stream().map(Role::getName).collect(Collectors.toList());
         boolean isEnabled = !user.isDeleted();

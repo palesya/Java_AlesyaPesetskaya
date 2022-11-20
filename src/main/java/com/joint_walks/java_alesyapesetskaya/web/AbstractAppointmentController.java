@@ -28,7 +28,8 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
     }
 
     public void getAppointmentsWithoutUserAndAddToModel(Model model, String attributeName, UserSecurity userSecurity) {
-        Long userId = getUserByLoginFromUserSecurity(userSecurity).getId();
+        User userByLoginFromUserSecurity = getUserByLoginFromUserSecurity(userSecurity);
+        Long userId = userByLoginFromUserSecurity.getId();
         List<AppointmentDto> all = appointmentService.getAppointmentsWithoutUser(userId);
         model.addAttribute(attributeName, all);
     }
@@ -42,7 +43,7 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
 
     }
 
-    public void joinAppointmentAndAddItToModel(Model model, Long appointmentId, UserSecurity userSecurity) {
+    public void joinAppointmentAndAddSuccessMessageToModel(Model model, Long appointmentId, UserSecurity userSecurity) {
         User userByLogin = getUserByLoginFromUserSecurity(userSecurity);
         Appointment appointment = appointmentService.getById(appointmentId);
         Address address = appointment.getPlace().getAddress();
@@ -69,7 +70,6 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         List<AppointmentDto> allAppointments;
         if (Objects.equals(city, "All cities")) {
             allAppointments = appointmentService.getAppointmentsWithoutUser(userId);
-            ;
         } else {
             List<AppointmentDto> allAppointmentsByCity = appointmentService.getAppointmentsByCity(city);
             allAppointments = appointmentService.excludeAppointmentsWithUser(userId, allAppointmentsByCity);

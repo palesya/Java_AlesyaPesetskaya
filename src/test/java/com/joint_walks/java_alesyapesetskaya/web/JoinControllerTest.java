@@ -51,6 +51,8 @@ public class JoinControllerTest {
     private UserDto loggedUserDto;
     private User loggedUser;
     private List<AppointmentDto> allAppointmentsDtoWithoutUser;
+    private List<AppointmentDto> allAppointmentsMinskWithoutUser;
+    private List<AppointmentDto> allAppointmentsMinsk;
     private List<String> allCities;
     private List<PlaceDto> allPlaces;
 
@@ -61,21 +63,22 @@ public class JoinControllerTest {
                 .login("User")
                 .isDeleted(false)
                 .build();
-        loggedUser = User.builder()
-                .id(1L)
-                .login("User")
-                .isDeleted(false)
-                .build();
-
         User user1 = User.builder()
                 .id(2L)
                 .login("User simple")
                 .isDeleted(false)
                 .build();
+        User loggedUser = User.builder()
+                .id(1L)
+                .login("User")
+                .isDeleted(false)
+                .build();
+
         List<User> allUsersWithoutLogged = new ArrayList<>();
         allUsersWithoutLogged.add(user1);
-
-
+        List<User> allUsers = new ArrayList<>();
+        allUsers.add(loggedUser);
+        allUsers.add(user1);
         Address addressMinsk = Address.builder()
                 .city("Minsk")
                 .build();
@@ -102,8 +105,16 @@ public class JoinControllerTest {
                 .place(placeDtoMinsk)
                 .users(allUsersWithoutLogged)
                 .build();
+        AppointmentDto appointmentDto3 = AppointmentDto.builder()
+                .id(3L)
+                .place(placeDtoMinsk)
+                .users(allUsers)
+                .build();
         allAppointmentsDtoWithoutUser.add(appointmentDto1);
         allAppointmentsDtoWithoutUser.add(appointmentDto2);
+        allAppointmentsMinskWithoutUser.add(appointmentDto2);
+        allAppointmentsMinsk.add(appointmentDto2);
+        allAppointmentsMinsk.add(appointmentDto3);
         allPlaces.add(placeDtoGrodno);
         allPlaces.add(placeDtoMinsk);
     }
@@ -111,11 +122,17 @@ public class JoinControllerTest {
     @Test
     void openForUser() throws Exception {
         UserSecurity userDetails = new UserSecurity("User", "User", List.of("ROLE_USER"), true);
-        Mockito.when(userService.getUserDtoByLogin("User")).thenReturn(loggedUserDto);
+        loggedUser = User.builder()
+                .id(1L)
+                .login("User")
+                .password("User")
+                .isDeleted(false)
+                .build();
         Mockito.when(userService.getUserByLogin("User")).thenReturn(loggedUser);
+        Mockito.when(userService.getUserDtoByLogin("User")).thenReturn(loggedUserDto);
         Mockito.when(appointmentService.getAppointmentsWithoutUser(1L)).thenReturn(allAppointmentsDtoWithoutUser);
         Mockito.when(placeService.getAll()).thenReturn(allPlaces);
-
+        Mockito.when(placeService.getAllCities()).thenReturn(allCities);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/dogwalker/user/join/")
                         .with(user(userDetails)))
@@ -127,7 +144,24 @@ public class JoinControllerTest {
     }
 
     @Test
-    void getPlacesByCityForUser() {
+    void searchPlacesByCityForUser() throws Exception {
+        UserSecurity userDetails = new UserSecurity("User", "User", List.of("ROLE_USER"), true);
+        loggedUser = User.builder()
+                .id(1L)
+                .login("User")
+                .password("User")
+                .isDeleted(false)
+                .build();
+        Mockito.when(userService.getUserByLogin("User")).thenReturn(loggedUser);
+        Mockito.when(placeService.getAllCities()).thenReturn(allCities);
+        Mockito.when(appointmentService.getAppointmentsByCity("Minsk")).thenReturn(allAppointmentsMinsk);
+        Mockito.when(appointmentService.excludeAppointmentsWithUser(1L,allAppointmentsMinskWithoutUser)).thenReturn(allAppointmentsMinskWithoutUser);
+        mockMvc.perform(MockMvcRequestBuilders.get("/dogwalker/user/join/city?selected_city=Minsk")
+                        .with(user(userDetails)))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("allCities", allCities))
+                .andExpect(model().attribute("allAppointments", allAppointmentsMinskWithoutUser))
+                .andExpect(model().attribute("loggedUser", loggedUserDto));
     }
 
     @Test

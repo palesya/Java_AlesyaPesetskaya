@@ -35,6 +35,7 @@
                  enctype="multipart/form-data">
 
         <h3 class="fw-normal mb-3" style="letter-spacing: 1px;">Register new user</h3>
+            <h6>*All fields are required</h6>
 
         <div class="row">
             <div class="col-md-9 mb-4">

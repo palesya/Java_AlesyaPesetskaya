@@ -36,6 +36,7 @@ public class PersonalPageController extends AbstractAppointmentController {
             return "changeData";
         }
         saveUserChanges(userId,form);
+        getLoggedUserAndItsAppointmentsAndAddToModel(model,userId,"loggedUser","allUserAppointments");
         return "personalPage";
     }
 

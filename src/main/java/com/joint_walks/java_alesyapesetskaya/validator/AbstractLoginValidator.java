@@ -3,7 +3,6 @@ package com.joint_walks.java_alesyapesetskaya.validator;
 import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidatorContext;
@@ -34,13 +33,18 @@ public abstract class AbstractLoginValidator {
 
     public boolean isLoginAlreadyExist(String login, ConstraintValidatorContext context) {
         List<String> collect = repository.findAll().stream().map(User::getLogin).collect(Collectors.toList());
-        if (collect.contains(login.trim())) {
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(
-                            "Such login already exists.")
-                    .addConstraintViolation();
-            return true;
-        } else return false;
+        boolean isExist = false;
+        for (String el : collect) {
+            if (el.equalsIgnoreCase(login.trim())) {
+                context.disableDefaultConstraintViolation();
+                context.buildConstraintViolationWithTemplate(
+                                "Such login already exists.")
+                        .addConstraintViolation();
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
     }
 
 }

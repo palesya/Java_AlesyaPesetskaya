@@ -49,6 +49,7 @@
 </div>
 
 <div class="container p-3">
+    <h4>Active Users</h4>
     <div class="row mx-auto">
         <c:forEach items="${users}" var="user">
             <div class="col-md-4 p-3">
@@ -83,6 +84,52 @@
                                   action="${pageContext.request.contextPath}/dogwalker/admin/dogs/delete/${user.id}"
                                   class="d-flex justify-content-end">
                                 <input type="submit" class="btn btn-primary" value="Delete" name="user_id"
+                                       style="position: absolute; bottom: 10px;"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+<div class="container p-3">
+    <h4>Removed Users</h4>
+    <div class="row mx-auto">
+        <c:forEach items="${deletedUsers}" var="user">
+            <div class="col-md-4 p-3">
+                <div class="card" style="width: 20rem;background-color: darkgray">
+                    <img src="data:image/jpg;base64,${user.dog.base64Image}" alt="Lights"
+                         style="height: 20rem; object-fit: cover;"
+                         class="card-img-top rounded">
+                    <div class="card-body">
+                        <h5>${user.dog.name} - <h6>(${user.dog.type})</h6></h5>
+                        <p>age: ${user.dog.age}, good
+                            <c:choose>
+                                <c:when test="${user.dog.sex == 'MAN'}">
+                                    boy
+                                </c:when>
+                                <c:otherwise>
+                                    girl
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                        <p>Owner:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="data:image/jpg;base64,${user.base64Image}" alt="Lights"
+                                     style="max-height: 5rem;border-radius: 50%;max-width: 5rem;">
+                            </div>
+                            <div class="col-md-4">
+                                    ${user.login} - ${user.age}
+                            </div>
+                        </div>
+                        <div class="row pt-4">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/dogwalker/admin/dogs/restore/${user.id}"
+                                  class="d-flex justify-content-end">
+                                <input type="submit" class="btn btn-primary" value="Restore" name="user_id"
                                        style="position: absolute; bottom: 10px;"/>
                             </form>
                         </div>

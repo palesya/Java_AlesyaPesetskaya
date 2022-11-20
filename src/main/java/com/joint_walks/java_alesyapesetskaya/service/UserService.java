@@ -9,9 +9,11 @@ public interface UserService {
     UserDto getUserDtoByLogin(String login);
     User getUserByLogin(String login);
     List<UserDto> getAllNotDeleted();
+    List<UserDto> getAllDeleted();
     List<UserDto> getUsersByPartialMatch(String text);
     UserDto getUserDtoById(Long id);
     User getUserById(Long id);
     void saveUser(User user);
     void setIsDeletedToTrue(Long userId);
+    void setIsDeletedToFalse(Long userId);
 }

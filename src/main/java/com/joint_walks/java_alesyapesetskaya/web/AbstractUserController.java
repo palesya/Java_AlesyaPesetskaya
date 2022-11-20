@@ -51,6 +51,11 @@ public abstract class AbstractUserController {
         model.addAttribute(attributeName, allUsers);
     }
 
+    public void getDeletedUsersAndAddToModel(Model model, String attributeName) {
+        List<UserDto> allUsers = userService.getAllDeleted();
+        model.addAttribute(attributeName, allUsers);
+    }
+
     public void getLoggedUserByUserSecurityLoginAndAddToModel(UserSecurity userSecurity,
                                                               Model model,
                                                               String attributeName) {

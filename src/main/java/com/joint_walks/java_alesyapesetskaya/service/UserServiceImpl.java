@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getAllDeleted() {
+        List<User> usersByIsDeletedIsTrue = repository.findUsersByIsDeletedIsTrue();
+        return converter.mapToListUserDTO(usersByIsDeletedIsTrue);
+    }
+
+    @Override
     public List<UserDto> getUsersByPartialMatch(String text) {
         List<User> usersFromDb = repository.getUsersByPartialMatchNotDeleted(text);
         return converter.mapToListUserDTO(usersFromDb);
@@ -58,6 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setIsDeletedToTrue(Long userId) {
         repository.setIsDeletedToTrue(userId);
+    }
+
+    @Override
+    public void setIsDeletedToFalse(Long userId) {
+        repository.setIsDeletedToFalse(userId);
     }
 
 }

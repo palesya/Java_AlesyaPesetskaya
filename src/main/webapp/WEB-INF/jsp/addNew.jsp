@@ -69,7 +69,7 @@
 
             <h3 class="fw-normal mb-3" style="letter-spacing: 1px;">Add new appointment</h3>
             <h6>New appointment can be scheduled at least one hour before the existing one,
-                or not earlier than one hour after the beginning of the existing one.</h6>
+                or not earlier than one hour after the beginning of the existing one. Date can be not earlier than tomorrow.</h6>
             <%--@elvariable id="appointmentForm" type=""--%>
             <sf:form action="${pageContext.request.contextPath}/dogwalker/user/addedNew" method="post" modelAttribute="appointmentForm">
                 <div class="form-outline mb-4 mt-4">

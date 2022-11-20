@@ -29,7 +29,7 @@ public class TimeValidator implements ConstraintValidator<ValidTime, AddAppointm
         Address address = appointmentForm.getAddress();
         List<LocalTime> timeOfAppointments = repository.findByDateAndAddress(date,address).stream().map(Appointment::getTime).collect(Collectors.toList());
         for (LocalTime timeFromDb : timeOfAppointments) {
-            if (time.isAfter(timeFromDb.minusMinutes(59))&&time.isBefore(timeFromDb.plusMinutes(59))){
+            if (time.isAfter(timeFromDb.minusMinutes(60))&&time.isBefore(timeFromDb.plusMinutes(60))){
                 context.disableDefaultConstraintViolation();
                 context.buildConstraintViolationWithTemplate(
                                 "This time is busy by another appointment.")

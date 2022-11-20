@@ -39,6 +39,7 @@ public class DogsController extends AbstractUserController {
     @GetMapping("/admin/dogs")
     public String getForAdmin(Model model) {
         getNotDeletedUsersAndAddToModel(model, "users");
+        getDeletedUsersAndAddToModel(model, "deletedUsers");
         return "dogsAdmin";
     }
 
@@ -47,6 +48,7 @@ public class DogsController extends AbstractUserController {
             @RequestParam(name = "search_text") String text,
             Model model) {
         getUsersByPartialMatchAndAddToModel(text, model, "users");
+        getDeletedUsersAndAddToModel(model, "deletedUsers");
         return "dogsAdmin";
     }
 
@@ -56,6 +58,16 @@ public class DogsController extends AbstractUserController {
         userService.setIsDeletedToTrue(id);
         appointmentService.deleteUserFromAppointments(id);
         getNotDeletedUsersAndAddToModel(model, "users");
+        getDeletedUsersAndAddToModel(model, "deletedUsers");
+        return "dogsAdmin";
+    }
+
+    @PostMapping("/admin/dogs/restore/{id}")
+    public String restoreUser(@PathVariable Long id,
+                             Model model) {
+        userService.setIsDeletedToFalse(id);
+        getNotDeletedUsersAndAddToModel(model, "users");
+        getDeletedUsersAndAddToModel(model, "deletedUsers");
         return "dogsAdmin";
     }
 

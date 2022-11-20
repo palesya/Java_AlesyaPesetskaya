@@ -59,6 +59,7 @@ public class AppointmentInfoControllerTest {
         User user1 = User.builder()
                 .id(1L)
                 .login("User")
+                .password("User")
                 .isDeleted(false)
                 .build();
         User user2 = User.builder()
@@ -109,6 +110,7 @@ public class AppointmentInfoControllerTest {
         User user1 = User.builder()
                 .id(1L)
                 .login("User")
+                .password("User")
                 .isDeleted(false)
                 .build();
         User user2 = User.builder()

@@ -48,7 +48,7 @@ public class JoinController extends AbstractAppointmentController {
     public String getWithSelectedAddressForUser(@PathVariable Long id,
                                          Model model,
                                          @AuthenticationPrincipal UserSecurity userSecurity) {
-        joinAppointmentAndAddItToModel(model,id,userSecurity);
+        joinAppointmentAndAddSuccessMessageToModel(model,id,userSecurity);
         getAppointmentsWithoutUserAndAddToModel(model,"allAppointments",userSecurity);
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "join";

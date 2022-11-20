@@ -18,6 +18,7 @@ public class RegisterForm {
     private String login;
     @NotNull(message = "Age can't be empty.")
     @Min(value = 18, message = "Age can't be less than 18 years.")
+    @Max(value = 100, message = "Age can't be greater than 100 years.")
     private Integer userAge;
     @NotBlank(message = "Password can't be empty or contain only spaces.")
     @Size(min = 4, max = 20, message = "Password should be in between 4 to 20 characters.")

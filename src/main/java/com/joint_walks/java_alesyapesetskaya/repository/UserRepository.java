@@ -15,6 +15,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getByLoginNotDeleted(String login);
 
     @Transactional
+    @Query("select u from User u where u.login=:login")
+    User getByLogin(String login);
+
+    @Transactional
     @Query("select u from User u JOIN u.dog d " +
             "where u.isDeleted=false and lower(u.login) LIKE lower(CONCAT('%',:text,'%')) " +
             "OR LOWER(d.name) LIKE lower(CONCAT('%',:text,'%')) " +
@@ -30,8 +34,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUsersByIsDeletedIsFalse();
 
     @Transactional
+    @Query("select u from User u join u.roles r where u.isDeleted=true and r.name='ROLE_USER'")
+    List<User> findUsersByIsDeletedIsTrue();
+
+    @Transactional
     @Modifying
     @Query("update User u set u.isDeleted=true where u.id=:userId")
     void setIsDeletedToTrue(Long userId);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.isDeleted=false where u.id=:userId")
+    void setIsDeletedToFalse(Long userId);
 
 }

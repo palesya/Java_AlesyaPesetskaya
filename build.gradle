@@ -29,6 +29,8 @@ dependencies {
     implementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.flywaydb:flyway-core'
+
 
     annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
@@ -42,7 +44,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.junit.platform:junit-platform-suite-api'
     testImplementation 'org.junit.platform:junit-platform-suite-engine'
-    testImplementation 'org.junit.platform:junit-platform-runner'
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
 

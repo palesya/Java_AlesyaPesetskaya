@@ -21,7 +21,7 @@ public class AddAppointmentForm {
     private Address address;
     @NotNull(message = "Date should be selected.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @FutureOrPresent(message = "Date should be no earlier than today.")
+    @FutureOrPresent(message = "Date should be no earlier than tomorrow.")
     private Date date;
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @NotNull(message = "Time should be selected.")
