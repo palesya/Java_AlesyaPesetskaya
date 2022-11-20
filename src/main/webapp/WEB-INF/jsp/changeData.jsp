@@ -70,6 +70,7 @@
             <div class="col-4">
                 <div class="card-body">
                     <%--@elvariable id="changePersonalDataForm" type=""--%>
+                        <p class="text-warning" cssStyle="line-height: 25px;" role="alert">${error}</p>
                     <sf:form method="post"
                              action="${pageContext.request.contextPath}/dogwalker/user/personalPage/${loggedUser.id}/savedChanges"
                              modelAttribute="changePersonalDataForm"

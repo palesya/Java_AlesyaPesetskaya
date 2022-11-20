@@ -21,6 +21,7 @@ public class PersonalPageController extends AbstractAppointmentController {
 
     @PostMapping("/{id}/changeData")
     public String getChanges(@PathVariable Long id, Model model) {
+
         model.addAttribute("changePersonalDataForm",new ChangePersonalDataForm());
         getLoggedUserByIdAndAddToModel(id, model, "loggedUser");
         return "changeData";
