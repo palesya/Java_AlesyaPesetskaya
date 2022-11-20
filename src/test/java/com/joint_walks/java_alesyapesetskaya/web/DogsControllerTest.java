@@ -6,6 +6,8 @@ import com.joint_walks.java_alesyapesetskaya.model.User;
 import com.joint_walks.java_alesyapesetskaya.service.AppointmentService;
 import com.joint_walks.java_alesyapesetskaya.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.mockito.Mockito;
@@ -25,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(Suite.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Execution(ExecutionMode.SAME_THREAD)
 public class DogsControllerTest {
 
     @MockBean
@@ -57,8 +60,6 @@ public class DogsControllerTest {
         usersDto.add(user1);
         usersDto.add(user2);
         Mockito.when(userService.getUsersByPartialMatch("mops")).thenReturn(usersDto);
-
-
         mockMvc.perform(MockMvcRequestBuilders.post("/dogwalker/admin/dogs")
                         .with(user("Admin").password("Admin").roles("ADMIN"))
                         .param("search_text", "mops"))

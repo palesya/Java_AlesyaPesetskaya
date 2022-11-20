@@ -35,11 +35,15 @@ public class AppointmentInfoController extends AbstractAppointmentController{
     @PostMapping("/user/appointment/{appointmentId}/leaveAppointment/{loggedUserId}")
     public String leaveAppointment(@PathVariable Long appointmentId,@PathVariable Long loggedUserId, Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
         leaveAppointmentAndAddSuccessMessageToModel(model,appointmentId,loggedUserId,"success");
-        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
-        getAppointmentByIdAndAddToModel(model,appointmentId,"appointment");
-        getUsersFromAppointmentAndAddToModel(model,appointmentId,"allUsers");
-        checkIfUserIsAddedToAppointmentAndAddToModel(userSecurity,appointmentId,model,"isUserAdded");
-        return "appointmentInfo";
+        if(isAppointmentStillExist(appointmentId)){
+            getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
+            getAppointmentByIdAndAddToModel(model,appointmentId,"appointment");
+            getUsersFromAppointmentAndAddToModel(model,appointmentId,"allUsers");
+            checkIfUserIsAddedToAppointmentAndAddToModel(userSecurity,appointmentId,model,"isUserAdded");
+            return "appointmentInfo";
+        }else
+        getLoggedUserAndItsAppointmentsAndAddToModel(model,loggedUserId,"loggedUser","allUserAppointments");
+        return "personalPage";
     }
 
 }

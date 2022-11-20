@@ -89,7 +89,7 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         model.addAttribute(appointmentsAttributeName, appointmentsByPartialMatch);
     }
 
-    public void getUsersFromAppointmentAndAddToModel(Model model, Long appointmentId,String usersAttributeName) {
+    public void getUsersFromAppointmentAndAddToModel(Model model, Long appointmentId, String usersAttributeName) {
         List<User> users = appointmentService.getById(appointmentId).getUsers();
         model.addAttribute(usersAttributeName, users);
     }
@@ -115,13 +115,17 @@ public abstract class AbstractAppointmentController extends AbstractPlaceControl
         model.addAttribute(successAttributeName, "You've successfully left the appointment. Date: " + date + ". Time: " + appointment.getTime() + ". Address: " + appointment.getPlace().getAddress());
     }
 
+    public boolean isAppointmentStillExist(Long appointmentId) {
+        return appointmentService.getById(appointmentId) != null;
+    }
+
     public void getAppointmentByIdAndAddToModel(Model model, Long appointmentId, String appointmentAttributeName) {
         Appointment appointment = appointmentService.getById(appointmentId);
         model.addAttribute(appointmentAttributeName, appointment);
     }
 
-    public void getLoggedUserAndItsAppointmentsAndAddToModel(Model model,Long userId,String userAttributeName, String appointmentsAttributeName){
-        getLoggedUserByIdAndAddToModel(userId,model,userAttributeName);
-        getUserAppointmentsAndAddToModel(userId,model,appointmentsAttributeName);
+    public void getLoggedUserAndItsAppointmentsAndAddToModel(Model model, Long userId, String userAttributeName, String appointmentsAttributeName) {
+        getLoggedUserByIdAndAddToModel(userId, model, userAttributeName);
+        getUserAppointmentsAndAddToModel(userId, model, appointmentsAttributeName);
     }
 }
