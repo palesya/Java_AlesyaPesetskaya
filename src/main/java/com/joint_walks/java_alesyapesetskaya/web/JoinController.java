@@ -19,7 +19,7 @@ public class JoinController extends AbstractAppointmentController {
     public String getForUser(Model model, @AuthenticationPrincipal UserSecurity userSecurity) {
         getAppointmentsWithoutUserAndAddToModel(model,"allAppointments",userSecurity);
         getAllCitiesAndAddToModel(model, "allCities");
-        addAllPlacesAndLoggedUserToModel(model,"allPlaces",userSecurity,"loggedUser");
+        getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity,model,"loggedUser");
         return "join";
     }
 
@@ -50,6 +50,7 @@ public class JoinController extends AbstractAppointmentController {
                                          @AuthenticationPrincipal UserSecurity userSecurity) {
         joinAppointmentAndAddSuccessMessageToModel(model,id,userSecurity);
         getAppointmentsWithoutUserAndAddToModel(model,"allAppointments",userSecurity);
+        getAllCitiesAndAddToModel(model, "allCities");
         getLoggedUserByUserSecurityLoginAndAddToModel(userSecurity, model, "loggedUser");
         return "join";
     }
@@ -57,7 +58,6 @@ public class JoinController extends AbstractAppointmentController {
     @GetMapping("/admin/appointment")
     public String getForAdmin(Model model) {
         getAllAppointmentsAndAddToModel(model,"allAppointments");
-        getAllPlacesAndAddToModel(model, "allPlaces");
         getAllCitiesAndAddToModel(model, "allCities");
         return "appointmentsAdmin";
     }
@@ -84,7 +84,6 @@ public class JoinController extends AbstractAppointmentController {
                                     Model model){
         appointmentService.deleteAppointment(id);
         getAllAppointmentsAndAddToModel(model,"allAppointments");
-        getAllPlacesAndAddToModel(model, "allPlaces");
         getAllCitiesAndAddToModel(model, "allCities");
         return "appointmentsAdmin";
     }

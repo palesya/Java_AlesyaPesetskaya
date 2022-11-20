@@ -28,7 +28,8 @@ import org.junit.platform.suite.api.Suite;
         SmokeTest.class,
         WalkPlacesControllerTest.class,
         AppointmentInfoControllerTest.class,
-        JoinControllerTest.class
+        JoinControllerTest.class,
+        AddAppointmentControllerTest.class
 })
 public class TestSuiteAllTests {
 
