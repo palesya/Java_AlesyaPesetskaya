@@ -1,0 +1,16 @@
+
+Screenshots:
+![login](https://user-images.githubusercontent.com/95909253/203313994-2456fcdb-9b93-495c-9ca4-381b81ef6e71.png)
+![dogs](https://user-images.githubusercontent.com/95909253/203314014-f0321020-6ec0-4198-ac3e-8446a8307df3.png)
+![walk](https://user-images.githubusercontent.com/95909253/203314060-bdaa4447-dba3-48d2-8d28-6083189c1b5c.png)
+![success](https://user-images.githubusercontent.com/95909253/203314065-776b979f-578c-48e4-9259-acddbe727544.png)
+![places](https://user-images.githubusercontent.com/95909253/203314070-17acc6e0-88ec-4f41-8323-9a2688c33e79.png)
+![join_page](https://user-images.githubusercontent.com/95909253/203314082-5e784fd2-00f4-490e-86b3-7ebbff322061.png)
+![change_personal_data](https://user-images.githubusercontent.com/95909253/203314089-ed5aa132-3515-4eb6-950a-4d818837a1f8.png)
+![personal page](https://user-images.githubusercontent.com/95909253/203314133-105bb784-e89d-4242-bb32-dd1b51c616cb.png)
+![moreInfo](https://user-images.githubusercontent.com/95909253/203314145-a7ff34e1-51f5-4dd1-9d62-42aba4e6ab8d.png)
+![admin_page](https://user-images.githubusercontent.com/95909253/203314234-ee71f572-3edf-4911-9034-d00fc128a62b.png)
+![admin_page_appointments](https://user-images.githubusercontent.com/95909253/203314243-920d648a-73d6-4ad2-ac5c-6de4e48b3c31.png)
+![validation_example2](https://user-images.githubusercontent.com/95909253/203314257-5a4d1785-8317-4cff-8229-b12710575f1f.png)
+![validation_example1](https://user-images.githubusercontent.com/95909253/203314266-344269c3-9091-477b-b88e-5c1cb83a1664.png)
+![register_page](https://user-images.githubusercontent.com/95909253/203314440-693c3eb6-1a53-4836-a8c9-d06c0321831e.png)
